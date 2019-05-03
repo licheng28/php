@@ -89,11 +89,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="log.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="log.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/log.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49945474">
-              <caret line="119" column="27" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="171" column="15" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="id_rsa" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.ssh/id_rsa">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="id_rsa.pub" pinned="false" current-in-tab="true">
+        <entry file="file://$USER_HOME$/.ssh/id_rsa.pub">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -106,7 +126,6 @@
       <list>
         <option value="$PROJECT_DIR$/spider.php" />
         <option value="$PROJECT_DIR$/purchase.bat" />
-        <option value="$PROJECT_DIR$/log.txt" />
         <option value="$PROJECT_DIR$/purchase2.bat" />
         <option value="$PROJECT_DIR$/simplehtml.php" />
         <option value="$PROJECT_DIR$/pai.php" />
@@ -115,6 +134,7 @@
         <option value="$PROJECT_DIR$/differentPrice.bat" />
         <option value="$PROJECT_DIR$/log2.txt" />
         <option value="$PROJECT_DIR$/itemData.php" />
+        <option value="$PROJECT_DIR$/log.txt" />
       </list>
     </option>
   </component>
@@ -128,10 +148,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="333" />
+    <option name="y" value="105" />
     <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="height" value="901" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -238,7 +258,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="333" y="105" width="1936" height="901" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18020834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -278,22 +298,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/simplehtml.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="306" column="6" selection-start-line="306" selection-start-column="6" selection-end-line="306" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/base.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/itemData.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -809,8 +813,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/log.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49945474">
-          <caret line="119" column="27" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="171" column="15" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.ssh/id_rsa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.ssh/id_rsa.pub">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
