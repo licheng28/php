@@ -167,9 +167,9 @@ function changePurchasePrice($data, $cookie, $pwd){
 
         echo $message;
 
-        $time = date("Y-m-d h:i:sa");
-
-        file_put_contents($file, $message.' '.$time."\n",FILE_APPEND);
+//        $time = date("Y-m-d h:i:sa");
+//
+//        file_put_contents($file, $message.' '.$time."\n",FILE_APPEND);
 
         return;
 
@@ -306,8 +306,8 @@ function changePurchasePrice($data, $cookie, $pwd){
     echo '<br>';
 //    $message = iconv("UTF-8","gbk//TRANSLIT",$message);
     echo $message;
-    $time = date("Y-m-d h:i:sa");
-    file_put_contents($file, $message.' '.$time."\n",FILE_APPEND);
+//    $time = date("Y-m-d h:i:sa");
+//    file_put_contents($file, $message.' '.$time."\n",FILE_APPEND);
 
 }
 
