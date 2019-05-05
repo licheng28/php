@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aff744a4-1301-4f43-b56e-ae397f375ca3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log.txt" afterPath="$PROJECT_DIR$/log.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log2.txt" afterPath="$PROJECT_DIR$/log2.txt" />
     </list>
     <ignored path="workspace.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -97,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/log.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="240" column="15" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="27" />
+              <caret line="256" column="15" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -816,7 +814,7 @@
     <entry file="file://$PROJECT_DIR$/log.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="240" column="15" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="27" />
+          <caret line="256" column="15" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="27" />
           <folding />
         </state>
       </provider>
