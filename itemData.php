@@ -15,7 +15,8 @@ function index(){
 
 //    $url = 'https://www.igxe.cn/dota2/570?tags_type_name=%E6%8D%86%E7%BB%91%E5%8C%85&tags_type_id=1027&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1556266391326';
 
-    $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=20&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
+    $url = "https://www.igxe.cn/dota2/570?quality_name=%E7%BA%AF%E6%AD%A3&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=350&rarity_id=0&exterior_id=0&quality_id=1023&capsule_id=0&_t=1557129070760";
+//    $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=2000&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
 
     $base = new base();
 
@@ -48,11 +49,13 @@ function index(){
 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql_is = "select id from price_difference where item_id_igxe ="."$item_id";
+            $sql_is = "select * from price_difference where `name` ='".$name."'";
 
             $res = $pdo->query($sql_is);
 
-            if(!$res->fetch()){
+            $result = $res->fetch();
+
+            if(!$result){
 
                 $time = time();
 
@@ -69,7 +72,9 @@ function index(){
 
             }else{
 
-                $sql_update = "update price_difference set price_igxe=".$price." where item_id_igxe =".$item_id;
+                $difference = $result['price_c5']?$price-$result['price_c5']:-$price;
+
+                $sql_update = "update price_difference set item_id_igxe=".$item_id.", price_igxe=".$price.",difference=".$difference." where id =".$result['id'];
 
                 if($pdo->exec($sql_update)){
 
@@ -89,11 +94,9 @@ function index(){
 
         }
 
-        $dom->clear();
-
-
-
     }
+
+    $dom->clear();
 
 }
 
@@ -180,13 +183,15 @@ function findC5New(){
 
     try{
 
-        $page = 50;
+        $page = 1;
 
-        while($page<100){
+        while($page<50){
+
+            $url = "https://www.c5game.com/dota.html?quality=genuine&page=".$page."&sort=price.desc";
 
 //            $url = 'https://www.c5game.com/dota.html?type=bundle&page='.$page.'&sort=price.desc';
 
-            $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique&page='.$page;
+//            $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique&page='.$page;
 
             $base = new base();
 
@@ -228,7 +233,7 @@ function findC5New(){
 
                     $difference = $result['price_igxe']?$result['price_igxe']-$price:$price;
 
-                    $sql_update = "update price_difference set price_c5=".$price.", update_time="."$update_time".", difference=".$difference." item_id_c5=".$item_id_c5." where id=".$result['id'];
+                    $sql_update = "update price_difference set price_c5=".$price.", update_time="."$update_time".", difference=".$difference.", item_id_c5=".$item_id_c5." where id=".$result['id'];
 
                     if($pdo->exec($sql_update)){
 
