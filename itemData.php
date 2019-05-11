@@ -10,7 +10,8 @@ include_once ('D:\workspace/simple_html_dom.php');
 set_time_limit(0);
 //index();
 //findC5();
-findC5New();
+//findC5New();
+completeC5();
 function index(){
 
 //    $url = 'https://www.igxe.cn/dota2/570?tags_type_name=%E6%8D%86%E7%BB%91%E5%8C%85&tags_type_id=1027&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1556266391326';
@@ -275,6 +276,87 @@ function findC5New(){
         }
 
     }catch (PDOException $e){
+
+        echo $e->getMessage();
+
+    }
+
+
+}
+
+function completeC5(){
+
+    try{
+
+        $pdo = new PDO("mysql:host=localhost;dbname=lic","root", "");
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->exec('set names utf8');
+
+        $sql = "select * from price_difference where price_c5=0 ORDER by update_time limit 50";
+
+        $res = $pdo->query($sql);
+
+        $result = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        $base = new base();
+
+        foreach($result as $data){
+
+            $pdo->exec("update price_difference set update_time=".time()." where id = ".$data['id']);
+
+            $name = $data['name'];
+
+            $url = 'https://www.c5game.com/dota.html?k='.$name;
+
+            $html = $base->curl($url);
+
+            $dom = new simple_html_dom();
+
+            $dom->load($html);
+
+            foreach($dom->find('.selling') as $e){
+
+                $name_c5 = $e->children(1)->first_child()->first_child()->innertext;
+
+                if($name==$name_c5){
+
+                    $item_id_c5 = $base->getNum($e->first_child()->href, '*');
+
+                    $price = $e->children(2)->first_child()->first_child()->innertext;
+
+                    $price = $base->getNum($price);
+
+                    $time = time();
+
+                    $difference_price=$data['price_igxe']-$price;
+
+                    $sql_update = "update price_difference set item_id_c5=".$item_id_c5.", price_c5=".$price.", update_time=".$time.", difference=".$difference_price." where id=".$data['id'];
+
+                    if($pdo->exec($sql_update)){
+
+                        $message = $name.'更新成功';
+
+//                        $message = iconv("UTF-8","gbk//TRANSLIT",$message);
+
+                        echo $message;
+                        echo '<br>';
+
+                    }else{
+
+                        echo 'error';
+
+                    }
+
+                }
+
+            }
+
+            $dom->clear();
+
+
+        }
+
+    } catch (PDOException $e){
 
         echo $e->getMessage();
 
