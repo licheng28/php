@@ -47,6 +47,40 @@ class DataController extends Controller
 
        }
 
+       $sell_url = "https://www.c5game.com/api/product/sale.json?id=".$c5_id."&quick=&gem_id=0&page=1&flag=&delivery=&sort=&b1=&style=";
+
+       $list = $base->curl($sell_url);
+
+       $list = json_decode($list);
+
+       if($list->{'status'} == 200){
+
+           $item_info = $list->{'body'}->{'items'}[0];
+
+           $pay_url = "https://www.c5game.com/api/order/payment.json";
+
+           $data_array = array(
+
+               'id' => $item_info->id,
+               'paypwd' => $base->pwd,
+               'is_nopass' => 'no',
+               'price' => $item_info->price,
+               'method' => 4
+
+           );
+
+           $res = $base->curl($pay_url, $data_array);
+
+           print_r(json_decode($res));die;
+
+       }else{
+
+           echo json_encode(array('status' => 202));
+
+       }
+
+
+
 //       $sql = "select * from price_difference where difference>2 order by difference+0";
 //
 //       $res = Yii::$app->db->createCommand($sql);
