@@ -1,1 +1,2 @@
 composer config -g repo.packagist composer https://packagist.phpcomposer.com //改为中国镜像，可以下到目录文件
+213hdfask
