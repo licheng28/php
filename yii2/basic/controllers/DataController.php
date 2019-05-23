@@ -12,12 +12,40 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use yii\data\Pagination;
+use yii\web\simple_html_dom;
+
 
 
 class DataController extends Controller
 {
    public function actionIndex()
    {
+
+       $url = "https://www.c5game.com/dota/32856-S.html";
+
+       $base = new base();
+
+       $html = $base->curl($url);
+
+       $dom = new simple_html_dom();
+
+       $dom->load($html);
+
+       foreach($dom->find('.sale-item-table') as $e){
+
+           $a = $e->outertext;
+
+           preg_match_all('/(data-url)=("[^"]*")/i', $a, $matches);
+
+           $item_url = $matches[2][0];
+
+           $num = $base->getNum($item_url, '=');
+
+           $arr = explode('=',$num);
+
+           $c5_id = $arr[1];
+
+       }
 
 //       $sql = "select * from price_difference where difference>2 order by difference+0";
 //
@@ -59,8 +87,30 @@ class DataController extends Controller
         $id = Yii::$app->request->post('id');
         $base = new base();
 
-        $base->updatePrice($id);
+        $data = $base->updatePrice($id);
 
+        echo json_encode($data);
+
+    }
+
+    public function actionBuy()
+    {
+
+        $id = Yii::$app->request->post('id');
+        $base = new base();
+
+        $data = $base->c5Buy($id);
+
+        if($data){
+
+            $status = 200;
+
+        }else{
+
+            $status = 201;
+        }
+
+        echo json_encode(array('status' => $status));
     }
 
 

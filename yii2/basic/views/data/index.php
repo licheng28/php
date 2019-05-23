@@ -31,12 +31,12 @@ use yii\widgets\LinkPager;
 
                 <tr class="accordion">
                     <td class="table-danger"><?php echo $data->name?></td>
-                    <td class="table-danger"><?php echo $data->price_igxe/100?></td>
-                    <td class="table-danger"><?php echo $data->price_c5/100?></td>
-                    <td class="table-danger"><?php echo $data->difference/100?></td>
+                    <td class="table-danger <?php echo $data->id.'_ig'?>"><?php echo $data->price_igxe/100?></td>
+                    <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->price_c5/100?></td>
+                    <td class="table-danger <?php echo $data->id.'_difference'?>"><?php echo $data->difference/100?></td>
                     <td>
                         <button class="button update" id="<?php echo $data->id?>" data-url="index.php?r=data/update">update</button>
-                        <button class="button buy">buy</button>
+                        <button class="button buy" data-id="<?php echo $data->id?>" data-url="index.php?r=data/buy">buy</button>
                     </td>
                 </tr>
             <?php }?>
@@ -62,11 +62,43 @@ use yii\widgets\LinkPager;
             var id = $(this).attr('id');
             var url = $(this).data('url');
 
-            $.post(url, {id:id}, function(){
+            $.post(url, {id:id}, function(data){
 
+                var data = eval("("+data+")");
 
+                if(data){
+
+                    $("."+data.id+"_ig").html(data.ig);
+                    $("."+data.id+"_c5").html(data.c5);
+                    $("."+data.id+"_difference").html(data.difference);
+
+                }
 
             })
+
+        })
+
+        $('.buy').click(function(){
+
+            var id = $(this).data('id');
+            var url = $(this).data('url');
+
+            $.post(url, {id:id}, function(data){
+
+                var data = eval("("+data+")");
+
+                if(data.status == 200){
+
+                    alert('succ');
+
+                }else{
+
+                    alert('err');
+                }
+
+            })
+
+
 
         })
 

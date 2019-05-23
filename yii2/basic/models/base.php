@@ -18,20 +18,35 @@ class base extends Model
 {
 
     var $cookie_c5 ='bdshare_firstime=1495112656374; fp_ver=3.3.3; BSFIT_OkLJUJ=FFBqPVR-F9hmdg-zTUxNdxvoJUwJAI8P; BSFIT_DEVICEID=By3w4BbUbCpg3rijooGXLYUOhJ5DbIgY7h-9Iq6K7SZb_AljkrSOAS6Powiq7grc0HqpCUH1xMZgru0nAZ2ZnLPRyMZXmGGUrXUz64wskn5a4JSz8s_FtruUXmHE1xJuDslfpLXtqyXPhJa5Ld9qQjM1WfGOVVGd; MEIQIA_EXTRA_TRACK_ID=0wnpBv1NMrGhzg6IkdfVZB6AYSP; buyKnowNotice=close; C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; C5buygame=Y; C5Appid=570; C5Lang=zh; C5NoticeBounces1555403740=close; C5Notice1555403740=close; C5NoticeBounces1555558523=close; C5Notice1555558523=close; C5Steamurl=true; C5SessionID=n5saim7bo5ausckfbtgc8tff01; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cbbff88bf9db; C5Login=253352; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1555473868,1555560364,1555745175,1555824487; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1555832787';
-    var $cookie_ig = 'distribution_channel=681a3905060164114876; notetop12563=close; my_steam_game=570; __cfduid=d173e9333e80a5a60245cc291762ff5dc1531462579; my_game=570; agree_sell_agreementlic666=true; gdxidpyhxdE=5H%2FL%2BY24%2Bl%5CImiJ7Ty4Dhn5J4N9eCZ3JvC2IAeItOEfJObYIUg7Pu51nR0W7uXZ2DwJPOt%5Cz1nqK28x%2FVS02Rd04mTJqhq%5CywcZi%2Bey0EIiu%5Cf0PWSmwhS2GWjYW3jVMMTbE1NxMYc%2FwOj3xBYNNLk%2F3yOUn%2ByYft9ItTaZoPuULOv8i%3A1555216691483; _9755xjdesxxd_=32; aliyungf_tc=AQAAAG5mVDfDIAQAI5K1PIijWE4jDixN; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; token=c8f25b75-acce-44ee-80cd-a5c5b3f0cb26; not_pay_pwd_token=c8f25b75-acce-44ee-80cd-a5c5b3f0cb26; myDateMinutes=6; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.1876312458.1555215789; _gat=1; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1555914391,1555998612,1556167237,1556255489; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1556266112; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=808; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; nice_id572d9ba0-d737-11e8-970c-a553533099d1=bf7ccb01-67e1-11e9-aed9-4f728b3039a0; csrftoken=GKuXFVffilpMkaBXNTs3yP3u1dwSqic6; sessionid=x9klsals3obc8m7f7t35g2bsw7lenf1o';
+    var $cookie_ig = 'distribution_channel=681a3905060164114876; my_steam_game=570; __cfduid=d173e9333e80a5a60245cc291762ff5dc1531462579; my_game=570; agree_sell_agreementlic666=true; gdxidpyhxdE=pYCXqveN9uD5bfqNyQDwUYGblo4LPr2ibStEV6zlpJHE63gVOfz8tTZ2uu%5Cz%5CXbNbnPXNp%2BACb42C%2BhuA7vbqc6zVgdawdPBeZ3PN0xZQBnBuw9Q%2F%2BBUrMMzKLzfsJrz%2Fv95r6j9f3SfJe3CA7BjPTSHjzrN2%2BS%2FnwV3n%2B54js%5CEVLfO%3A1558239691886; _9755xjdesxxd_=32; aliyungf_tc=AQAAAD4V7HorWAIA9pa1PARtnkqGagCF; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; _gat=1; myDateMinutes=27; token=09b5e1b1-c1b8-4486-9817-967499d39cbb; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.431814668.1556871626; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=1242; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1558434188,1558438131,1558499306,1558587207; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1558589263; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; nice_id572d9ba0-d737-11e8-970c-a553533099d1=b455dfb1-7d16-11e9-8edb-d1f9a37e7379; csrftoken=wuMHfDq6oERnFvnMXfzTRd3oL3meGImc; sessionid=ncy1kppd506cpzu86q49jnxtiqcvb7go';
 
 
     public function updatePrice($id){
 
         try{
 
+            $price_c5 = 0;
+            $price_ig = 0;
+
             $data = PriceDifference::findOne($id);
+
+            if($data->item_id_igxe){
+
+                $price_ig = $this->updateIgPrice($data);
+
+                $data->price_igxe = $price_ig*100;
+
+            }
 
             if($data->item_id_c5){
 
-                $this->updateC5Price($data);
+                $price_c5 = $this->updateC5Price($data);
 
             }
+
+            $difference = $price_ig*100-$price_c5*100;
+
+            return array('c5' => $price_c5, 'ig' => $price_ig, 'id' => $data->id, 'difference' => $difference/100);
 
         }catch(PDOException $e) {
 
@@ -39,6 +54,30 @@ class base extends Model
 
         }
 
+
+    }
+
+    public function updateIgPrice($data){
+
+        $url = 'https://www.igxe.cn/purchase/product_info_'.$data->item_id_igxe.'_2?p_type=1';
+
+        $html = $this->curl($url, array(), 'ig');
+
+        $content = json_decode($html);
+
+        if($content->{'succ'} == true){
+
+            $price = $content->{'min_price'};
+
+            $price = round($price, 2);
+
+            $difference = $data->price_c5?($price-$data->price_c5/100)*100:-$price*100;
+
+            PriceDifference::updateAll(array('price_igxe'=>$price*100, 'difference'=>$difference, 'update_time'=>time()), array('id' => $data->id));
+
+        }
+
+        return $price;
 
     }
 
@@ -98,6 +137,8 @@ class base extends Model
 
 //                    $sql_update = "update price_difference set item_id_c5=".$item_id_c5.", price_c5=".$price.", update_time=".$time.", difference=".$difference_price." where id=".$data['id'];
 
+                    $price = $price/100;
+
                 }
 
             }
@@ -105,6 +146,8 @@ class base extends Model
             $dom->clear();
 
         }
+
+        return $price;
 
     }
 
@@ -160,6 +203,27 @@ class base extends Model
         }
 
         return $result;
+
+    }
+
+    public function c5Buy($id){
+
+        $data = PriceDifference::findOne($id);
+
+        $url = "https://www.c5game.com/dota/".$data->item_id_c5."-S.html";
+
+        $html = $this->curl($url);
+
+        $dom = new simple_html_dom();
+
+        $dom->load($html);
+
+        foreach($dom->find('#sale-body') as $e){
+
+            echo $e->innertext;
+
+
+        }
 
     }
 
