@@ -24,6 +24,7 @@ use yii\widgets\LinkPager;
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_igxe']?></td>
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_c5']?></td>
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['difference']?></td>
+                <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['is_sell']?></td>
                 <td class="table-danger">操作</td>
             </tr>
 
@@ -34,6 +35,7 @@ use yii\widgets\LinkPager;
                     <td class="table-danger <?php echo $data->id.'_ig'?>"><?php echo $data->price_igxe/100?></td>
                     <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->price_c5/100?></td>
                     <td class="table-danger <?php echo $data->id.'_difference'?>"><?php echo $data->difference/100?></td>
+                    <td class="table-danger <?php echo $data->id.'_sell'?>"><?php echo $data->is_sell?'是':'否'?></td>
                     <td>
                         <button class="button update" id="<?php echo $data->id?>" data-url="index.php?r=data/update">update</button>
                         <button class="button buy" data-id="<?php echo $data->id?>" data-url="index.php?r=data/buy">buy</button>
@@ -70,7 +72,17 @@ use yii\widgets\LinkPager;
 
                     $("."+data.id+"_ig").html(data.ig);
                     $("."+data.id+"_c5").html(data.c5);
-                    $("."+data.id+"_difference").html(data.difference);
+                    $("."+data.id+"_difference").html(data.difference/100);
+
+                    if(data.sell){
+
+                        $("."+data.id+"_sell").html('是');
+
+                    }else{
+
+                        $("."+data.id+"_sell").html('否');
+
+                    }
 
                 }
 
@@ -89,11 +101,11 @@ use yii\widgets\LinkPager;
 
                 if(data.status == 200){
 
-                    alert('succ');
+                    alert(data.msg);
 
                 }else{
 
-                    alert('err');
+                    alert(data.msg);
                 }
 
             })

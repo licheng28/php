@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aff744a4-1301-4f43-b56e-ae397f375ca3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.iml" afterPath="$PROJECT_DIR$/.idea/workspace.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/base.php" afterPath="$PROJECT_DIR$/base.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/itemData.php" afterPath="$PROJECT_DIR$/itemData.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yii2/basic/controllers/DataController.php" afterPath="$PROJECT_DIR$/yii2/basic/controllers/DataController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yii2/basic/models/PriceDifference.php" afterPath="$PROJECT_DIR$/yii2/basic/models/PriceDifference.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yii2/basic/models/base.php" afterPath="$PROJECT_DIR$/yii2/basic/models/base.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yii2/basic/views/data/index.php" afterPath="$PROJECT_DIR$/yii2/basic/views/data/index.php" />
     </list>
     <ignored path="workspace.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,8 +35,8 @@
       <file leaf-file-name="simplehtml.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simplehtml.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="58" column="88" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="88" />
+            <state vertical-scroll-proportion="-36.92857">
+              <caret line="65" column="47" selection-start-line="65" selection-start-column="47" selection-end-line="65" selection-end-column="47" />
               <folding>
                 <element signature="n#unicode_decode#0;n#!!top" expanded="false" />
               </folding>
@@ -45,18 +47,18 @@
       <file leaf-file-name="test.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.714286">
+            <state vertical-scroll-proportion="-0.78571427">
               <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yii2/basic/controllers/DataController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.568371">
-              <caret line="66" column="44" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
+            <state vertical-scroll-proportion="-7.452381">
+              <caret line="63" column="27" selection-start-line="63" selection-start-column="27" selection-end-line="63" selection-end-column="27" />
               <folding>
                 <element signature="e#35#55#0#PHP" expanded="true" />
               </folding>
@@ -64,11 +66,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yii2/basic/views/data/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.523809">
+              <caret line="105" column="22" selection-start-line="105" selection-start-column="22" selection-end-line="105" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/yii2/basic/models/base.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.928572">
-              <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+            <state vertical-scroll-proportion="-0.45184305">
+              <caret line="113" column="86" selection-start-line="113" selection-start-column="86" selection-end-line="113" selection-end-column="86" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PriceDifference.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yii2/basic/models/PriceDifference.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.071428">
+              <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -77,12 +99,32 @@
       <file leaf-file-name="itemData.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/itemData.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="186" column="21" selection-start-line="186" selection-start-column="21" selection-end-line="186" selection-end-column="21" />
+            <state vertical-scroll-proportion="4.714286">
+              <caret line="105" column="18" selection-start-line="105" selection-start-column="18" selection-end-line="105" selection-end-column="18" />
               <folding>
-                <element signature="n#index#0;n#!!top" expanded="false" />
                 <element signature="n#completeC5#0;n#!!top" expanded="false" />
+                <marker date="1558708529058" expanded="true" signature="1835:1891" placeholder="select * fro... price_difference" />
+                <marker date="1558708529058" expanded="true" signature="2059:2211" placeholder="insert into price_difference... " />
+                <marker date="1558708529058" expanded="true" signature="2502:2616" placeholder="update price... " />
+                <marker date="1558708529058" expanded="true" signature="2965:3025" placeholder="select * fro... price_difference" />
+                <marker date="1558708529058" expanded="true" signature="4157:4299" placeholder="update price... " />
+                <marker date="1558708529058" expanded="true" signature="5937:5997" placeholder="select * fro... price_difference" />
+                <marker date="1558708529058" expanded="true" signature="6321:6466" placeholder="update price... " />
+                <marker date="1558708529058" expanded="true" signature="6968:7141" placeholder="insert into price_difference... " />
+                <marker date="1558708529058" expanded="true" signature="7692:7769" placeholder="select * fro... price_difference" />
+                <marker date="1558708529058" expanded="true" signature="7950:8012" placeholder="update price... " />
+                <marker date="1558708529058" expanded="true" signature="8823:8965" placeholder="update price... " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/base.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.642858">
+              <caret line="11" column="1331" selection-start-line="11" selection-start-column="1331" selection-end-line="11" selection-end-column="1331" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -98,7 +140,6 @@
         <option value="$PROJECT_DIR$/spider.php" />
         <option value="$PROJECT_DIR$/purchase.bat" />
         <option value="$PROJECT_DIR$/purchase2.bat" />
-        <option value="$PROJECT_DIR$/base.php" />
         <option value="$PROJECT_DIR$/test.php" />
         <option value="$PROJECT_DIR$/differentPrice.bat" />
         <option value="$PROJECT_DIR$/log.txt" />
@@ -118,13 +159,14 @@
         <option value="$PROJECT_DIR$/yii2/basic/codeception.yml" />
         <option value="$PROJECT_DIR$/yii2/basic/config/db.php" />
         <option value="$PROJECT_DIR$/yii2/basic/views/layouts/main.php" />
-        <option value="$PROJECT_DIR$/itemData.php" />
-        <option value="$PROJECT_DIR$/yii2/basic/models/PriceDifference.php" />
         <option value="$PROJECT_DIR$/yii2/basic/models/simple_html_dom.php" />
-        <option value="$PROJECT_DIR$/yii2/basic/views/data/index.php" />
         <option value="$PROJECT_DIR$/yii2/basic/vendor/yiisoft/yii2/web/simple_html_dom.php" />
-        <option value="$PROJECT_DIR$/yii2/basic/models/base.php" />
+        <option value="$PROJECT_DIR$/base.php" />
+        <option value="$PROJECT_DIR$/itemData.php" />
         <option value="$PROJECT_DIR$/yii2/basic/controllers/DataController.php" />
+        <option value="$PROJECT_DIR$/yii2/basic/models/PriceDifference.php" />
+        <option value="$PROJECT_DIR$/yii2/basic/views/data/index.php" />
+        <option value="$PROJECT_DIR$/yii2/basic/models/base.php" />
       </list>
     </option>
   </component>
@@ -236,97 +278,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="php" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yiisoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="php" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yiisoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="php" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yiisoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -431,11 +383,68 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/simplehtml.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="58" column="88" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="88" />
+          <folding>
+            <element signature="n#unicode_decode#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yii2/basic/controllers/DataController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#35#55#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yii2/basic/models/base.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itemData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="186" column="21" selection-start-line="186" selection-start-column="21" selection-end-line="186" selection-end-column="21" />
+          <folding>
+            <element signature="n#completeC5#0;n#!!top" expanded="false" />
+            <marker date="1558708529058" expanded="true" signature="1835:1891" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="2059:2211" placeholder="insert into price_difference... " />
+            <marker date="1558708529058" expanded="true" signature="2502:2616" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="2965:3025" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="4157:4299" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="5937:5997" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="6321:6466" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="6968:7141" placeholder="insert into price_difference... " />
+            <marker date="1558708529058" expanded="true" signature="7692:7769" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="7950:8012" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="8823:8965" placeholder="update price... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/simplehtml.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -459,8 +468,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="186" column="21" selection-start-line="186" selection-start-column="21" selection-end-line="186" selection-end-column="21" />
           <folding>
-            <element signature="n#index#0;n#!!top" expanded="false" />
             <element signature="n#completeC5#0;n#!!top" expanded="false" />
+            <marker date="1558708529058" expanded="true" signature="1835:1891" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="2059:2211" placeholder="insert into price_difference... " />
+            <marker date="1558708529058" expanded="true" signature="2502:2616" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="2965:3025" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="4157:4299" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="5937:5997" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="6321:6466" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="6968:7141" placeholder="insert into price_difference... " />
+            <marker date="1558708529058" expanded="true" signature="7692:7769" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="7950:8012" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="8823:8965" placeholder="update price... " />
           </folding>
         </state>
       </provider>
@@ -480,8 +499,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="186" column="21" selection-start-line="186" selection-start-column="21" selection-end-line="186" selection-end-column="21" />
           <folding>
-            <element signature="n#index#0;n#!!top" expanded="false" />
             <element signature="n#completeC5#0;n#!!top" expanded="false" />
+            <marker date="1558708529058" expanded="true" signature="1835:1891" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="2059:2211" placeholder="insert into price_difference... " />
+            <marker date="1558708529058" expanded="true" signature="2502:2616" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="2965:3025" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="4157:4299" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="5937:5997" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="6321:6466" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="6968:7141" placeholder="insert into price_difference... " />
+            <marker date="1558708529058" expanded="true" signature="7692:7769" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="7950:8012" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="8823:8965" placeholder="update price... " />
           </folding>
         </state>
       </provider>
@@ -570,42 +599,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/base.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32576618">
-          <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itemData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="186" column="21" selection-start-line="186" selection-start-column="21" selection-end-line="186" selection-end-column="21" />
-          <folding>
-            <element signature="n#index#0;n#!!top" expanded="false" />
-            <element signature="n#completeC5#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simplehtml.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="88" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="88" />
-          <folding>
-            <element signature="n#unicode_decode#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.714286">
-          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yii2/basic/vendor/yiisoft/yii2/web/simple_html_dom.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="39.984543">
@@ -616,21 +609,84 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yii2/basic/models/base.php">
+    <entry file="file://$PROJECT_DIR$/test.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.928572">
-          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+        <state vertical-scroll-proportion="-0.78571427">
+          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simplehtml.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-36.92857">
+          <caret line="65" column="47" selection-start-line="65" selection-start-column="47" selection-end-line="65" selection-end-column="47" />
+          <folding>
+            <element signature="n#unicode_decode#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.642858">
+          <caret line="11" column="1331" selection-start-line="11" selection-start-column="1331" selection-end-line="11" selection-end-column="1331" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yii2/basic/models/PriceDifference.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.071428">
+          <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itemData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.714286">
+          <caret line="105" column="18" selection-start-line="105" selection-start-column="18" selection-end-line="105" selection-end-column="18" />
+          <folding>
+            <element signature="n#completeC5#0;n#!!top" expanded="false" />
+            <marker date="1558708529058" expanded="true" signature="1835:1891" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="2059:2211" placeholder="insert into price_difference... " />
+            <marker date="1558708529058" expanded="true" signature="2502:2616" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="2965:3025" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="4157:4299" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="5937:5997" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="6321:6466" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="6968:7141" placeholder="insert into price_difference... " />
+            <marker date="1558708529058" expanded="true" signature="7692:7769" placeholder="select * fro... price_difference" />
+            <marker date="1558708529058" expanded="true" signature="7950:8012" placeholder="update price... " />
+            <marker date="1558708529058" expanded="true" signature="8823:8965" placeholder="update price... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yii2/basic/views/data/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.523809">
+          <caret line="105" column="22" selection-start-line="105" selection-start-column="22" selection-end-line="105" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/yii2/basic/controllers/DataController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.568371">
-          <caret line="66" column="44" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
+        <state vertical-scroll-proportion="-7.452381">
+          <caret line="63" column="27" selection-start-line="63" selection-start-column="27" selection-end-line="63" selection-end-column="27" />
           <folding>
             <element signature="e#35#55#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yii2/basic/models/base.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.45184305">
+          <caret line="113" column="86" selection-start-line="113" selection-start-column="86" selection-end-line="113" selection-end-column="86" />
+          <folding />
         </state>
       </provider>
     </entry>

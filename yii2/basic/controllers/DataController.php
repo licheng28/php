@@ -21,66 +21,6 @@ class DataController extends Controller
    public function actionIndex()
    {
 
-       $url = "https://www.c5game.com/dota/32856-S.html";
-
-       $base = new base();
-
-       $html = $base->curl($url);
-
-       $dom = new simple_html_dom();
-
-       $dom->load($html);
-
-       foreach($dom->find('.sale-item-table') as $e){
-
-           $a = $e->outertext;
-
-           preg_match_all('/(data-url)=("[^"]*")/i', $a, $matches);
-
-           $item_url = $matches[2][0];
-
-           $num = $base->getNum($item_url, '=');
-
-           $arr = explode('=',$num);
-
-           $c5_id = $arr[1];
-
-       }
-
-       $sell_url = "https://www.c5game.com/api/product/sale.json?id=".$c5_id."&quick=&gem_id=0&page=1&flag=&delivery=&sort=&b1=&style=";
-
-       $list = $base->curl($sell_url);
-
-       $list = json_decode($list);
-
-       if($list->{'status'} == 200){
-
-           $item_info = $list->{'body'}->{'items'}[0];
-
-           $pay_url = "https://www.c5game.com/api/order/payment.json";
-
-           $data_array = array(
-
-               'id' => $item_info->id,
-               'paypwd' => $base->pwd,
-               'is_nopass' => 'no',
-               'price' => $item_info->price,
-               'method' => 4
-
-           );
-
-           $res = $base->curl($pay_url, $data_array);
-
-           print_r(json_decode($res));die;
-
-       }else{
-
-           echo json_encode(array('status' => 202));
-
-       }
-
-
-
 //       $sql = "select * from price_difference where difference>2 order by difference+0";
 //
 //       $res = Yii::$app->db->createCommand($sql);
@@ -121,7 +61,7 @@ class DataController extends Controller
         $id = Yii::$app->request->post('id');
         $base = new base();
 
-        $data = $base->updatePrice($id);
+        $data = $base->updateInfo($id);
 
         echo json_encode($data);
 
@@ -135,16 +75,7 @@ class DataController extends Controller
 
         $data = $base->c5Buy($id);
 
-        if($data){
-
-            $status = 200;
-
-        }else{
-
-            $status = 201;
-        }
-
-        echo json_encode(array('status' => $status));
+        echo json_encode($data);
     }
 
 

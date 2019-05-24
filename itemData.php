@@ -5,10 +5,10 @@
  * Date: 2019/4/26 0026
  * Time: 14:06
  */
-include_once('D:\workspace/base.php');
-include_once ('D:\workspace/simple_html_dom.php');
+include_once('D:\workspace/php/base.php');
+include_once ('D:\workspace/php/simple_html_dom.php');
 set_time_limit(0);
-//index();
+index();
 //findC5();
 findC5New();
 //completeC5();
