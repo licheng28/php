@@ -10,7 +10,7 @@ include_once ('D:\workspace/php/simple_html_dom.php');
 set_time_limit(0);
 index();
 //findC5();
-findC5New();
+//findC5New();
 //completeC5();
 function index(){
 
@@ -34,6 +34,8 @@ function index(){
         $href_array = explode('/', $href);
 
         $item_id = $href_array[3];
+
+        $src = $e->first_child()->first_child()->src;
 
         $name = $e->children(1)->innertext;
 
@@ -62,7 +64,7 @@ function index(){
 
                 $time = time();
 
-                $sql = "insert into price_difference (`name`,item_id_igxe,price_igxe,update_time,creat_time) VALUES (\"".$name."\",".$item_id.",".$price.", ".$time.",".$time.")";
+                $sql = "insert into price_difference (`name`,item_id_igxe,price_igxe,update_time,creat_time, img) VALUES (\"".$name."\",".$item_id.",".$price.", ".$time.",".$time.", \"".$src."\")";
 
                 if($pdo->exec($sql)){
 
@@ -261,9 +263,11 @@ function findC5New(){
 
                     $item_id_c5 = $base->getNum($e->first_child()->href, '*');
 
+                    $src = $e->first_child()->children(1)->src;
+
                     $creat_time = $update_time;
 
-                    $sql_insert = "insert into price_difference (`name`, item_id_c5, price_c5, update_time, creat_time) VALUES (\"".$name_c5."\", ".$item_id_c5.", ".$price.",".$update_time.", ".$creat_time.")";
+                    $sql_insert = "insert into price_difference (`name`, item_id_c5, price_c5, update_time, creat_time, img) VALUES (\"".$name_c5."\", ".$item_id_c5.", ".$price.",".$update_time.", ".$creat_time.",\"".$src."\")";
 
                     if($pdo->exec($sql_insert)){
 

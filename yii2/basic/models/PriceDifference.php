@@ -10,9 +10,12 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property int $item_id_igxe
- * @property string $price_igxe
+ * @property int $price_igxe
  * @property int $item_id_c5
- * @property string $price_c5
+ * @property int $price_c5
+ * @property int $purchase_c5
+ * @property string $img
+ * @property int $price_buff
  * @property int $update_time
  * @property int $creat_time
  * @property int $difference
@@ -35,9 +38,8 @@ class PriceDifference extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'update_time', 'creat_time'], 'required'],
-            [['item_id_igxe', 'item_id_c5', 'update_time', 'creat_time', 'difference', 'is_sell'], 'integer'],
-            [['name'], 'string', 'max' => 255],
-            [['price_igxe', 'price_c5'], 'string', 'max' => 9],
+            [['item_id_igxe', 'price_igxe', 'item_id_c5', 'price_c5', 'purchase_c5', 'price_buff', 'update_time', 'creat_time', 'difference', 'is_sell'], 'integer'],
+            [['name', 'img'], 'string', 'max' => 255],
         ];
     }
 
@@ -47,12 +49,16 @@ class PriceDifference extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+
             'id' => 'ID',
             'name' => '名称',
             'item_id_igxe' => 'IGID',
             'price_igxe' => 'ig价格',
             'item_id_c5' => 'C5ID',
             'price_c5' => 'c5价格',
+            'purchase_c5' => 'C5求购',
+            'img' => '图片',
+            'price_buff' => 'buff价格',
             'update_time' => '更新时间',
             'creat_time' => '创建时间',
             'difference' => '差价',

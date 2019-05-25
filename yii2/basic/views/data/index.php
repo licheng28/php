@@ -21,6 +21,7 @@ use yii\widgets\LinkPager;
         <table class="table">
             <tr class="accordion">
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['name']?></td>
+                <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['img']?></td>
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_igxe']?></td>
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_c5']?></td>
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['difference']?></td>
@@ -31,7 +32,12 @@ use yii\widgets\LinkPager;
             <?php foreach($model as $data){?>
 
                 <tr class="accordion">
-                    <td class="table-danger"><?php echo $data->name?></td>
+                    <td class="table-danger">
+                        <a target="_blank" href="https://www.c5game.com/dota/<?php echo $data->item_id_c5?>-S.html">
+                            <?php echo $data->name?>
+                        </a>
+                    </td>
+                    <td class="table-danger "><img src="<?php echo $data->img?>" style="width: 58px;"></td>
                     <td class="table-danger <?php echo $data->id.'_ig'?>"><?php echo $data->price_igxe/100?></td>
                     <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->price_c5/100?></td>
                     <td class="table-danger <?php echo $data->id.'_difference'?>"><?php echo $data->difference/100?></td>
@@ -39,6 +45,7 @@ use yii\widgets\LinkPager;
                     <td>
                         <button class="button update" id="<?php echo $data->id?>" data-url="index.php?r=data/update">update</button>
                         <button class="button buy" data-id="<?php echo $data->id?>" data-url="index.php?r=data/buy">buy</button>
+                        <button class="button purchase" data-url="index.php?r=data/purchase">purchase</button>
                     </td>
                 </tr>
             <?php }?>
