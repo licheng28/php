@@ -128,6 +128,7 @@ require_once  'D:/workspace/php/simple_html_dom.php';
  *
  */
 
+
 function getNum($element,$punctuation='.'){
 
     if($punctuation){
