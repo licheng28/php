@@ -65,4 +65,25 @@ class PriceDifference extends \yii\db\ActiveRecord
             'is_sell' => '在售',
         ];
     }
+
+    public function getSellMsg($k)
+    {
+
+        if($k == null){
+
+            return '-';
+
+        }
+
+        $arr = [
+
+            0 => '否',
+            1 => '是',
+            2 => '-',
+
+        ];
+
+        return $arr[$k];
+
+    }
 }
