@@ -99,11 +99,11 @@ function index(){
 
         if($data){
 
-            if($data['price'] == $data['max_price']){
-
-                continue;
-
-            }
+//            if($data['price'] == $data['max_price']){
+//
+//                continue;
+//
+//            }
 
             changePurchasePrice($data, $cookie, $pwd);
 
@@ -111,9 +111,9 @@ function index(){
 
         $key++;
 
-        if($key>5){
+        if($key>10){
 
-            sleep(2);
+            sleep(1);
 
             $key = 1;
 
