@@ -3,6 +3,9 @@
 /* @var $this yii\web\View */
 
 $this->title = 'price_difference';
+
+use yii\bootstrap\ButtonGroup;
+use yii\bootstrap\Button;
 ?>
 <?php
 use yii\widgets\LinkPager;
@@ -26,6 +29,7 @@ use yii\widgets\LinkPager;
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_c5']?></td>
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['difference']?></td>
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['is_sell']?></td>
+                <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['purchase_c5']?></td>
                 <td class="table-danger">操作</td>
             </tr>
 
@@ -42,10 +46,20 @@ use yii\widgets\LinkPager;
                     <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->price_c5/100?></td>
                     <td class="table-danger <?php echo $data->id.'_difference'?>"><?php echo $data->difference/100?></td>
                     <td class="table-danger <?php echo $data->id.'_sell'?>"><?php echo $data->is_sell?'是':'否'?></td>
+                    <td class="table-danger <?php echo $data->id.'_purchase'?>"><?php echo $data->purchase_c5?></td>
                     <td>
+<!--                        --><?php
+//                            echo ButtonGroup::widget([
+//                            'buttons' => [
+//                                ['label' => '按钮A'],
+//                                ['label' => '按钮B'],
+//                                ['label' => '隐藏按钮C', 'visible' => false],
+//                            ]
+//                        ]);
+//                        ?>
                         <button class="button update" id="<?php echo $data->id?>" data-url="index.php?r=data/update">update</button>
                         <button class="button buy" data-id="<?php echo $data->id?>" data-url="index.php?r=data/buy">buy</button>
-                        <button class="button purchase" data-url="index.php?r=data/purchase">purchase</button>
+                        <button class="button purchase" data-test="123" data-url="index.php?r=data/purchase">purchase</button>
                     </td>
                 </tr>
             <?php }?>
@@ -65,11 +79,19 @@ use yii\widgets\LinkPager;
 
     $(document).ready(function(){
 
+        $('.purchase').click(function(){
+
+            $(this).attr('disabled','');
+
+        })
+
 
         $('.update').click(function(){
 
+            $(this).attr('disabled','');
             var id = $(this).attr('id');
             var url = $(this).data('url');
+            var $this = $(this);
 
             $.post(url, {id:id}, function(data){
 
@@ -80,7 +102,6 @@ use yii\widgets\LinkPager;
                     $("."+data.id+"_ig").html(data.ig);
                     $("."+data.id+"_c5").html(data.c5);
                     $("."+data.id+"_difference").html(data.difference/100);
-
                     if(data.sell){
 
                         $("."+data.id+"_sell").html('是');
@@ -91,7 +112,11 @@ use yii\widgets\LinkPager;
 
                     }
 
+                    $("."+data.id+"_purchase").html(data.price_p);
+
                 }
+
+               $this.removeAttr('disabled');
 
             })
 
@@ -99,8 +124,10 @@ use yii\widgets\LinkPager;
 
         $('.buy').click(function(){
 
+            $(this).attr('disabled','');
             var id = $(this).data('id');
             var url = $(this).data('url');
+            var $this = $(this);
 
             $.post(url, {id:id}, function(data){
 
@@ -114,6 +141,8 @@ use yii\widgets\LinkPager;
 
                     alert(data.msg);
                 }
+
+                $this.removeAttr('disabled');
 
             })
 

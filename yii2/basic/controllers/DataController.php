@@ -16,6 +16,7 @@ use yii\web\simple_html_dom;
 
 
 
+
 class DataController extends Controller
 {
    public function actionIndex()
