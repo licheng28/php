@@ -21,8 +21,8 @@ function index(){
 
     $html = curl($url, $cookie);
 
-//require_once  ' D:/workspace/simple_html_dom.php';
-    include_once ('/var/git/licheng.git/php/simple_html_dom.php');
+require_once  'D:/workspace/php/simple_html_dom.php';
+//    include_once ('/var/git/licheng.git/php/simple_html_dom.php');
 //$html = file_get_html('https://www.c5game.com');//获取html
     $dom = new simple_html_dom(); //new simple_html_dom对象
     $dom->load($html);  //加载html
@@ -99,11 +99,11 @@ function index(){
 
         if($data){
 
-            if($data['price'] == $data['max_price']){
-
-                continue;
-
-            }
+//            if($data['price'] == $data['max_price']){
+//
+//                continue;
+//
+//            }
 
             changePurchasePrice($data, $cookie, $pwd);
 
@@ -111,9 +111,9 @@ function index(){
 
         $key++;
 
-        if($key>5){
+        if($key>10){
 
-            sleep(2);
+            sleep(1);
 
             $key = 1;
 
@@ -234,7 +234,7 @@ function changePurchasePrice($data, $cookie, $pwd){
 
         $sell_min_price = $content->{'body'}->{'item'}->{'sell_min_price'};
 
-        $purchase_max_price = $data['max_price'];
+        $purchase_max_price = $content->{'body'}->{'item'}->{'purchase_max_price'};
 
         if($sell_min_price&&$purchase_max_price){
 
