@@ -12,11 +12,10 @@ index();
 function index(){
 
     $url = 'https://www.c5game.com/user/purchase/index.html';
-//$url = 'https://www.cnblogs.com/blueskycc/p/5189232.html';
-    $cookie = 'bdshare_firstime=1495112656374; fp_ver=3.3.3; BSFIT_OkLJUJ=FFBqPVR-F9hmdg-zTUxNdxvoJUwJAI8P; BSFIT_DEVICEID=By3w4BbUbCpg3rijooGXLYUOhJ5DbIgY7h-9Iq6K7SZb_AljkrSOAS6Powiq7grc0HqpCUH1xMZgru0nAZ2ZnLPRyMZXmGGUrXUz64wskn5a4JSz8s_FtruUXmHE1xJuDslfpLXtqyXPhJa5Ld9qQjM1WfGOVVGd; MEIQIA_EXTRA_TRACK_ID=0wnpBv1NMrGhzg6IkdfVZB6AYSP; buyKnowNotice=close; C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; C5buygame=Y; C5Appid=570; C5Lang=zh; C5NoticeBounces1555403740=close; C5Notice1555403740=close; C5NoticeBounces1555558523=close; C5Notice1555558523=close; C5Steamurl=true; C5SessionID=n5saim7bo5ausckfbtgc8tff01; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cbbff88bf9db; C5Login=253352; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1555473868,1555560364,1555745175,1555824487; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1555832787';
-
-//    $cookie = 'C5Lang=zh; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1556181926; C5NoticeBounces1556170168=close; C5Appid=570; C5SessionID=rcl4ss5tpvq9deieti9cfm80f7; C5Sate=9dac2228e8e1038ef95eb42cb26dd526540df83ba%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cc174f589f60; C5Login=557376709; C5Machines=Wl4MOBJaQ0Fj%2F3qKBDxJGciO%2Bfd%2BvowCOflGnn8qGYs%3D; C5_NPWD=0QRrydA06t9FYzzO7qR%2FNA%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1556182330';
+    $cookie = 'C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; C5Lang=zh; C5Appid=570; C5Notice1558575896=close; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5SessionID=oqmjotlbf6flvv3tgpt9smm1r5; C5Token=5cebe430de6b7; C5Login=253352; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1558891615,1558891662,1558891775,1558963252; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1558974326';
     $pwd = 328928;
+//    $cookie = 'C5Lang=zh; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1556181926; C5NoticeBounces1556170168=close; C5Appid=570; C5SessionID=rcl4ss5tpvq9deieti9cfm80f7; C5Sate=9dac2228e8e1038ef95eb42cb26dd526540df83ba%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cc174f589f60; C5Login=557376709; C5Machines=Wl4MOBJaQ0Fj%2F3qKBDxJGciO%2Bfd%2BvowCOflGnn8qGYs%3D; C5_NPWD=0QRrydA06t9FYzzO7qR%2FNA%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1556182330';
+//    $pwd = 679578;
 
 
     $html = curl($url, $cookie);
@@ -27,7 +26,7 @@ require_once  'D:/workspace/php/simple_html_dom.php';
     $dom = new simple_html_dom(); //new simple_html_dom对象
     $dom->load($html);  //加载html
     // Find all images
-
+    $page_count = 1;
     foreach($dom->find('ul li.last a') as $e){
 
         $page_count = $e->href;
@@ -41,11 +40,18 @@ require_once  'D:/workspace/php/simple_html_dom.php';
     $j = 0;
     $i = 1;
 
+    if(!$page_count){
+
+        $page_count = 1;
+
+    }
+
     for($page=1;$page<=$page_count;$page++){
 
         $url = 'https://www.c5game.com/user/purchase/index.html?page='.$page;
 
         $html = curl($url, $cookie);
+
         $dom->load($html);
 
         foreach($dom->find('tr td') as $element) {
