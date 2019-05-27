@@ -69,7 +69,7 @@ class PriceDifference extends \yii\db\ActiveRecord
     public function getSellMsg($k)
     {
 
-        if($k == null){
+        if($k === null){
 
             return '-';
 

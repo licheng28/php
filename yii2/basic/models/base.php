@@ -397,9 +397,9 @@ class base extends Model
 
                  }
 
-                 return 0;
-
              }
+
+             return 0;
 
          }
 
