@@ -21,6 +21,7 @@ function index(){
     $html = curl($url, $cookie);
 
 //require_once  'D:/workspace/php/simple_html_dom.php';
+//require_once  'D:/workspace/simple_html_dom.php';
     include_once ('/var/git/licheng.git/php/simple_html_dom.php');
 //$html = file_get_html('https://www.c5game.com');//获取html
     $dom = new simple_html_dom(); //new simple_html_dom对象
@@ -299,7 +300,51 @@ function changePurchasePrice($data, $cookie, $pwd){
 
         }else{
 
-            $message = $message.'&nbsp'.$name. '没有求购或没有在售';
+            if($purchase_max_price == 0){
+
+                $min_price = $content->{'body'}->{'item'}->{'purchase_max_price'};
+
+                if($min_price<=$data['price']){
+
+                    if($min_price>=100){
+
+                        $improve_price = 1;
+
+                    }else{
+
+                        $improve_price = 0.1;
+
+                    }
+
+                    $url_purchase_submit = 'https://www.c5game.com/api/purchase/submit';
+
+                    $purchase_data = array(
+
+                        'price' => $min_price+$improve_price,
+                        'num' => 1,
+                        'paypwd' => $pwd,
+                        'delivery' => 'on',
+                        'id' => $item_id,//item_id
+                        'appid' => 570,
+
+                    );
+
+                    curl($url_purchase_submit, $cookie, $purchase_data);
+
+                    $message = $message .'  发布求购成功,物品名称 = '.$name.',花费金额:'.$purchase_data['price'];
+
+                }else{
+
+                    $message = $message.'&nbsp'.$name. '最低求购价过高';
+
+                }
+
+            }else{
+
+                $message = $message.'&nbsp'.$name. '没有在售';
+
+            }
+
 
         }
 
