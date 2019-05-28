@@ -59,7 +59,7 @@ use yii\widgets\LinkPager;
 //                        ?>
                         <button class="button update" id="<?php echo $data->id?>" data-url="index.php?r=data/update">update</button>
                         <button class="button buy" data-id="<?php echo $data->id?>" data-url="index.php?r=data/buy">buy</button>
-                        <button class="button purchase" data-test="123" data-url="index.php?r=data/purchase">purchase</button>
+                        <button class="button purchase" data-id="<?php echo $data->id?>" data-url="index.php?r=data/purchase">purchase</button>
                     </td>
                 </tr>
             <?php }?>
@@ -82,6 +82,19 @@ use yii\widgets\LinkPager;
         $('.purchase').click(function(){
 
             $(this).attr('disabled','');
+            var id = $(this).data('id');
+            var url = $(this).data('url');
+            var $this = $(this);
+
+            $.post(url, {id:id}, function(data){
+
+                var data = eval("("+data+")");
+
+                alert(data.msg);
+
+            })
+
+            $this.removeAttr('disabled');
 
         })
 
@@ -124,24 +137,13 @@ use yii\widgets\LinkPager;
 
                 var data = eval("("+data+")");
 
-                if(data.status == 200){
-
-                    alert(data.msg);
-
-                }else{
-
-                    alert(data.msg);
-                }
+                alert(data.msg);
 
                 $this.removeAttr('disabled');
 
             })
 
-
-
         })
-
-
 
     })
 

@@ -79,5 +79,17 @@ class DataController extends Controller
         echo json_encode($data);
     }
 
+    public function actionPurchase()
+    {
+
+        $id = Yii::$app->request->post('id');
+        $base = new base();
+
+        $data = $base->purchase($id);
+
+        echo json_encode($data);
+
+    }
+
 
 }
