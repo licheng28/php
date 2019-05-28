@@ -61,7 +61,7 @@ class base extends Model
             $trans->rollBack();
         }
 
-        $difference = $price_ig*100-$price_arr['price']*100;
+        $difference = $price_ig?$price_ig*100-$price_arr['price']*100:$price_arr['price']*100;
 
         $sell_msg = PriceDifference::getSellMsg($is_sell);
 

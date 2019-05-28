@@ -36,7 +36,16 @@ class DataController extends Controller
 
        if($k){
 
-           $data = PriceDifference::find()->where(['>', 'difference', $k*100])->orderBy('difference');
+           if(is_numeric($k)){
+
+               $data = PriceDifference::find()->where(['>', 'difference', $k*100])->orderBy('difference');
+
+           }else{
+
+               $data = PriceDifference::find()->where(['like', 'name', $k])->orderBy('difference');
+
+           }
+
 
        }else{
 

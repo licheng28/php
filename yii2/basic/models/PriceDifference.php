@@ -13,7 +13,7 @@ use Yii;
  * @property int $price_igxe
  * @property int $item_id_c5
  * @property int $price_c5
- * @property int $purchase_c5
+ * @property string $purchase_c5
  * @property string $img
  * @property int $price_buff
  * @property int $update_time
@@ -38,8 +38,9 @@ class PriceDifference extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'update_time', 'creat_time'], 'required'],
-            [['item_id_igxe', 'price_igxe', 'item_id_c5', 'price_c5', 'purchase_c5', 'price_buff', 'update_time', 'creat_time', 'difference', 'is_sell'], 'integer'],
+            [['item_id_igxe', 'price_igxe', 'item_id_c5', 'price_c5', 'price_buff', 'update_time', 'creat_time', 'difference', 'is_sell'], 'integer'],
             [['name', 'img'], 'string', 'max' => 255],
+            [['purchase_c5'], 'string', 'max' => 21],
         ];
     }
 
