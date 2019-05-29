@@ -299,27 +299,43 @@ class base extends Model
 
         $data = PriceDifference::findOne($id);
 
-        $url = "https://www.c5game.com/dota/".$data->item_id_c5."-S.html";
+        if(!$data->c5_id){
 
-        $html = $this->curl($url);
+            $url = "https://www.c5game.com/dota/".$data->item_id_c5."-S.html";
 
-        $dom = new simple_html_dom();
+            $html = $this->curl($url);
 
-        $dom->load($html);
+            $dom = new simple_html_dom();
 
-        foreach($dom->find('.sale-item-table') as $e){
+            $dom->load($html);
 
-            $a = $e->outertext;
+            foreach($dom->find('.sale-item-table') as $e){
 
-            preg_match_all('/(data-url)=("[^"]*")/i', $a, $matches);
+                $a = $e->outertext;
 
-            $item_url = $matches[2][0];
+                preg_match_all('/(data-url)=("[^"]*")/i', $a, $matches);
 
-            $num = $this->getNum($item_url, '=');
+                $item_url = $matches[2][0];
 
-            $arr = explode('=',$num);
+                $num = $this->getNum($item_url, '=');
 
-            $c5_id = $arr[1];
+                $arr = explode('=',$num);
+
+                $c5_id = $arr[1];
+
+            }
+
+            $row = PriceDifference::updateAll(array('c5_id'=>$c5_id), array('id' => $id));
+
+            if(!$row){
+
+                return array('status'=> 205, 'msg'=>'更新c5id失败');
+
+            }
+
+        }else{
+
+            $c5_id = $data->c5_id;
 
         }
 
@@ -424,11 +440,13 @@ class base extends Model
 
             }
 
+            $purchase_c5 = ceil($data->purchase_c5/10);
+
             $url_purchase_submit = 'https://www.c5game.com/api/purchase/submit';
 
             $purchase_data = array(
 
-                'price' => $data->purchase_c5/100+$improve_price,
+                'price' => $purchase_c5/10+$improve_price,
                 'num' => 1,
                 'paypwd' => $this->pwd,
                 'delivery' => 'on',
