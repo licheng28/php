@@ -103,6 +103,8 @@ class base extends Model
 
         $url = 'https://www.igxe.cn/dota2/570?keyword='.$data->name;
 
+        $url = str_replace(' ', '%20', $url);
+
         $html = $this->curl($url,array(),'ig', false);
 
         $dom = new simple_html_dom();
@@ -185,6 +187,8 @@ class base extends Model
         $name = $data->name;
 
         $url = 'https://www.c5game.com/dota.html?k='.$name;
+
+        $url = str_replace(' ', '%20', $url);
 
         $html = $this->curl($url);
 
