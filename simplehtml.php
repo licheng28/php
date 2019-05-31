@@ -302,17 +302,24 @@ function changePurchasePrice($data, $cookie, $pwd){
 
             if($purchase_max_price == 0){
 
-                $min_price = $content->{'body'}->{'item'}->{'purchase_max_price'};
+                $min_price = $content->{'body'}->{'item'}->{'min_price'};
 
                 if($min_price<=$data['price']){
 
                     if($min_price>=100){
 
-                        $improve_price = 1;
+                        $price = ceil($min_price);
 
                     }else{
 
-                        $improve_price = 0.1;
+
+                        $price = ceil(($min_price*10))/10;
+
+                        if($price == 0){
+
+                            $price = 0.1;
+
+                        }
 
                     }
 
@@ -320,7 +327,7 @@ function changePurchasePrice($data, $cookie, $pwd){
 
                     $purchase_data = array(
 
-                        'price' => $min_price+$improve_price,
+                        'price' => $price,
                         'num' => 1,
                         'paypwd' => $pwd,
                         'delivery' => 'on',
