@@ -38,27 +38,20 @@ class base extends Model
 
         try{
 
-            if($data->item_id_igxe){
+            $price_ig = $this->updateIgPrice($data);
 
-                $price_ig = $this->updateIgPrice($data);
+            $data->price_igxe = $price_ig*100;
 
-                $data->price_igxe = $price_ig*100;
-
-            }
-
-            if($data->item_id_c5){
-
-                $price_arr = $this->updateC5Price($data);
-
-            }
+            $price_arr = $this->updateC5Price($data);
 
             $trans->commit();
 
         }catch(Exception $e){
 
+            $trans->rollBack();
+
             return array('status' => 204, 'msg' => 'err');
 
-            $trans->rollBack();
         }
 
         $difference = $price_ig?$price_ig*100-$price_arr['price']*100:$price_arr['price']*100;
@@ -78,61 +71,70 @@ class base extends Model
 
     public function updateIgPrice($data){
 
-        $url = 'https://www.igxe.cn/purchase/product_info_'.$data->item_id_igxe.'_2?p_type=1';
+        $price = 0;
 
-        $html = $this->curl($url, array(), 'ig');
+        if($data->item_id_igxe){
 
-        $content = json_decode($html);
+            $url = 'https://www.igxe.cn/purchase/product_info_'.$data->item_id_igxe.'_2?p_type=1';
 
-        if($content){
+            $html = $this->curl($url, array(), 'ig',false);
 
-            if($content->{'succ'} == true){
+            $content = json_decode($html);
 
-                $price = $content->{'min_price'};
+            if($content){
 
-                $price = round($price, 2);
+                if($content->{'succ'} == true){
 
-                $difference = $data->price_c5?($price-$data->price_c5/100)*100:-$price*100;
+                    $price = $content->{'min_price'};
 
-                PriceDifference::updateAll(array('price_igxe'=>$price*100, 'difference'=>$difference, 'update_time'=>time(), 'is_sell' => $data->is_sell), array('id' => $data->id));
-
-            }
-
-        }else{
-
-            $url = 'https://www.igxe.cn/dota2/570?keyword='.$data->name;
-
-            $html = $this->curl($url,array(),'ig', false);
-
-            $dom = new simple_html_dom();
-
-            $dom->load($html);
-
-            foreach($dom->find('.dota') as $e){
-
-                $name = $e->children(1)->innertext;
-
-                if($name == $data->name){
-
-                    $price1 = $e->children(2)->first_child()->children(1)->innertext;
-                    $price2 = $e->children(2)->first_child()->children(2)->innertext;
-
-                    $price = $price1.$price2;
+                    $price = round($price, 2);
 
                     $difference = $data->price_c5?($price-$data->price_c5/100)*100:-$price*100;
 
                     PriceDifference::updateAll(array('price_igxe'=>$price*100, 'difference'=>$difference, 'update_time'=>time(), 'is_sell' => $data->is_sell), array('id' => $data->id));
 
+                    return $price;
+
                 }
 
             }
 
-            $dom->clear();
+        }
 
+        $url = 'https://www.igxe.cn/dota2/570?keyword='.$data->name;
+
+        $html = $this->curl($url,array(),'ig', false);
+
+        $dom = new simple_html_dom();
+
+        $dom->load($html);
+
+        foreach($dom->find('.dota') as $e){
+
+            $name = $e->children(1)->innertext;
+
+            if($name == $data->name){
+
+                $href = $e->href;
+
+                $href_array = explode('/', $href);
+
+                $item_id = $href_array[3];
+
+                $price1 = $e->children(2)->first_child()->children(1)->innertext;
+                $price2 = $e->children(2)->first_child()->children(2)->innertext;
+
+                $price = $price1.$price2;
+
+                $difference = $data->price_c5?($price-$data->price_c5/100)*100:-$price*100;
+
+                PriceDifference::updateAll(array('price_igxe'=>$price*100, 'difference'=>$difference, 'update_time'=>time(), 'is_sell' => $data->is_sell, 'item_id_igxe' => $item_id), array('id' => $data->id));
+
+            }
 
         }
 
-
+        $dom->clear();
 
         return $price;
 
@@ -140,99 +142,107 @@ class base extends Model
 
     public function updateC5Price($data){
 
-        $url_purchase_item = 'https://www.c5game.com/api/purchase/item';
+        $price = $price_purchase = $difference = 0;
 
-        $data_item = array(
+        if($data->item_id_c5){
 
-            'id' => $data->item_id_c5
+            $url_purchase_item = 'https://www.c5game.com/api/purchase/item';
 
-        );
+            $data_item = array(
 
-        $html = $this->curl($url_purchase_item,$data_item);
+                'id' => $data->item_id_c5
 
-        $content = json_decode($html);
+            );
 
-        $price = $data->price_c5;
+            $html = $this->curl($url_purchase_item,$data_item);
 
-        $price_purchase = 0;
+            $content = json_decode($html);
 
-        $difference = $data->difference;
+            $price = $data->price_c5;
 
-        if($content->{'status'} == 200){
+            $price_purchase = 0;
 
-            $price = $content->{'body'}->{'item'}->{'sell_min_price'};
+            if($content->{'status'} == 200){
 
-            $price_purchase = $content->{'body'}->{'item'}->{'purchase_max_price'};
+                $price = $content->{'body'}->{'item'}->{'sell_min_price'};
 
-            $difference = $data->price_igxe?$data->price_igxe-($price*100):$price*100;
+                $price_purchase = $content->{'body'}->{'item'}->{'purchase_max_price'};
+
+                $difference = $data->price_igxe?$data->price_igxe-($price*100):$price*100;
 
 //            PriceDifference::model()->updateByPk($data->id,array('price_c5'=>$price*100, 'difference'=>$difference, 'update_time'=>time()));
 
-            PriceDifference::updateAll(array('price_c5'=>$price*100, 'difference'=>$difference, 'purchase_c5' => $price_purchase*100, 'update_time'=>time()), array('id' => $data->id));
+                PriceDifference::updateAll(array('price_c5'=>$price*100, 'difference'=>$difference, 'purchase_c5' => $price_purchase*100, 'update_time'=>time()), array('id' => $data->id));
 
-        }else{
+                return array('price' => $price, 'price_p' => $price_purchase);
 
-            $name = $data->name;
+            }
 
-            $url = 'https://www.c5game.com/dota.html?k='.$name;
+        }
 
-            $html = $this->curl($url);
+        $item_id_c5 = 0;
+
+        $name = $data->name;
+
+        $url = 'https://www.c5game.com/dota.html?k='.$name;
+
+        $html = $this->curl($url);
 
 //            include_once  Yii::$app->basePath.\models\simple_html_dom.php;
 
-            $dom = new simple_html_dom();
+        $dom = new simple_html_dom();
 
-            $dom->load($html);
+        $dom->load($html);
 
-            foreach($dom->find('.selling') as $e){
+        foreach($dom->find('.selling') as $e){
 
-                $name_c5 = $e->children(1)->first_child()->first_child()->innertext;
+            $name_c5 = $e->children(1)->first_child()->first_child()->innertext;
 
-                if($name==$name_c5){
+            if($name==$name_c5){
 
-                    $price = $e->children(2)->first_child()->first_child()->innertext;
+                $item_id_c5 = $this->getNum($e->first_child()->href, '*');
 
-                    $price = $this->getNum($price);
+                $price = $e->children(2)->first_child()->first_child()->innertext;
 
-                    $price = $price*100;
+                $price = $this->getNum($price);
 
-                    $difference = $data->price_igxe?$data->price_igxe-($price):$price;
+                $price = $price*100;
+
+                $difference = $data->price_igxe?$data->price_igxe-($price):$price;
 
 //                    PriceDifference::updateAll(array('price_c5'=>$price, 'difference'=>$difference, 'update_time'=>time()), array('id' => $data->id));
 
 //                    $sql_update = "update price_difference set item_id_c5=".$item_id_c5.", price_c5=".$price.", update_time=".$time.", difference=".$difference_price." where id=".$data['id'];
-                }
-
             }
 
-            foreach($dom->find('.purchaseing') as $e){
+        }
 
-                $name_c5 = $e->children(1)->first_child()->first_child()->innertext;
+        foreach($dom->find('.purchaseing') as $e){
 
-                if($name==$name_c5){
+            $name_c5 = $e->children(1)->first_child()->first_child()->innertext;
 
-                    $price_purchase = $e->children(2)->first_child()->first_child()->innertext;
+            if($name==$name_c5){
 
-                    $price_purchase = $this->getNum($price_purchase);
+                $price_purchase = $e->children(2)->first_child()->first_child()->innertext;
 
-                    $price_purchase = $price_purchase*100;
+                $price_purchase = $this->getNum($price_purchase);
+
+                $price_purchase = $price_purchase*100;
 
 //                    PriceDifference::updateAll(array('purchase_c5'=>$price_purchase, 'difference'=>$difference, 'update_time'=>time()), array('id' => $data->id));
 
 //                    $sql_update = "update price_difference set item_id_c5=".$item_id_c5.", price_c5=".$price.", update_time=".$time.", difference=".$difference_price." where id=".$data['id'];
 
-                }
-
             }
 
-            PriceDifference::updateAll(array('purchase_c5'=>$price_purchase,'price_c5'=>$price, 'difference'=>$difference, 'update_time'=>time()), array('id' => $data->id));
-
-            $price = $price/100;
-            $price_purchase = $price_purchase/100;
-
-            $dom->clear();
-
         }
+
+        PriceDifference::updateAll(array('purchase_c5'=>$price_purchase,'price_c5'=>$price, 'difference'=>$difference, 'update_time'=>time(), 'item_id_c5' => $item_id_c5), array('id' => $data->id));
+
+        $price = $price/100;
+        $price_purchase = $price_purchase/100;
+
+        $dom->clear();
 
         return array('price' => $price, 'price_p' => $price_purchase);
 
