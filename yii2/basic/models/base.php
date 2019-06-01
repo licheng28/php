@@ -19,7 +19,7 @@ class base extends Model
 
     var $cookie_c5 = 'C5Lang=zh; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1556181926; C5NoticeBounces1556170168=close; C5Appid=570; C5SessionID=rcl4ss5tpvq9deieti9cfm80f7; C5Sate=9dac2228e8e1038ef95eb42cb26dd526540df83ba%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cc174f589f60; C5Login=557376709; C5Machines=Wl4MOBJaQ0Fj%2F3qKBDxJGciO%2Bfd%2BvowCOflGnn8qGYs%3D; C5_NPWD=0QRrydA06t9FYzzO7qR%2FNA%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1556182330';
 //    var $cookie_c5 ='bdshare_firstime=1495112656374; fp_ver=3.3.3; BSFIT_OkLJUJ=FFBqPVR-F9hmdg-zTUxNdxvoJUwJAI8P; BSFIT_DEVICEID=By3w4BbUbCpg3rijooGXLYUOhJ5DbIgY7h-9Iq6K7SZb_AljkrSOAS6Powiq7grc0HqpCUH1xMZgru0nAZ2ZnLPRyMZXmGGUrXUz64wskn5a4JSz8s_FtruUXmHE1xJuDslfpLXtqyXPhJa5Ld9qQjM1WfGOVVGd; MEIQIA_EXTRA_TRACK_ID=0wnpBv1NMrGhzg6IkdfVZB6AYSP; buyKnowNotice=close; C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; C5buygame=Y; C5Appid=570; C5Lang=zh; C5NoticeBounces1555403740=close; C5Notice1555403740=close; C5NoticeBounces1555558523=close; C5Notice1555558523=close; C5Steamurl=true; C5SessionID=n5saim7bo5ausckfbtgc8tff01; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cbbff88bf9db; C5Login=253352; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1555473868,1555560364,1555745175,1555824487; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1555832787';
-    var $cookie_ig ='distribution_channel=681a3905060164114876; my_steam_game=570; __cfduid=d173e9333e80a5a60245cc291762ff5dc1531462579; my_game=570; agree_sell_agreementlic666=true; gdxidpyhxdE=pYCXqveN9uD5bfqNyQDwUYGblo4LPr2ibStEV6zlpJHE63gVOfz8tTZ2uu%5Cz%5CXbNbnPXNp%2BACb42C%2BhuA7vbqc6zVgdawdPBeZ3PN0xZQBnBuw9Q%2F%2BBUrMMzKLzfsJrz%2Fv95r6j9f3SfJe3CA7BjPTSHjzrN2%2BS%2FnwV3n%2B54js%5CEVLfO%3A1558239691886; _9755xjdesxxd_=32; aliyungf_tc=AQAAAKrXoyfUXAMA7pK1PEyVvse4Tgbs; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; token=af404091-ebd3-4bec-897b-82efdb52f7cc; not_pay_pwd_token=af404091-ebd3-4bec-897b-82efdb52f7cc; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1558669880,1558757985,1558782747,1559018839; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1559036687; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=1460; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; nice_id572d9ba0-d737-11e8-970c-a553533099d1=abf1db32-8103-11e9-a207-8584bcb2e02e; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.431814668.1556871626; myDateMinutes=51; csrftoken=EJz8PiiG37nATTHEuwa5Q8p8A7Y1CDiS; sessionid=dzgdkktgou3pifrqrmy9rxwekwfv6g8b';
+    var $cookie_ig = 'distribution_channel=681a3905060164114876; my_steam_game=570; __cfduid=d173e9333e80a5a60245cc291762ff5dc1531462579; my_game=570; agree_sell_agreementlic666=true; gdxidpyhxdE=pYCXqveN9uD5bfqNyQDwUYGblo4LPr2ibStEV6zlpJHE63gVOfz8tTZ2uu%5Cz%5CXbNbnPXNp%2BACb42C%2BhuA7vbqc6zVgdawdPBeZ3PN0xZQBnBuw9Q%2F%2BBUrMMzKLzfsJrz%2Fv95r6j9f3SfJe3CA7BjPTSHjzrN2%2BS%2FnwV3n%2B54js%5CEVLfO%3A1558239691886; _9755xjdesxxd_=32; aliyungf_tc=AQAAAPJ0SGKdQwUAhZC1PPRvj11lK16r; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; token=cebd7f15-bad4-4abf-8472-0da987da163c; myDateMinutes=48; csrftoken=hS3bk4YRwj7JwsrwGLKiEQmqs47rCOeb; sessionid=435q92e3w2s6rpwinv3s7wrhqjhdkpf7; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=1630; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.431814668.1556871626; _gat=1; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1559121818,1559204220,1559293102,1559362996; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1559375384; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; nice_id572d9ba0-d737-11e8-970c-a553533099d1=fb46a1b1-8424-11e9-9fda-c179ddc12e4a';
 //    var $pwd = '328928';
     var $pwd = '679578';
 
@@ -478,6 +478,41 @@ class base extends Model
         }
 
         return array('status' => 201, 'msg' => '求购价未知');
+
+    }
+
+    /**
+     * @param $day
+     */
+
+    public function updateReplenishInfo($day)
+    {
+
+        $url = 'https://www.igxe.cn/inventory/api/get_sold_data/570?page_no=1&page_size=200&keyword=&status_locked=0&date_from='.$day.'&date_to=';
+
+        $html = $this->curl($url, array(), 'ig');
+
+        $content = json_decode($html);
+
+
+        foreach($content->{'items'} as $data){
+
+            $model = new Replenish();
+//            $min_price = $data->{'min_price'};
+            $model->fee = ceil($data->{'fee_money'}*100);
+            $model->income_price = ceil($data->{'income_price'}*100);
+            $model->sold_time = strtotime($data->{'last_updated'});
+//            $name = $data->{'market_name'};
+            $model->item_id_igxe = $data->{'product_id'};
+            $model->creat_time = time();
+            $model->status = 1;
+
+            $date = date('Y-m-d', strtotime($data->{'last_updated'}));
+            $model->sell_day = strtotime($date);
+
+            $model->save();
+
+        }
 
     }
 

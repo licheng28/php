@@ -12,7 +12,7 @@ use yii\widgets\LinkPager;
 ?>
 <div class="site-index">
     <form id="formdata" action="" method="get">
-        <input type="hidden" name="r" value="data/index">
+<!--        <input type="hidden" name="r" value="data/index">-->
         <input class="input-group-text" type="text"  name="k" placeholder="差价" value="<?php echo $k?>">
         <button type="submit">submit</button>
     </form>

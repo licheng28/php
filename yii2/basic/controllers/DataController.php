@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\base;
 use app\models\PriceDifference;
+use app\models\Replenish;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -97,6 +98,39 @@ class DataController extends Controller
         $data = $base->purchase($id);
 
         echo json_encode($data);
+
+    }
+
+    public function actionReplenish()
+    {
+        $k = Yii::$app->request->get('k');
+
+        $day =  date('Y-m-d');
+
+        $time = strtotime($day);
+
+        $data = Replenish::find()->where('sell_day ='.$time);
+
+        if($data->count() == 0){
+
+            $base = new base();
+
+            $base->updateReplenishInfo($day);
+
+            $data = Replenish::find()->where('sell_day ='.$time);
+
+        }
+
+        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '20']);
+        $model = $data->offset($pages->offset)->limit($pages->limit)->all();
+
+        return $this->render('replenish', array(
+
+            'model' => $model,
+            'pages' => $pages,
+            'k'=>$k
+
+        ));
 
     }
 
