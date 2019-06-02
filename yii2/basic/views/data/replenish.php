@@ -28,10 +28,15 @@ use yii\widgets\LinkPager;
 
     <table class="table">
         <tr class="accordion">
-            <td class="table-danger"><?php echo \app\models\Replenish::attributeLabels()['sell_day']?></td>
-            <td class="table-danger"><?php echo \app\models\Replenish::attributeLabels()['status']?></td>
+            <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['name']?></td>
+            <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['img']?></td>
             <td class="table-danger"><?php echo \app\models\Replenish::attributeLabels()['fee']?></td>
             <td class="table-danger"><?php echo \app\models\Replenish::attributeLabels()['income_price']?></td>
+            <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_igxe']?></td>
+            <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_c5']?></td>
+            <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['purchase_c5']?></td>
+            <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['difference']?></td>
+            <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['is_sell']?></td>
             <td class="table-danger"><?php echo \app\models\Replenish::attributeLabels()['sold_time']?></td>
             <td class="table-danger">操作</td>
         </tr>
@@ -41,12 +46,17 @@ use yii\widgets\LinkPager;
             <tr class="accordion">
                 <td class="table-danger">
                     <a target="_blank" href="">
-                        <?php echo date('Y-m-d', $data->sell_day)?>
+                        <?php echo $data->itemInfo?$data->itemInfo['name']:$data->item_id_igxe;?>
                     </a>
                 </td>
-                <td class="table-danger "><img src="<?php echo $data->status?>" style="width: 58px;"></td>
-                <td class="table-danger <?php echo $data->id.'_ig'?>"><?php echo $data->fee/100?></td>
+                <td class="table-danger "><img src="<?php print_r($data->itemInfo['img']) ?>" style="width: 58px;"></td>
+                <td class="table-danger <?php echo $data->id.'_ig'?>"><?php print_r($data->fee/100) ?></td>
                 <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->income_price/100?></td>
+                <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->itemInfo['price_igxe']/100?></td>
+                <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->itemInfo['price_c5']/100?></td>
+                <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->itemInfo['purchase_c5']/100?></td>
+                <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->itemInfo['difference']/100?></td>
+                <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo \app\models\PriceDifference::getSellMsg($data->itemInfo['is_sell'])?></td>
                 <td class="table-danger <?php echo $data->id.'_difference'?>"><?php echo date('Y-m-d H:i:s', $data->sold_time)?></td>
                 <td>
                     <!--                        --><?php

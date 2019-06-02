@@ -53,4 +53,20 @@ class Replenish extends \yii\db\ActiveRecord
             'sold_time' => 'Sold Time',
         ];
     }
+
+    public function getItemInfo() {
+        return $this->hasOne(PriceDifference::className(), ['item_id_igxe' => 'item_id_igxe']);
+    }
+
+    /**
+     * @return array
+     */
+
+//    public function relations()
+//    {
+//        return array(
+//            'itemInfo'=>array(self::BELONGS_TO, 'PriceDifference', '','on'=> 't.item_id_igxe=itemInfo.item_id_igxe'),
+//        );
+//    }
+
 }
