@@ -134,5 +134,19 @@ class DataController extends Controller
 
     }
 
+    public function actionUpdateReplenish()
+    {
+
+        $item_id_igxe = Yii::$app->request->post('id');
+        $base = new base();
+
+        $itemInfo = PriceDifference::find()->where('item_id_igxe='.$item_id_igxe)->all();
+
+        $data = $base->updateInfo($itemInfo->id);
+
+        echo json_encode($data);
+
+    }
+
 
 }
