@@ -488,28 +488,127 @@ class base extends Model
     public function updateReplenishInfo($day, $page=1)
     {
 
+        $trans = Yii::$app->db->beginTransaction();
+
+        try{
+
+            $url = 'https://www.igxe.cn/inventory/api/get_sold_data/570?page_no='.$page.'&page_size=200&keyword=&status_locked=0&date_from='.$day.'&date_to=';
+
+            $html = $this->curl($url, array(), 'ig');
+
+            $content = json_decode($html);
+
+            foreach($content->{'items'} as $data){
+
+                $model = new Replenish();
+//            $min_price = $data->{'min_price'};
+                $model->fee = ceil($data->{'fee_money'}*100);
+                $model->income_price = ceil($data->{'income_price'}*100);
+                $model->sold_time = strtotime($data->{'last_updated'});
+//            $name = $data->{'market_name'};
+                $model->item_id_igxe = $data->{'product_id'};
+                $model->create_time = time();
+                $model->status = 1;
+
+                $date = date('Y-m-d', strtotime($data->{'last_updated'}));
+                $model->sell_day = strtotime($date);
+
+                $model->save();
+
+                $item_info = PriceDifference::find()->where('item_id_igxe = '.$data->{'product_id'})->all();
+
+                if(!$item_info){
+
+                    $difference = new PriceDifference();
+
+                    $difference->name = $data->{'market_name'};
+                    $difference->item_id_igxe = $data->{'product_id'};
+                    $difference->price_igxe = ceil($data->{'min_price'}*100);
+                    $difference->img = $data->{'icon_url'};
+                    $difference->update_time = time();
+                    $difference->creat_time = time();
+                    $difference->difference = -ceil($data->{'min_price'}*100);
+
+                    $difference->save();
+
+                }
+
+            }
+
+            if($content->{'is_more'}){
+
+                $this->updateReplenishInfo($day, $page+1);
+
+            }
+
+            $trans->commit();
+
+        }catch(Exception $e){
+
+            $trans->rollBack();
+
+        }
+
+    }
+
+/**
+ * @param $day
+ * @param int $page
+ */
+
+    public function updateSold($day, $page=1)
+    {
+
         $url = 'https://www.igxe.cn/inventory/api/get_sold_data/570?page_no='.$page.'&page_size=200&keyword=&status_locked=0&date_from='.$day.'&date_to=';
 
         $html = $this->curl($url, array(), 'ig');
 
         $content = json_decode($html);
 
+        $last = array();
+
         foreach($content->{'items'} as $data){
 
-            $model = new Replenish();
+            if(strtotime($data->{'last_updated'}) != $last->sold_time){
+
+                $model = new Replenish();
 //            $min_price = $data->{'min_price'};
-            $model->fee = ceil($data->{'fee_money'}*100);
-            $model->income_price = ceil($data->{'income_price'}*100);
-            $model->sold_time = strtotime($data->{'last_updated'});
+                $model->fee = ceil($data->{'fee_money'}*100);
+                $model->income_price = ceil($data->{'income_price'}*100);
+                $model->sold_time = strtotime($data->{'last_updated'});
 //            $name = $data->{'market_name'};
-            $model->item_id_igxe = $data->{'product_id'};
-            $model->creat_time = time();
-            $model->status = 1;
+                $model->item_id_igxe = $data->{'product_id'};
+                $model->create_time = time();
+                $model->status = 1;
 
-            $date = date('Y-m-d', strtotime($data->{'last_updated'}));
-            $model->sell_day = strtotime($date);
+                $date = date('Y-m-d', strtotime($data->{'last_updated'}));
+                $model->sell_day = strtotime($date);
 
-            $model->save();
+                $model->save();
+
+                $item_info = PriceDifference::find()->where('item_id_igxe = '.$data->{'product_id'})->all();
+
+                if(!$item_info){
+
+                    $difference = new PriceDifference();
+
+                    $difference->name = $data->{'market_name'};
+                    $difference->item_id_igxe = $data->{'product_id'};
+                    $difference->price_igxe = ceil($data->{'min_price'}*100);
+                    $difference->img = $data->{'icon_url'};
+                    $difference->update_time = time();
+                    $difference->creat_time = time();
+                    $difference->difference = -ceil($data->{'min_price'}*100);
+
+                    $difference->save();
+
+                }
+
+            }else{
+
+                return true;
+
+            }
 
         }
 

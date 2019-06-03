@@ -134,19 +134,14 @@ class DataController extends Controller
 
     }
 
-    public function actionUpdateReplenish()
+    public function actionUpdateSold()
     {
 
-        $item_id_igxe = Yii::$app->request->post('id');
-        $base = new base();
+        $day =  date('Y-m-d');
 
-        $itemInfo = PriceDifference::find()->where('item_id_igxe='.$item_id_igxe)->all();
+        base::updateSold($day);
 
-        $data = $base->updateInfo($itemInfo->id);
-
-        echo json_encode($data);
-
+        $this->redirect('index.php?r=data/replenish');
     }
-
 
 }

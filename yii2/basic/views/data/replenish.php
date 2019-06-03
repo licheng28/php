@@ -16,11 +16,14 @@ use yii\bootstrap\Button;
 use yii\widgets\LinkPager;
 ?>
 <div class="site-index">
-    <form id="formdata" action="" method="get">
-        <input type="hidden" name="r" value="data/replenish">
-        <input class="input-group-text" type="text"  name="k" placeholder="差价" value="<?php echo $k?>">
-        <button type="submit">submit</button>
-    </form>
+    <a href="index.php?r=data/update-sold">
+        <button class="updatesold">updatesold</button>
+    </a>
+<!--    <form id="formdata" action="" method="get">-->
+<!--        <input type="hidden" name="r" value="data/replenish">-->
+<!--        <input class="input-group-text" type="text"  name="k" placeholder="差价" value="--><?php //echo $k?><!--">-->
+<!--        <button type="submit">submit</button>-->
+<!--    </form>-->
 </div>
 <body class="content-container">
 
@@ -30,7 +33,7 @@ use yii\widgets\LinkPager;
         <tr class="accordion">
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['name']?></td>
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['img']?></td>
-            <td class="table-danger"><?php echo \app\models\Replenish::attributeLabels()['fee']?></td>
+<!--            <td class="table-danger">--><?php //echo \app\models\Replenish::attributeLabels()['fee']?><!--</td>-->
             <td class="table-danger"><?php echo \app\models\Replenish::attributeLabels()['income_price']?></td>
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_igxe']?></td>
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_c5']?></td>
@@ -46,11 +49,15 @@ use yii\widgets\LinkPager;
             <tr class="accordion">
                 <td class="table-danger">
                     <a target="_blank" href="https://www.c5game.com/dota/<?php echo $data->itemInfo['item_id_c5']?>-S.html">
-                        <?php echo $data->itemInfo?$data->itemInfo['name']:$data->item_id_igxe;?>
+                        <?php echo $data->itemInfo['name'];?>
                     </a>
                 </td>
-                <td class="table-danger "><img src="<?php print_r($data->itemInfo['img']) ?>" style="width: 48px;"></td>
-                <td class="table-danger"><?php print_r($data->fee/100) ?></td>
+                <td class="table-danger ">
+                    <a target="_blank" href="https://www.igxe.cn/product/570/<?php echo $data->item_id_igxe?>">
+                        <img src="<?php print_r($data->itemInfo['img']) ?>" style="width: 48px;">
+                    </a>
+                </td>
+<!--                <td class="table-danger">--><?php //print_r($data->fee/100) ?><!--</td>-->
                 <td class="table-danger"><?php echo $data->income_price/100?></td>
                 <td class="table-danger <?php echo $data->itemInfo['id'].'_ig'?>"><?php echo $data->itemInfo['price_igxe']/100?></td>
                 <td class="table-danger <?php echo $data->itemInfo['id'].'_c5'?>"><?php echo $data->itemInfo['price_c5']/100?></td>
@@ -68,11 +75,8 @@ use yii\widgets\LinkPager;
                     //                            ]
                     //                        ]);
                     //                        ?>
-                    <?php if($data->itemInfo){?>
-                        <button class="button update" id="<?php echo $data->itemInfo['id']?>" data-url="index.php?r=data/update">update</button>
-                    <?php }else{?>
-                        <button class="button update" id="<?php echo $data->item_id_igxe?>" data-url="index.php?r=data/update-replenish">update</button>
-                    <?php }?>
+
+                    <button class="button update" id="<?php echo $data->itemInfo['id']?>" data-url="index.php?r=data/update">update</button>
                     <button class="button buy" data-id="<?php echo $data->itemInfo['id']?>" data-url="index.php?r=data/buy">buy</button>
                     <button class="button purchase" data-id="<?php echo $data->itemInfo['id']?>" data-url="index.php?r=data/purchase">purchase</button>
                 </td>

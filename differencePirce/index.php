@@ -11,9 +11,9 @@ function index(){
 
     try{
 
-        echo phpinfo();die;
 
-        $pdo = new PDO("mysql:host=localhost;dbname=lic","root","");
+
+        $pdo = new PDO("mysql:host=localhost;dbname=lic","root","root");
 
         $pdo->exec('set names utf8');
 
