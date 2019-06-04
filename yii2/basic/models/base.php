@@ -19,7 +19,7 @@ class base extends Model
 
 //    var $cookie_c5 = 'C5Lang=zh; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1556181926; C5NoticeBounces1556170168=close; C5Appid=570; C5SessionID=rcl4ss5tpvq9deieti9cfm80f7; C5Sate=9dac2228e8e1038ef95eb42cb26dd526540df83ba%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cc174f589f60; C5Login=557376709; C5Machines=Wl4MOBJaQ0Fj%2F3qKBDxJGciO%2Bfd%2BvowCOflGnn8qGYs%3D; C5_NPWD=0QRrydA06t9FYzzO7qR%2FNA%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1556182330';
     var $cookie_c5 ='bdshare_firstime=1495112656374; fp_ver=3.3.3; BSFIT_OkLJUJ=FFBqPVR-F9hmdg-zTUxNdxvoJUwJAI8P; BSFIT_DEVICEID=By3w4BbUbCpg3rijooGXLYUOhJ5DbIgY7h-9Iq6K7SZb_AljkrSOAS6Powiq7grc0HqpCUH1xMZgru0nAZ2ZnLPRyMZXmGGUrXUz64wskn5a4JSz8s_FtruUXmHE1xJuDslfpLXtqyXPhJa5Ld9qQjM1WfGOVVGd; MEIQIA_EXTRA_TRACK_ID=0wnpBv1NMrGhzg6IkdfVZB6AYSP; buyKnowNotice=close; C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; C5buygame=Y; C5Appid=570; C5Lang=zh; C5NoticeBounces1555403740=close; C5Notice1555403740=close; C5NoticeBounces1555558523=close; C5Notice1555558523=close; C5Steamurl=true; C5SessionID=n5saim7bo5ausckfbtgc8tff01; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cbbff88bf9db; C5Login=253352; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1555473868,1555560364,1555745175,1555824487; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1555832787';
-    var $cookie_ig = 'distribution_channel=681a3905060164114876; my_steam_game=570; __cfduid=d173e9333e80a5a60245cc291762ff5dc1531462579; my_game=570; agree_sell_agreementlic666=true; gdxidpyhxdE=pYCXqveN9uD5bfqNyQDwUYGblo4LPr2ibStEV6zlpJHE63gVOfz8tTZ2uu%5Cz%5CXbNbnPXNp%2BACb42C%2BhuA7vbqc6zVgdawdPBeZ3PN0xZQBnBuw9Q%2F%2BBUrMMzKLzfsJrz%2Fv95r6j9f3SfJe3CA7BjPTSHjzrN2%2BS%2FnwV3n%2B54js%5CEVLfO%3A1558239691886; _9755xjdesxxd_=32; aliyungf_tc=AQAAACrc0HzruQgAhZC1PC+5zNOoVGw7; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; token=8dd636b0-2178-4725-9998-c93e29927b33; myDateMinutes=27; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=1668; _gat=1; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; nice_id572d9ba0-d737-11e8-970c-a553533099d1=0527cce1-85b5-11e9-9fda-c179ddc12e4a; csrftoken=uiK23e0qkye70UW7WgatlpTDljZHVNI7; sessionid=mnbycl5tgmi8vcx0trh9urdfl6iimxnt; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1559362996,1559388133,1559448259,1559534811; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1559536167; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.431814668.1556871626';
+    var $cookie_ig = 'distribution_channel=681a3905060164114876; my_steam_game=570; __cfduid=d173e9333e80a5a60245cc291762ff5dc1531462579; my_game=570; agree_sell_agreementlic666=true; gdxidpyhxdE=pYCXqveN9uD5bfqNyQDwUYGblo4LPr2ibStEV6zlpJHE63gVOfz8tTZ2uu%5Cz%5CXbNbnPXNp%2BACb42C%2BhuA7vbqc6zVgdawdPBeZ3PN0xZQBnBuw9Q%2F%2BBUrMMzKLzfsJrz%2Fv95r6j9f3SfJe3CA7BjPTSHjzrN2%2BS%2FnwV3n%2B54js%5CEVLfO%3A1558239691886; _9755xjdesxxd_=32; aliyungf_tc=AQAAAHdyQwPEtQIAhZC1PNnJUGwJqNYY; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; token=c60986dc-f4b1-4a01-90c0-018cd061c12d; myDateMinutes=45; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=1702; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; nice_id572d9ba0-d737-11e8-970c-a553533099d1=a2efc501-867c-11e9-8b58-d38319d565ab; csrftoken=BZ8oTy6unvd9xGGHjIBQx907HLPrhKU9; sessionid=8qe3rfmnpbkzujttl8df27y7v5q8kiee; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1559388133,1559448259,1559534811,1559620548; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1559623670; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.431814668.1556871626; _gat=1';
     var $pwd = '328928';
 //    var $pwd = '679578';
 
@@ -501,11 +501,9 @@ class base extends Model
             foreach($content->{'items'} as $data){
 
                 $model = new Replenish();
-//            $min_price = $data->{'min_price'};
                 $model->fee = ceil($data->{'fee_money'}*100);
                 $model->income_price = ceil($data->{'income_price'}*100);
                 $model->sold_time = strtotime($data->{'last_updated'});
-//            $name = $data->{'market_name'};
                 $model->item_id_igxe = $data->{'product_id'};
                 $model->create_time = time();
                 $model->status = 1;
@@ -545,6 +543,8 @@ class base extends Model
 
         }catch(Exception $e){
 
+            echo $e->getMessage();
+
             $trans->rollBack();
 
         }
@@ -558,55 +558,64 @@ class base extends Model
 
     public function updateSold($day, $page=1)
     {
+//        $end = date('Y-m-d', strtotime($day)+86400);
 
-        $url = 'https://www.igxe.cn/inventory/api/get_sold_data/570?page_no='.$page.'&page_size=200&keyword=&status_locked=0&date_from='.$day.'&date_to=';
+        $url = 'https://www.igxe.cn/inventory/api/get_sold_data/570?page_no='.$page.'&page_size=200&keyword=&status_locked=0&date_from='.$day.'&date_to='.$day;
 
         $html = $this->curl($url, array(), 'ig');
 
         $content = json_decode($html);
 
-        $last = array();
+        $last = Replenish::find()->where('sell_day='.strtotime($day))->orderBy('sold_time desc')->one();
+
+        if(!$content->{'items'}){
+
+            return false;
+
+        }
 
         foreach($content->{'items'} as $data){
 
-            if(strtotime($data->{'last_updated'}) != $last->sold_time){
+            if($last){
 
-                $model = new Replenish();
-//            $min_price = $data->{'min_price'};
-                $model->fee = ceil($data->{'fee_money'}*100);
-                $model->income_price = ceil($data->{'income_price'}*100);
-                $model->sold_time = strtotime($data->{'last_updated'});
-//            $name = $data->{'market_name'};
-                $model->item_id_igxe = $data->{'product_id'};
-                $model->create_time = time();
-                $model->status = 1;
+                if(strtotime($data->{'last_updated'}) == $last->sold_time){
 
-                $date = date('Y-m-d', strtotime($data->{'last_updated'}));
-                $model->sell_day = strtotime($date);
-
-                $model->save();
-
-                $item_info = PriceDifference::find()->where('item_id_igxe = '.$data->{'product_id'})->all();
-
-                if(!$item_info){
-
-                    $difference = new PriceDifference();
-
-                    $difference->name = $data->{'market_name'};
-                    $difference->item_id_igxe = $data->{'product_id'};
-                    $difference->price_igxe = ceil($data->{'min_price'}*100);
-                    $difference->img = $data->{'icon_url'};
-                    $difference->update_time = time();
-                    $difference->creat_time = time();
-                    $difference->difference = -ceil($data->{'min_price'}*100);
-
-                    $difference->save();
+                    return true;
 
                 }
 
-            }else{
+            }
 
-                return true;
+            $model = new Replenish();
+//            $min_price = $data->{'min_price'};
+            $model->fee = ceil($data->{'fee_money'}*100);
+            $model->income_price = ceil($data->{'income_price'}*100);
+            $model->sold_time = strtotime($data->{'last_updated'});
+//            $name = $data->{'market_name'};
+            $model->item_id_igxe = $data->{'product_id'};
+            $model->create_time = time();
+            $model->status = 1;
+
+            $date = date('Y-m-d', strtotime($data->{'last_updated'}));
+            $model->sell_day = strtotime($date);
+
+            $model->save();
+
+            $item_info = PriceDifference::find()->where('item_id_igxe = '.$data->{'product_id'})->all();
+
+            if(!$item_info){
+
+                $difference = new PriceDifference();
+
+                $difference->name = $data->{'market_name'};
+                $difference->item_id_igxe = $data->{'product_id'};
+                $difference->price_igxe = ceil($data->{'min_price'}*100);
+                $difference->img = $data->{'icon_url'};
+                $difference->update_time = time();
+                $difference->creat_time = time();
+                $difference->difference = -ceil($data->{'min_price'}*100);
+
+                $difference->save();
 
             }
 

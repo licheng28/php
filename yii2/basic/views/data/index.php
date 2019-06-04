@@ -11,11 +11,12 @@ use yii\bootstrap\Button;
 use yii\widgets\LinkPager;
 ?>
 <div class="site-index">
-    <form id="formdata" action="" method="get">
+    <form id="formdata" action="" method="get" style="width: auto;">
 <!--        <input type="hidden" name="r" value="data/index">-->
-        <input class="input-group-text" type="text"  name="k" placeholder="差价" value="<?php echo $k?>">
-        <button type="submit">submit</button>
+        <input class="form-control" type="text"  name="k" placeholder="差价" value="<?php echo $k?>" style="float: left;width: 250px;">
+        <button type="submit" class="btn btn-primary" style="float: left;margin-left: 10px;">submit</button>
     </form>
+    <a class="btn btn-success" href="index.php?r=data/replenish" style="margin-left: 583px;">补货页面</a>
 </div>
 <body class="content-container">
 
@@ -57,9 +58,9 @@ use yii\widgets\LinkPager;
 //                            ]
 //                        ]);
 //                        ?>
-                        <button class="button update" id="<?php echo $data->id?>" data-url="index.php?r=data/update">update</button>
-                        <button class="button buy" data-id="<?php echo $data->id?>" data-url="index.php?r=data/buy">buy</button>
-                        <button class="button purchase" data-id="<?php echo $data->id?>" data-url="index.php?r=data/purchase">purchase</button>
+                        <button class="btn update" id="<?php echo $data->id?>" data-url="index.php?r=data/update">update</button>
+                        <button class="btn btn-info buy" data-id="<?php echo $data->id?>" data-url="index.php?r=data/buy">buy</button>
+                        <button class="btn btn-warning purchase" data-id="<?php echo $data->id?>" data-url="index.php?r=data/purchase">purchase</button>
                     </td>
                 </tr>
             <?php }?>

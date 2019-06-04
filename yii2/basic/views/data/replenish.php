@@ -11,19 +11,33 @@ $this->title = 'replenish';
 
 use yii\bootstrap\ButtonGroup;
 use yii\bootstrap\Button;
+use kartik\datetime\DateTimePicker;
+use kartik\date\DatePicker;
 ?>
 <?php
 use yii\widgets\LinkPager;
 ?>
 <div class="site-index">
-    <a href="index.php?r=data/update-sold">
-        <button class="updatesold">updatesold</button>
+    <a href="index.php?r=data/update-sold&start_time=<?php echo $day?>">
+        <button class="updatesold btn btn-success">updatesold</button>
     </a>
-<!--    <form id="formdata" action="" method="get">-->
-<!--        <input type="hidden" name="r" value="data/replenish">-->
+    <form id="formdata" action="" method="get">
+        <input type="hidden" name="r" value="data/replenish">
 <!--        <input class="input-group-text" type="text"  name="k" placeholder="差价" value="--><?php //echo $k?><!--">-->
-<!--        <button type="submit">submit</button>-->
-<!--    </form>-->
+        <?php echo DatePicker::widget([
+            'name' => 'start_time',
+            'options' => ['placeholder' => '起始日期'],
+            //value值更新的时候需要加上
+            'value' => $day,
+            'pluginOptions' => [
+                'autoclose' => true,
+                'format' => 'yyyy-mm-dd',
+                'todayHighlight' => true,
+            ]
+        ]); ?>
+        <button type="submit">submit</button>
+    </form>
+
 </div>
 <body class="content-container">
 
@@ -76,9 +90,9 @@ use yii\widgets\LinkPager;
                     //                        ]);
                     //                        ?>
 
-                    <button class="button update" id="<?php echo $data->itemInfo['id']?>" data-url="index.php?r=data/update">update</button>
-                    <button class="button buy" data-id="<?php echo $data->itemInfo['id']?>" data-url="index.php?r=data/buy">buy</button>
-                    <button class="button purchase" data-id="<?php echo $data->itemInfo['id']?>" data-url="index.php?r=data/purchase">purchase</button>
+                    <button class="btn update" id="<?php echo $data->itemInfo['id']?>" data-url="index.php?r=data/update">update</button>
+                    <button class="btn btn-info buy" data-id="<?php echo $data->itemInfo['id']?>" data-url="index.php?r=data/buy">buy</button>
+                    <button class="btn btn-warning purchase" data-id="<?php echo $data->itemInfo['id']?>" data-url="index.php?r=data/purchase">purchase</button>
                 </td>
             </tr>
         <?php }?>

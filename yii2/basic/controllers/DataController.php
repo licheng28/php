@@ -20,6 +20,10 @@ use yii\web\simple_html_dom;
 
 class DataController extends Controller
 {
+
+    public $enableCsrfValidation=false;
+
+
    public function actionIndex()
    {
 
@@ -103,13 +107,22 @@ class DataController extends Controller
 
     public function actionReplenish()
     {
-        $k = Yii::$app->request->get('k');
+        $get = Yii::$app->request->get();
 
         $day =  date('Y-m-d');
 
+        if(isset($get['start_time'])){
+
+            if($get['start_time']){
+
+                $day = $get['start_time'];
+
+            }
+        }
+
         $time = strtotime($day);
 
-        $data = Replenish::find()->where('sell_day ='.$time);
+        $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc');
 
         if($data->count() == 0){
 
@@ -117,7 +130,7 @@ class DataController extends Controller
 
             $base->updateReplenishInfo($day);
 
-            $data = Replenish::find()->where('sell_day ='.$time);
+            $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc');
 
         }
 
@@ -128,7 +141,7 @@ class DataController extends Controller
 
             'model' => $model,
             'pages' => $pages,
-            'k'=>$k
+            'day' => $day
 
         ));
 
@@ -137,11 +150,15 @@ class DataController extends Controller
     public function actionUpdateSold()
     {
 
-        $day =  date('Y-m-d');
+        $get = Yii::$app->request->get();
 
-        base::updateSold($day);
+        $day = $get['start_time'];
 
-        $this->redirect('index.php?r=data/replenish');
+        $base = new base();
+
+        $base->updateSold($day);
+
+        $this->redirect('index.php?r=data/replenish&start_time='.$day);
     }
 
 }
