@@ -14,6 +14,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use yii\data\Pagination;
 use yii\web\simple_html_dom;
+use yii\helpers\Html;
 
 
 
@@ -134,7 +135,7 @@ class DataController extends Controller
 
         }
 
-        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '20']);
+        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '12']);
         $model = $data->offset($pages->offset)->limit($pages->limit)->all();
 
         return $this->render('replenish', array(

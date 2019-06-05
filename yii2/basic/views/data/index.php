@@ -16,11 +16,11 @@ use yii\widgets\LinkPager;
         <input class="form-control" type="text"  name="k" placeholder="差价" value="<?php echo $k?>" style="float: left;width: 250px;">
         <button type="submit" class="btn btn-primary" style="float: left;margin-left: 10px;">submit</button>
     </form>
-    <a class="btn btn-success" href="index.php?r=data/replenish" style="margin-left: 583px;">补货页面</a>
+<!--    <a class="btn btn-success" href="index.php?r=data/replenish" style="margin-left: 583px;">补货页面</a>-->
 </div>
 <body class="content-container">
 
-    <div class="site-index"  style="margin-top:20px;">
+    <div class="site-index"  style="margin-top:40px;">
 
         <table class="table">
             <tr class="accordion">

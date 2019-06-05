@@ -28,7 +28,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-<!--    --><?php
+<?php
 //    NavBar::begin([
 //        'brandLabel' => Yii::$app->name,
 //        'brandUrl' => Yii::$app->homeUrl,
@@ -39,7 +39,7 @@ AppAsset::register($this);
 //    echo Nav::widget([
 //        'options' => ['class' => 'navbar-nav navbar-right'],
 //        'items' => [
-//            ['label' => 'Home', 'url' => ['/site/index']],
+//            ['label' => 'Replenish', 'url' => ['/data/replenish']],
 //            ['label' => 'About', 'url' => ['/site/about']],
 //            ['label' => 'Contact', 'url' => ['/site/contact']],
 //            Yii::$app->user->isGuest ? (

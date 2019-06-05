@@ -17,16 +17,17 @@ use kartik\date\DatePicker;
 <?php
 use yii\widgets\LinkPager;
 ?>
-<div class="site-index">
+<div >
     <a href="index.php?r=data/update-sold&start_time=<?php echo $day?>">
-        <button class="updatesold btn btn-success">updatesold</button>
+        <button class="updatesold btn btn-success" style="margin-left: 380px;">updatesold</button>
     </a>
-    <form id="formdata" action="" method="get">
+    <form id="formdata" action="" method="get" style="float: left;width: 600px;">
         <input type="hidden" name="r" value="data/replenish">
 <!--        <input class="input-group-text" type="text"  name="k" placeholder="差价" value="--><?php //echo $k?><!--">-->
+
         <?php echo DatePicker::widget([
             'name' => 'start_time',
-            'options' => ['placeholder' => '起始日期'],
+            'options' => ['placeholder' => '起始日期', 'style' => 'width:300px;'],
             //value值更新的时候需要加上
             'value' => $day,
             'pluginOptions' => [
@@ -35,13 +36,12 @@ use yii\widgets\LinkPager;
                 'todayHighlight' => true,
             ]
         ]); ?>
-        <button type="submit">submit</button>
+        <button type="submit" class="btn btn-primary" style="float: inherit;margin-top:6px;">submit</button>
     </form>
-
 </div>
 <body class="content-container">
 
-<div class="site-index"  style="margin-top:20px;">
+<div class="site-index"  style="margin-top:50px;">
 
     <table class="table">
         <tr class="accordion">
