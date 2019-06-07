@@ -12,12 +12,13 @@ index();
 //findC5();
 findC5New();
 //completeC5();
+//isSell();
 function index(){
 
-//    $url = 'https://www.igxe.cn/dota2/570?tags_type_name=%E6%8D%86%E7%BB%91%E5%8C%85&tags_type_id=1027&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1556266391326';
+    $url = 'https://www.igxe.cn/dota2/570?tags_type_name=%E6%8D%86%E7%BB%91%E5%8C%85&tags_type_id=1027&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1556266391326';
 //
 //    $url = "https://www.igxe.cn/dota2/570?quality_name=%E7%BA%AF%E6%AD%A3&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=350&rarity_id=0&exterior_id=0&quality_id=1023&capsule_id=0&_t=1557129070760";
-    $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=2000&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
+//    $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=2000&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
 
     $base = new base();
 
@@ -192,13 +193,13 @@ function findC5New(){
 
         $page = 1;
 
-        while($page<101){
+        while($page<37){
 
-//            $url = "https://www.c5game.com/dota.html?quality=genuine&page=".$page."&sort=price.desc";
+            $url = "https://www.c5game.com/dota.html?quality=genuine&page=".$page."&sort=price.desc";
 
 //            $url = 'https://www.c5game.com/dota.html?type=bundle&page='.$page.'&sort=price.desc';
 
-            $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique&page='.$page;
+//            $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique&page='.$page;
 
             $base = new base();
 
@@ -377,4 +378,74 @@ function completeC5(){
 
 }
 
+function isSell($page=1,$count=1)
+{
+
+    try{
+
+        if($page==1){
+
+            $url = 'https://www.igxe.cn/sell/data/999999';
+
+        }else{
+
+            $url = 'https://www.igxe.cn/sell/data/999999?page_no='.$page;
+
+        }
+
+
+        $base = new base();
+
+        $html = $base->curl($url,array(),'ig');
+
+        $content = json_decode($html);
+
+        $pdo = new PDO("mysql:host=localhost;dbname=lic","root","root");
+
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $pdo->exec('set names utf8');
+
+        foreach($content->{'show_data'} as $value){
+
+            $name = $value->{'name'};
+
+            $sql = "update price_difference set is_sell=1 where `name`=\"".$name."\"";
+
+            if($pdo->exec($sql)){
+
+                echo '更新成功';
+
+            }else{
+
+                echo $name.'找不到信息或在售未改变';
+            }
+
+            $count++;
+
+        }
+
+        if($content->{'is_more'}){
+
+            $page++;
+
+            isSell($page, $count);
+
+        }
+
+        if(!$content->{'is_more'}){
+
+            echo $count;
+
+        }
+
+    }catch(PDOException $e)
+
+    {
+
+        echo $e->getMessage();
+
+    }
+
+}
 

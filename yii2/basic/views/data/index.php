@@ -42,7 +42,11 @@ use yii\widgets\LinkPager;
                             <?php echo $data->name?>
                         </a>
                     </td>
-                    <td class="table-danger "><img src="<?php echo $data->img?>" style="width: 58px;"></td>
+                    <td class="table-danger ">
+                        <a target="_blank" href="https://www.igxe.cn/product/570/<?php echo $data->item_id_igxe?>">
+                            <img src="<?php echo $data->img?>" style="width: 58px;">
+                        </a>
+                    </td>
                     <td class="table-danger <?php echo $data->id.'_ig'?>"><?php echo $data->price_igxe/100?></td>
                     <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->price_c5/100?></td>
                     <td class="table-danger <?php echo $data->id.'_difference'?>"><?php echo $data->difference/100?></td>

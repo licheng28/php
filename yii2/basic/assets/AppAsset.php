@@ -24,7 +24,7 @@ class AppAsset extends AssetBundle
         'css/bootstrap.css',
         'css/font-awesome.css',
         'css/lightbox.css',
-        'css/style1.css',
+//        'css/style1.css',
     ];
     public $js = [
         'js/bootstrap.js',
