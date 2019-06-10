@@ -19,7 +19,7 @@ class base extends Model
 
 //    var $cookie_c5 = 'C5Lang=zh; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1556181926; C5NoticeBounces1556170168=close; C5Appid=570; C5SessionID=rcl4ss5tpvq9deieti9cfm80f7; C5Sate=9dac2228e8e1038ef95eb42cb26dd526540df83ba%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cc174f589f60; C5Login=557376709; C5Machines=Wl4MOBJaQ0Fj%2F3qKBDxJGciO%2Bfd%2BvowCOflGnn8qGYs%3D; C5_NPWD=0QRrydA06t9FYzzO7qR%2FNA%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1556182330';
     var $cookie_c5 ='bdshare_firstime=1495112656374; fp_ver=3.3.3; BSFIT_OkLJUJ=FFBqPVR-F9hmdg-zTUxNdxvoJUwJAI8P; BSFIT_DEVICEID=By3w4BbUbCpg3rijooGXLYUOhJ5DbIgY7h-9Iq6K7SZb_AljkrSOAS6Powiq7grc0HqpCUH1xMZgru0nAZ2ZnLPRyMZXmGGUrXUz64wskn5a4JSz8s_FtruUXmHE1xJuDslfpLXtqyXPhJa5Ld9qQjM1WfGOVVGd; MEIQIA_EXTRA_TRACK_ID=0wnpBv1NMrGhzg6IkdfVZB6AYSP; buyKnowNotice=close; C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; C5buygame=Y; C5Appid=570; C5Lang=zh; C5NoticeBounces1555403740=close; C5Notice1555403740=close; C5NoticeBounces1555558523=close; C5Notice1555558523=close; C5Steamurl=true; C5SessionID=n5saim7bo5ausckfbtgc8tff01; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cbbff88bf9db; C5Login=253352; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1555473868,1555560364,1555745175,1555824487; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1555832787';
-    var $cookie_ig = 'distribution_channel=681a3905060164114876; __cfduid=d173e9333e80a5a60245cc291762ff5dc1531462579; my_game=570; agree_sell_agreementlic666=true; not_pay_pwd_token=8d755791-aef7-4267-b1a0-239d206fa295; aliyungf_tc=AQAAAFYPPiuE3AwAwJO1PENJruDgFcSo; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; gdxidpyhxdE=yrQPZ%2B5d7BLg3jwot2zHB%5CZMW%2FwnB0NVx%5Cf0C1yGxlq6gqZeTM%2FqMdaRrTQ6qzUvEDOoCJciTq90RqdnWVzYPMjb5PRAZvzn89uEP5IjqjWtIBZ%5CQqfQ58h3RJ%5C3ZaDhaLpQX0UDBMG4BipEd46%2BkEBQYTpjliBbiqmKKpBq%2FIZ2Rpv%2F%3A1560054897599; _9755xjdesxxd_=32; token=23689cc1-0226-4a28-84d9-164906c7f526; myDateMinutes=30; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.408413461.1560053995; _gat=1; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; nice_id572d9ba0-d737-11e8-970c-a553533099d1=d87f98e1-8a6d-11e9-bc20-e71d1b8e4bb6; csrftoken=1eQ3EY3LXlad0fqZSPpgGCxkJyOAKeqk; sessionid=qifqpiyxn3zaua6u43s0saddpy0o830d; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1559808872,1559811278,1559811360,1560053995; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1560058347; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=11';
+    var $cookie_ig = 'distribution_channel=681a3905060164114876; __cfduid=d173e9333e80a5a60245cc291762ff5dc1531462579; my_game=570; agree_sell_agreementlic666=true; gdxidpyhxdE=yrQPZ%2B5d7BLg3jwot2zHB%5CZMW%2FwnB0NVx%5Cf0C1yGxlq6gqZeTM%2FqMdaRrTQ6qzUvEDOoCJciTq90RqdnWVzYPMjb5PRAZvzn89uEP5IjqjWtIBZ%5CQqfQ58h3RJ%5C3ZaDhaLpQX0UDBMG4BipEd46%2BkEBQYTpjliBbiqmKKpBq%2FIZ2Rpv%2F%3A1560054897599; _9755xjdesxxd_=32; not_pay_pwd_token=23689cc1-0226-4a28-84d9-164906c7f526; aliyungf_tc=AQAAABj3ZzADyQYAwJO1PHfQ8wxcdm3z; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; token=0480167f-75df-4fd4-a1bb-0577a31cc20f; myDateMinutes=9; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; nice_id572d9ba0-d737-11e8-970c-a553533099d1=17421331-8b33-11e9-a8a4-1f1e1eff423b; csrftoken=eIKMgiKxKZX7DzX96k9dWkbqzyMJfBZt; sessionid=3checswwfwpp7abncwjf5sz0xz8823oj; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.408413461.1560053995; _gat=1; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=73; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1560059914,1560060841,1560060849,1560138715; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1560143540';
     var $pwd = '328928';
 //    var $pwd = '679578';
 
@@ -562,7 +562,7 @@ class base extends Model
  * @param int $page
  */
 
-    public function updateSold($day, $page=1)
+    public function updateSold($day, $page=1, $lastSoldTime='')
     {
 //        $end = date('Y-m-d', strtotime($day)+86400);
 
@@ -572,19 +572,30 @@ class base extends Model
 
         $content = json_decode($html);
 
-        $last = Replenish::find()->where('sell_day='.strtotime($day))->orderBy('sold_time desc')->one();
-
         if(!$content->{'items'}){
 
             return false;
 
         }
 
-        foreach($content->{'items'} as $data){
+        if(!$lastSoldTime){
+
+            $last = Replenish::find()->where('sell_day='.strtotime($day))->orderBy('sold_time desc')->one();
 
             if($last){
 
-                if(strtotime($data->{'last_updated'}) == $last->sold_time){
+                $lastSoldTime = $last->sold_time;
+
+            }
+
+        }
+
+
+        foreach($content->{'items'} as $data){
+
+            if($lastSoldTime){
+
+                if(strtotime($data->{'last_updated'}) == $lastSoldTime){
 
                     return true;
 
@@ -629,7 +640,7 @@ class base extends Model
 
         if($content->{'is_more'}){
 
-            $this->updateSold($day, $page+1);
+            $this->updateSold($day, $page+1, $lastSoldTime);
 
         }
 
