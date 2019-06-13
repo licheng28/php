@@ -126,7 +126,7 @@ class DataController extends Controller
 
         $time = strtotime($day);
 
-        $sum = Replenish::find()->join('left join','price_difference', 'replenish.item_id_igxe=price_difference.item_id_igxe')->where('replenish.sell_day='.$time)->sum('price_difference.difference');
+        $sum = Replenish::find()->join('left join','price_difference', 'replenish.item_id_igxe=price_difference.item_id_igxe')->where('replenish.sell_day>='.$time)->sum('price_difference.difference');
 
         $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc');
 

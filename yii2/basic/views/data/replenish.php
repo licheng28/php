@@ -39,7 +39,7 @@ use yii\widgets\LinkPager;
         <button type="submit" class="btn btn-primary" style="float: inherit;margin-top:6px;">submit</button>
     </form>
 </div>
-<div>预估利润<?php echo $sum/100?>元</div>
+<div class="">参考利润 : <span style="color: red"><?php echo $sum/100?></span>元</div>
 <body class="content-container">
 
 <div class="site-index"  style="margin-top:50px;">
