@@ -65,10 +65,12 @@ class DataController extends Controller
        return $this->render('index',[
            'model' => $model,
            'pages' => $pages,
-           'k'=>$k
+           'k'=>$k,
+
        ]);
 
    }
+
 
 
     public function actionUpdate()
@@ -143,6 +145,13 @@ class DataController extends Controller
         $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '12']);
         $model = $data->offset($pages->offset)->limit($pages->limit)->all();
 
+        foreach($model as $e){
+
+            $id_arr[] = $e->itemInfo['id'];
+
+        }
+
+        $id_str = implode(',', $id_arr);
 
 
         return $this->render('replenish', array(
@@ -151,6 +160,7 @@ class DataController extends Controller
             'pages' => $pages,
             'day' => $day,
             'sum' => $sum,
+            'idstr' => $id_str,
         ));
 
     }
@@ -169,4 +179,19 @@ class DataController extends Controller
         $this->redirect('index.php?r=data/replenish&start_time='.$day);
     }
 
+    public function actionUpdateAll()
+    {
+        $idstr = Yii::$app->request->post('idstr');
+        $base = new base();
+
+        $idarr = explode(',', $idstr);
+
+        foreach($idarr as $id){
+
+            $base->updateInfo($id);
+
+        }
+
+        echo json_encode(array('status' => 200));
+    }
 }

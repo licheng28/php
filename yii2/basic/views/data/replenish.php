@@ -19,7 +19,10 @@ use yii\widgets\LinkPager;
 ?>
 <div >
     <a href="index.php?r=data/update-sold&start_time=<?php echo $day?>">
-        <button class="updatesold btn btn-success" style="margin-left: 380px;">updatesold</button>
+        <button class="updatesold btn btn-success" style="margin-left: 300px;">updatesold</button>
+    </a>
+    <a href="javascript:;">
+        <button class="updateall btn btn-danger" data-idstr="<?php echo $idstr?>" data-url="index.php?r=data/update-all" style="">updateall</button>
     </a>
     <form id="formdata" action="" method="get" style="float: left;width: 600px;">
         <input type="hidden" name="r" value="data/replenish">
@@ -112,6 +115,22 @@ use yii\widgets\LinkPager;
 <script>
 
     $(document).ready(function(){
+
+        $('.updateall').click(function(){
+
+            var idstr = $(this).data('idstr');
+            var url = $(this).data('url');
+
+            $.post(url,{idstr:idstr},function(data){
+
+                if(data){
+
+                    location.reload();
+                }
+
+            })
+
+        })
 
         $('.purchase').click(function(){
 
