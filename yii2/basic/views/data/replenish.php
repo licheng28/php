@@ -118,8 +118,10 @@ use yii\widgets\LinkPager;
 
         $('.updateall').click(function(){
 
+            $(this).attr('disabled','');
             var idstr = $(this).data('idstr');
             var url = $(this).data('url');
+            var $this = $(this);
 
             $.post(url,{idstr:idstr},function(data){
 
@@ -127,6 +129,8 @@ use yii\widgets\LinkPager;
 
                     location.reload();
                 }
+
+                $this.removeAttr('disabled');
 
             })
 
@@ -145,9 +149,10 @@ use yii\widgets\LinkPager;
 
                 alert(data.msg);
 
+                $this.removeAttr('disabled');
+
             })
 
-            $this.removeAttr('disabled');
 
         })
 
