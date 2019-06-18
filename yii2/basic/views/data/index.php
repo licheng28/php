@@ -11,16 +11,22 @@ use yii\bootstrap\Button;
 use yii\widgets\LinkPager;
 ?>
 <div class="site-index">
+
     <form id="formdata" action="" method="get" style="width: auto;">
 <!--        <input type="hidden" name="r" value="data/index">-->
         <input class="form-control" type="text"  name="k" placeholder="差价" value="<?php echo $k?>" style="float: left;width: 250px;">
         <button type="submit" class="btn btn-primary" style="float: left;margin-left: 10px;">submit</button>
+        <span style="margin-left: 20px;">
+            <input type="checkbox" name="bundle" <?php echo $bundle?'checked':''?>>只显示捆绑包
+        </span>
     </form>
-<!--    <a class="btn btn-success" href="index.php?r=data/replenish" style="margin-left: 583px;">补货页面</a>-->
+    <a class="btn btn-success" href="index.php?r=data/bundle" style="margin-left: 470px;margin-top: -32px;">捆绑包</a>
+    <a class="btn btn-default" href="javascript:;" style="margin-top: -32px;">标准</a>
+    <a class="btn btn-danger" href="javascript:;" style="margin-top: -32px;">纯正</a>
 </div>
 <body class="content-container">
 
-    <div class="site-index"  style="margin-top:40px;">
+    <div class="site-index"  style="margin-top:20px;">
 
         <table class="table">
             <tr class="accordion">

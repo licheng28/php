@@ -38,26 +38,38 @@ class DataController extends Controller
 //
 //       $data = PriceDifference::find()->andFilterWhere(['>','difference','10'])->orderBy([new \yii\db\Expression('FIELD (difference, difference+0)')]);
 
+       $bundle = Yii::$app->request->get('bundle');
+//
+//       print_r($_GET);die;
+
        $k = Yii::$app->request->get('k');
 
        if($k){
 
            if(is_numeric($k)){
 
-               $data = PriceDifference::find()->where(['>', 'difference', $k*100])->orderBy('difference');
+               $data = PriceDifference::find()->where(['>', 'difference', $k*100]);
 
            }else{
 
-               $data = PriceDifference::find()->where(['like', 'name', $k])->orderBy('difference');
+               $data = PriceDifference::find()->where(['like', 'name', $k]);
 
            }
 
 
        }else{
 
-           $data = PriceDifference::find()->orderBy('difference');
+           $data = PriceDifference::find();
 
        }
+
+       if($bundle){
+
+           $data->andWhere('type = :type', array(':type' => PriceDifference::TYPE_BUNDLE));
+
+       }
+
+       $data->orderBy('difference');
 
        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '20']);
        $model = $data->offset($pages->offset)->limit($pages->limit)->all();
@@ -66,6 +78,7 @@ class DataController extends Controller
            'model' => $model,
            'pages' => $pages,
            'k'=>$k,
+           'bundle' => $bundle
 
        ]);
 
@@ -145,6 +158,8 @@ class DataController extends Controller
         $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '12']);
         $model = $data->offset($pages->offset)->limit($pages->limit)->all();
 
+        $id_arr = array();
+
         foreach($model as $e){
 
             $id_arr[] = $e->itemInfo['id'];
@@ -193,5 +208,19 @@ class DataController extends Controller
         }
 
         echo json_encode(array('status' => 200));
+    }
+
+    public function actionBundle()
+    {
+        set_time_limit(0);
+
+        $base = new base();
+
+        $base->updateBundle();
+
+        $base->updateBundleC5();
+
+        $this->redirect('index.php');
+
     }
 }

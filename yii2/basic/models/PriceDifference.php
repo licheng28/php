@@ -21,12 +21,15 @@ use Yii;
  * @property int $difference
  * @property int $is_sell
  * @property int $c5_id
+ * @property int $type
  */
 class PriceDifference extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
+    const TYPE_BUNDLE = 1;
+
     public static function tableName()
     {
         return 'price_difference';
@@ -39,7 +42,7 @@ class PriceDifference extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'update_time', 'creat_time'], 'required'],
-            [['item_id_igxe', 'price_igxe', 'item_id_c5', 'price_c5', 'price_buff', 'update_time', 'creat_time', 'difference', 'is_sell', 'c5_id'], 'integer'],
+            [['item_id_igxe', 'price_igxe', 'item_id_c5', 'price_c5', 'price_buff', 'update_time', 'creat_time', 'difference', 'is_sell', 'c5_id', 'type'], 'integer'],
             [['name', 'img'], 'string', 'max' => 255],
             [['purchase_c5'], 'string', 'max' => 21],
         ];
@@ -66,6 +69,7 @@ class PriceDifference extends \yii\db\ActiveRecord
             'difference' => '差价',
             'is_sell' => '在售',
             'c5_id' => 'c5item主键id',
+            'type' => '类型'
         ];
     }
 

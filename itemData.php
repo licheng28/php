@@ -246,22 +246,13 @@ function findC5New(){
                     $sql_update = "update price_difference set price_c5=".$price.", update_time="."$update_time".", difference=".$difference.", item_id_c5=".$item_id_c5." where id=".$result['id'];
 
                     if($pdo->exec($sql_update)){
-
                         $message = '更新成功';
-
 //                $message = iconv("UTF-8","gbk//TRANSLIT",$message);
-
                         echo $message;
-
                     }else{
-
                         echo 'error';
-
                     }
-
-
                 }else{
-
                     $item_id_c5 = $base->getNum($e->first_child()->href, '*');
 
                     $src = $e->first_child()->children(1)->src;
