@@ -124,8 +124,6 @@ class DataController extends Controller
     public function actionReplenish()
     {
 
-
-
         $get = Yii::$app->request->get();
 
         $day =  date('Y-m-d');
@@ -141,8 +139,6 @@ class DataController extends Controller
 
         $time = strtotime($day);
 
-        $sum = Replenish::find()->join('left join','price_difference', 'replenish.item_id_igxe=price_difference.item_id_igxe')->where('replenish.sell_day>='.$time)->sum('price_difference.difference');
-
         $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc');
 
         if($data->count() == 0){
@@ -154,6 +150,8 @@ class DataController extends Controller
             $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc');
 
         }
+
+        $sum = Replenish::find()->join('left join','price_difference', 'replenish.item_id_igxe=price_difference.item_id_igxe')->where('replenish.sell_day>='.$time)->sum('price_difference.difference');
 
         $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '12']);
         $model = $data->offset($pages->offset)->limit($pages->limit)->all();
