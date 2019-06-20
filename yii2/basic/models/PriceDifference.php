@@ -29,6 +29,9 @@ class PriceDifference extends \yii\db\ActiveRecord
      * {@inheritdoc}
      */
     const TYPE_BUNDLE = 1;
+    const TYPE_UNIQUE = 2;
+    const TYPE_GENUINE = 3;
+    const TYPE_DEFAULT = 0;
 
     public static function tableName()
     {

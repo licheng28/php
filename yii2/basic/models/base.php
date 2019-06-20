@@ -19,7 +19,7 @@ class base extends Model
 
 //    var $cookie_c5 = 'C5Lang=zh; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1556181926; C5NoticeBounces1556170168=close; C5Appid=570; C5SessionID=rcl4ss5tpvq9deieti9cfm80f7; C5Sate=9dac2228e8e1038ef95eb42cb26dd526540df83ba%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cc174f589f60; C5Login=557376709; C5Machines=Wl4MOBJaQ0Fj%2F3qKBDxJGciO%2Bfd%2BvowCOflGnn8qGYs%3D; C5_NPWD=0QRrydA06t9FYzzO7qR%2FNA%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1556182330';
     var $cookie_c5 ='bdshare_firstime=1495112656374; fp_ver=3.3.3; BSFIT_OkLJUJ=FFBqPVR-F9hmdg-zTUxNdxvoJUwJAI8P; BSFIT_DEVICEID=By3w4BbUbCpg3rijooGXLYUOhJ5DbIgY7h-9Iq6K7SZb_AljkrSOAS6Powiq7grc0HqpCUH1xMZgru0nAZ2ZnLPRyMZXmGGUrXUz64wskn5a4JSz8s_FtruUXmHE1xJuDslfpLXtqyXPhJa5Ld9qQjM1WfGOVVGd; MEIQIA_EXTRA_TRACK_ID=0wnpBv1NMrGhzg6IkdfVZB6AYSP; buyKnowNotice=close; C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; C5buygame=Y; C5Appid=570; C5Lang=zh; C5NoticeBounces1555403740=close; C5Notice1555403740=close; C5NoticeBounces1555558523=close; C5Notice1555558523=close; C5Steamurl=true; C5SessionID=n5saim7bo5ausckfbtgc8tff01; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cbbff88bf9db; C5Login=253352; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1555473868,1555560364,1555745175,1555824487; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1555832787';
-    var $cookie_ig = 'distribution_channel=681a3905060164114876; __cfduid=d173e9333e80a5a60245cc291762ff5dc1531462579; my_game=570; agree_sell_agreementlic666=true; gdxidpyhxdE=yrQPZ%2B5d7BLg3jwot2zHB%5CZMW%2FwnB0NVx%5Cf0C1yGxlq6gqZeTM%2FqMdaRrTQ6qzUvEDOoCJciTq90RqdnWVzYPMjb5PRAZvzn89uEP5IjqjWtIBZ%5CQqfQ58h3RJ%5C3ZaDhaLpQX0UDBMG4BipEd46%2BkEBQYTpjliBbiqmKKpBq%2FIZ2Rpv%2F%3A1560054897599; _9755xjdesxxd_=32; aliyungf_tc=AQAAAG41uXLNdwcA+pC1PCzGfQxEPKvW; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; not_pay_pwd_token=bc55cbfd-2556-437c-91d6-03865f0015ea; token=2f765b18-c56f-4810-b19d-7932a8edb9c9; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.408413461.1560053995; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; nice_id572d9ba0-d737-11e8-970c-a553533099d1=88b59102-9181-11e9-b2e2-635acdadfbb4; myDateMinutes=50; csrftoken=j4YjRKWlgfcVdY6IgGBTryUJ6iE0z9Nt; sessionid=evch1b242k2oxowfwevhlx998p19b61l; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1560836273,1560836288,1560854057,1560854125; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1560927084; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=1065';
+    var $cookie_ig = 'distribution_channel=681a3905060164114876; __cfduid=d173e9333e80a5a60245cc291762ff5dc1531462579; my_game=570; agree_sell_agreementlic666=true; gdxidpyhxdE=yrQPZ%2B5d7BLg3jwot2zHB%5CZMW%2FwnB0NVx%5Cf0C1yGxlq6gqZeTM%2FqMdaRrTQ6qzUvEDOoCJciTq90RqdnWVzYPMjb5PRAZvzn89uEP5IjqjWtIBZ%5CQqfQ58h3RJ%5C3ZaDhaLpQX0UDBMG4BipEd46%2BkEBQYTpjliBbiqmKKpBq%2FIZ2Rpv%2F%3A1560054897599; _9755xjdesxxd_=32; aliyungf_tc=AQAAAOfRlEn/JQ0A55e1PMM3i7Z8pbFA; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; token=066af8df-daea-48d1-832c-2a7a3ba41b97; not_pay_pwd_token=066af8df-daea-48d1-832c-2a7a3ba41b97; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.408413461.1560053995; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=1163; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; nice_id572d9ba0-d737-11e8-970c-a553533099d1=e5f35191-930c-11e9-90a6-39e3c54aee2a; myDateMinutes=30; csrftoken=LtEvDkivWeq2wTzRUuptASwxBRxUEjnF; sessionid=yin259lq0nx1vmecml7x5jl3wexxhf1q; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1560927451,1560939996,1561001920,1561003065; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1561015856';
     var $pwd = '328928';
 //    var $pwd = '679578';
 
@@ -646,13 +646,26 @@ class base extends Model
 
     }
 
-    public function updateBundle()
+    public function updateBundle($type)
     {
 
-        $url = 'https://www.igxe.cn/dota2/570?tags_type_name=%E6%8D%86%E7%BB%91%E5%8C%85&tags_type_id=1027&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1556266391326';
-//
-//    $url = "https://www.igxe.cn/dota2/570?quality_name=%E7%BA%AF%E6%AD%A3&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=350&rarity_id=0&exterior_id=0&quality_id=1023&capsule_id=0&_t=1557129070760";
-//    $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=2000&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
+        if($type==PriceDifference::TYPE_BUNDLE){
+
+            $url = 'https://www.igxe.cn/dota2/570?tags_type_name=%E6%8D%86%E7%BB%91%E5%8C%85&tags_type_id=1027&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1556266391326';
+
+        }elseif($type == PriceDifference::TYPE_UNIQUE){
+
+            $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=2000&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
+
+        }elseif($type == PriceDifference::TYPE_GENUINE){
+
+            $url = "https://www.igxe.cn/dota2/570?quality_name=%E7%BA%AF%E6%AD%A3&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=350&rarity_id=0&exterior_id=0&quality_id=1023&capsule_id=0&_t=1557129070760";
+
+        }else{
+
+            return false;
+
+        }
 
         $html = $this->curl($url,array(),'ig');
 
@@ -726,20 +739,39 @@ class base extends Model
 
     }
 
-    public function updateBundleC5()
+    public function updateBundleC5($type)
     {
 
         try{
 
+            $m_type = PriceDifference::TYPE_DEFAULT;
+
+            if($type == PriceDifference::TYPE_BUNDLE){
+
+                $url = 'https://www.c5game.com/dota.html?type=bundle&sort=price.desc';
+                $maxpage = 37;
+                $m_type = PriceDifference::TYPE_BUNDLE;
+
+            }elseif($type == PriceDifference::TYPE_UNIQUE){
+
+                $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique';
+                $maxpage = 101;
+
+            }elseif($type == PriceDifference::TYPE_GENUINE){
+
+                $url = "https://www.c5game.com/dota.html?quality=genuine&sort=price.desc";
+                $maxpage = 27;
+
+            }else{
+
+                return false;
+            }
+
             $page = 1;
 
-            while($page<37){
+            while($page<$maxpage){
 
-//                $url = "https://www.c5game.com/dota.html?quality=genuine&page=".$page."&sort=price.desc";
-
-            $url = 'https://www.c5game.com/dota.html?type=bundle&page='.$page.'&sort=price.desc';
-
-//            $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique&page='.$page;
+                $url = $url.'&page='.$page;
 
                 $html = $this->curl($url);
 
@@ -777,7 +809,7 @@ class base extends Model
                         $result->update_time = $update_time;
                         $result->creat_time = $update_time;
                         $result->img = $src;
-                        $result->type = PriceDifference::TYPE_BUNDLE;
+                        $result->type = $m_type;
 
                         $result->save();
                     }else{
@@ -788,7 +820,7 @@ class base extends Model
                         $model->update_time = $update_time;
                         $model->creat_time = $update_time;
                         $model->img = $src;
-                        $model->type = PriceDifference::TYPE_BUNDLE;
+                        $model->type = $m_type;
 
                         $model->save();
                     }

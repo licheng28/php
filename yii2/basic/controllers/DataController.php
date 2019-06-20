@@ -139,7 +139,7 @@ class DataController extends Controller
 
         $time = strtotime($day);
 
-        $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc');
+        $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc, id');
 
         if($data->count() == 0){
 
@@ -147,7 +147,7 @@ class DataController extends Controller
 
             $base->updateReplenishInfo($day);
 
-            $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc');
+            $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc, id');
 
         }
 
@@ -214,9 +214,11 @@ class DataController extends Controller
 
         $base = new base();
 
-        $base->updateBundle();
+        $type = Yii::$app->request->get('type');
 
-        $base->updateBundleC5();
+        $base->updateBundle($type);
+
+        $base->updateBundleC5($type);
 
         $this->redirect('index.php');
 

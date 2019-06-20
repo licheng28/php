@@ -20,9 +20,9 @@ use yii\widgets\LinkPager;
             <input type="checkbox" name="bundle" <?php echo $bundle?'checked':''?>>只显示捆绑包
         </span>
     </form>
-    <a class="btn btn-success" href="index.php?r=data/bundle" style="margin-left: 470px;margin-top: -32px;">捆绑包</a>
-    <a class="btn btn-default" href="javascript:;" style="margin-top: -32px;">标准</a>
-    <a class="btn btn-danger" href="javascript:;" style="margin-top: -32px;">纯正</a>
+    <a class="btn btn-success updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_BUNDLE?>" style="margin-left: 470px;margin-top: -32px;">捆绑包</a>
+    <a class="btn btn-default updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_UNIQUE?>" style="margin-top: -32px;">标准</a>
+    <a class="btn btn-danger updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_GENUINE?>" style="margin-top: -32px;">纯正</a>
 </div>
 <body class="content-container">
 
@@ -89,6 +89,12 @@ use yii\widgets\LinkPager;
 <script>
 
     $(document).ready(function(){
+
+        $('.updateData').click(function(){
+
+            $(this).attr('disabled','');
+
+        })
 
         $('.purchase').click(function(){
 
