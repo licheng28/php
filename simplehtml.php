@@ -20,9 +20,9 @@ function index(){
 
     $html = curl($url, $cookie);
 
-require_once  'D:/workspace/php/simple_html_dom.php';
+//require_once  'D:/workspace/php/simple_html_dom.php';
 //require_once  'D:/workspace/simple_html_dom.php';
-//    include_once ('/var/git/licheng.git/php/simple_html_dom.php');
+    include_once ('/var/git/licheng.git/php/simple_html_dom.php');
 //$html = file_get_html('https://www.c5game.com');//获取html
     $dom = new simple_html_dom(); //new simple_html_dom对象
     $dom->load($html);  //加载html
