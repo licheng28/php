@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\base;
 use app\models\PriceDifference;
 use app\models\Replenish;
+use Codeception\Module\Redis;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -124,6 +125,14 @@ class DataController extends Controller
     public function actionReplenish()
     {
 
+        if(Yii::$app->user->isGuest){
+
+            $this->redirect('index.php?r=site/login');
+
+        }
+
+        $user_id = Yii::$app->user->id;
+
         $get = Yii::$app->request->get();
 
         $day =  date('Y-m-d');
@@ -139,7 +148,7 @@ class DataController extends Controller
 
         $time = strtotime($day);
 
-        $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc, id');
+        $data = Replenish::find()->where('sell_day >=:sell_day and user_id=:user_id', array(':sell_day'=> $time, ':user_id'=>$user_id))->orderBy('sold_time desc, id');
 
         if($data->count() == 0){
 
@@ -147,11 +156,11 @@ class DataController extends Controller
 
             $base->updateReplenishInfo($day);
 
-            $data = Replenish::find()->where('sell_day >='.$time)->orderBy('sold_time desc, id');
+            $data = Replenish::find()->where('sell_day >=:sell_day and user_id=:user_id', array(':sell_day'=> $time, ':user_id'=>$user_id))->orderBy('sold_time desc, id');
 
         }
 
-        $sum = Replenish::find()->join('left join','price_difference', 'replenish.item_id_igxe=price_difference.item_id_igxe')->where('replenish.sell_day>='.$time)->sum('price_difference.difference');
+        $sum = Replenish::find()->join('left join','price_difference', 'replenish.item_id_igxe=price_difference.item_id_igxe')->where('replenish.sell_day>=:sell_day and replenish.user_id=:user_id', array(':sell_day'=>$time, 'user_id'=>$user_id))->sum('price_difference.difference');
 
         $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '12']);
         $model = $data->offset($pages->offset)->limit($pages->limit)->all();
@@ -180,6 +189,8 @@ class DataController extends Controller
 
     public function actionUpdateSold()
     {
+
+//        Yii::$app->getSession()->setFlash('success', 'This is the message');
 
         $get = Yii::$app->request->get();
 
@@ -221,6 +232,57 @@ class DataController extends Controller
         $base->updateBundleC5($type);
 
         $this->redirect('index.php');
+
+    }
+
+    public function actionCreate()
+    {
+        $cookie = Yii::$app->request->get('cookie');
+
+        if(!$cookie)
+        {
+            return $this->renderAjax('create');
+
+        }else{
+
+            $user_id = Yii::$app->user->id;
+
+            if($user_id){
+
+                $redis = Yii::$app->redis;
+
+                if(Yii::$app->request->get('name') == base::IG){
+
+                    $key = 'cookie_ig'.$user_id;
+                    $redis->set($key, $cookie);
+                    $redis->expire($key, 84600*2);
+
+                }elseif(Yii::$app->request->get('name') == base::C5){
+
+                    $pwd = Yii::$app->request->get('pwd');
+
+                    $key = 'cookie_c5'.$user_id;
+                    $redis->set($key, $cookie);
+                    $redis->expire($key, 84600*60);
+
+                    $key_pwd = 'pwd_c5'.$user_id;
+                    $redis->set($key_pwd, $pwd);
+                    $redis->expire($key_pwd, 84600*60);
+
+                }
+
+            }
+
+            $this->redirect('index.php?r=data/replenish');
+
+        }
+
+    }
+
+    public function actionTest()
+    {
+
+        return $this->render('test');
 
     }
 }

@@ -21,16 +21,16 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        'css/bootstrap.css',
-        'css/font-awesome.css',
-        'css/lightbox.css',
+//        'css/bootstrap.css',
+//        'css/font-awesome.css',
+//        'css/lightbox.css',
 //        'css/style1.css',
     ];
     public $js = [
-        'js/bootstrap.js',
-        'js/jquery.countup.js',
-        'js/jquery.flexisel.js',
-        'js/jquery.waypoints.min.js',
+//        'js/bootstrap.js',
+//        'js/jquery.countup.js',
+//        'js/jquery.flexisel.js',
+//        'js/jquery.waypoints.min.js',
 //        'js/jquery-2.1.4.min.js',
 //        'js/lightbox-plus-jquery.min.js',
     ];

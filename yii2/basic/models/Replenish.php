@@ -15,6 +15,7 @@ use Yii;
  * @property int $fee
  * @property int $income_price
  * @property int $sold_time
+ * @property int $user_id
  */
 class Replenish extends \yii\db\ActiveRecord
 {
@@ -32,8 +33,8 @@ class Replenish extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_id_igxe', 'sell_day', 'create_time', 'fee', 'income_price', 'sold_time'], 'required'],
-            [['item_id_igxe', 'sell_day', 'create_time', 'status', 'fee', 'income_price', 'sold_time'], 'integer'],
+            [['item_id_igxe', 'sell_day', 'create_time', 'fee', 'income_price', 'sold_time', 'user_id'], 'required'],
+            [['item_id_igxe', 'sell_day', 'create_time', 'status', 'fee', 'income_price', 'sold_time', 'user_id'], 'integer'],
         ];
     }
 
@@ -51,6 +52,7 @@ class Replenish extends \yii\db\ActiveRecord
             'fee' => 'Fee',
             'income_price' => 'Income Price',
             'sold_time' => 'Sold Time',
+            'user_id' => '用户ID',
         ];
     }
 

@@ -13,17 +13,20 @@ use yii\bootstrap\ButtonGroup;
 use yii\bootstrap\Button;
 use kartik\datetime\DateTimePicker;
 use kartik\date\DatePicker;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 ?>
 <?php
 use yii\widgets\LinkPager;
 ?>
 <div >
     <a href="index.php?r=data/update-sold&start_time=<?php echo $day?>">
-        <button class="updatesold btn btn-success" style="margin-left: 300px;">updatesold</button>
+        <button class="updatesold btn btn-success" style="margin-left: 200px;">updatesold</button>
     </a>
     <a href="javascript:;">
         <button class="updateall btn btn-danger" data-idstr="<?php echo $idstr?>" data-url="index.php?r=data/update-all" style="">updateall</button>
     </a>
+    <a href="#" id="create" data-toggle="modal" data-target="#create-modal" class="btn btn-default">updateinfo</a>
     <form id="formdata" action="" method="get" style="float: left;width: 600px;">
         <input type="hidden" name="r" value="data/replenish">
 <!--        <input class="input-group-text" type="text"  name="k" placeholder="差价" value="--><?php //echo $k?><!--">-->
@@ -43,6 +46,7 @@ use yii\widgets\LinkPager;
     </form>
 </div>
 <div class="">参考利润 : <span style="color: red"><?php echo $sum/100?></span>元</div>
+
 <body class="content-container">
 
 <div class="site-index"  style="margin-top:50px;">
@@ -112,6 +116,28 @@ use yii\widgets\LinkPager;
     'maxButtonCount' =>8,
 ]); ?>
 
+
+<?php
+Modal::begin([
+    'id' => 'create-modal',
+    'header' => '<h4 class="modal-title">updateInfo</h4>',
+    'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
+]);
+
+$requestUrl = Url::toRoute('create');
+$js = <<<JS
+    $(document).on('click', '#create', function () {
+        $.get('{$requestUrl}', {},
+            function (data) {
+                $('.modal-body').html(data);
+            }
+        );
+    });
+JS;
+$this->registerJs($js);
+Modal::end();
+
+?>
 <script>
 
     $(document).ready(function(){

@@ -8,17 +8,17 @@
 include_once('D:\workspace/php/base.php');
 include_once ('D:\workspace/php/simple_html_dom.php');
 set_time_limit(0);
-index();
+//index();
 //findC5();
 findC5New();
 //completeC5();
 //isSell();
 function index(){
 
-    $url = 'https://www.igxe.cn/dota2/570?tags_type_name=%E6%8D%86%E7%BB%91%E5%8C%85&tags_type_id=1027&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1556266391326';
+//    $url = 'https://www.igxe.cn/dota2/570?tags_type_name=%E6%8D%86%E7%BB%91%E5%8C%85&tags_type_id=1027&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1556266391326';
 //
 //    $url = "https://www.igxe.cn/dota2/570?quality_name=%E7%BA%AF%E6%AD%A3&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=350&rarity_id=0&exterior_id=0&quality_id=1023&capsule_id=0&_t=1557129070760";
-//    $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=2000&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
+    $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=2500&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
 
     $base = new base();
 
@@ -49,7 +49,7 @@ function index(){
 
         try{
 
-            $pdo = new PDO("mysql:host=localhost;dbname=lic","root","root");
+            $pdo = new PDO("mysql:host=47.97.253.197;dbname=lic_test","root","root");
 
             $pdo->exec('set names utf8');
 
@@ -193,19 +193,19 @@ function findC5New(){
 
         $page = 1;
 
-        while($page<37){
+        while($page<101){
 
-            $url = "https://www.c5game.com/dota.html?quality=genuine&page=".$page."&sort=price.desc";
+//            $url = "https://www.c5game.com/dota.html?quality=genuine&page=".$page."&sort=price.desc";
 
 //            $url = 'https://www.c5game.com/dota.html?type=bundle&page='.$page.'&sort=price.desc';
 
-//            $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique&page='.$page;
+            $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique&page='.$page;
 
             $base = new base();
 
             $html = $base->curl($url);
 
-            $pdo = new PDO("mysql:host=localhost;dbname=lic","root","root");
+            $pdo = new PDO("mysql:host=47.97.253.197;dbname=lic_test","root","root");
 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

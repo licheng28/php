@@ -1,1 +1,1 @@
-"D:\xampp\php\php.exe" -f "D:workspace\pai.php"
+"D:\xampp\php\php.exe" -f "D:workspace\php\pai.php"

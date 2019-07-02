@@ -18,7 +18,8 @@ $config = [
             'cookieValidationKey' => '5UyA34e2OwWmaQ8OPamsDH9WQ5ckgb8b',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+//            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\redis\Cache',
         ],
         'user' => [
             'identityClass' => 'app\models\User',
@@ -44,6 +45,12 @@ $config = [
             ],
         ],
         'db' => $db,
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => '47.97.253.197',
+            'port' => 6379,
+            'database' => 0,
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
