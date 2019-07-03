@@ -239,37 +239,49 @@ class DataController extends Controller
     {
         $cookie = Yii::$app->request->get('cookie');
 
-        if(!$cookie)
+        $name = Yii::$app->request->get('name');
+
+        if(!$name)
         {
             return $this->renderAjax('create');
 
         }else{
 
-            $user_id = Yii::$app->user->id;
+            if($cookie){
 
-            if($user_id){
+                $user_id = Yii::$app->user->id;
 
-                $redis = Yii::$app->redis;
+                if($user_id){
 
-                if(Yii::$app->request->get('name') == base::IG){
+                    $redis = Yii::$app->redis;
 
-                    $key = 'cookie_ig'.$user_id;
-                    $redis->set($key, $cookie);
-                    $redis->expire($key, 84600*2);
+                    if($name == base::IG){
 
-                }elseif(Yii::$app->request->get('name') == base::C5){
+                        $key = 'cookie_ig'.$user_id;
+                        $redis->set($key, $cookie);
+                        $redis->expire($key, 84600*2);
 
-                    $pwd = Yii::$app->request->get('pwd');
+                    }elseif($name == base::C5){
 
-                    $key = 'cookie_c5'.$user_id;
-                    $redis->set($key, $cookie);
-                    $redis->expire($key, 84600*60);
+                        $pwd = Yii::$app->request->get('pwd');
 
-                    $key_pwd = 'pwd_c5'.$user_id;
-                    $redis->set($key_pwd, $pwd);
-                    $redis->expire($key_pwd, 84600*60);
+                        $key = 'cookie_c5'.$user_id;
+                        $redis->set($key, $cookie);
+                        $redis->expire($key, 84600*60);
+
+                        $key_pwd = 'pwd_c5'.$user_id;
+                        $redis->set($key_pwd, $pwd);
+                        $redis->expire($key_pwd, 84600*60);
+
+                    }
 
                 }
+
+                Yii::$app->getSession()->setFlash('success', 'update infomation success');
+
+            }else{
+
+                Yii::$app->getSession()->setFlash('error', 'update error');
 
             }
 

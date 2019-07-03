@@ -16,10 +16,14 @@ $this->title = 'create';
         <input type="hidden" name="r" value="data/create">
         <div class="form-group">
             <label class="control-label">网站</label>
-            <input type="text" name="name" value="ig" class="form-control" >
+            <select class="form-control" name="name">
+                <option selected>ig</option>
+                <option>c5</option>
+            </select>
+<!--            <input type="text" name="name" value="ig" class="form-control" >-->
         </div>
         <div class="form-group">
-            <label class="control-label">cookie</label>
+            <label class="control-label">cookie</label><label style="color: red">*</label>
             <textarea name="cookie"style="height: 200px;" class="form-control"></textarea>
         </div>
         <div class="form-group">

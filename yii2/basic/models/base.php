@@ -553,6 +553,14 @@ class base extends Model
     public function updateReplenishInfo($day, $page=1)
     {
 
+        $user_id = Yii::$app->user->id;
+
+        if(!$user_id){
+
+            return false;
+
+        }
+
         $trans = Yii::$app->db->beginTransaction();
 
         try{
@@ -581,6 +589,7 @@ class base extends Model
 
                 $date = date('Y-m-d', strtotime($data->{'last_updated'}));
                 $model->sell_day = strtotime($date);
+                $model->user_id = $user_id;
 
                 $model->save();
 
