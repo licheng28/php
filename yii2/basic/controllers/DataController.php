@@ -53,6 +53,8 @@ class DataController extends Controller
 
            }else{
 
+               $k = trim($k);
+
                $data = PriceDifference::find()->where(['like', 'name', $k]);
 
            }
@@ -293,6 +295,36 @@ class DataController extends Controller
 
     public function actionTest()
     {
+
+        $array=array(5,4,8,6,12,7,2,33);
+
+        $count = count($array);
+
+        for($i=0;$i<$count-1;$i++){
+
+            $min = $array[$i];
+            $min_key = $i;
+
+            for($j=$i+1;$j<$count;$j++){
+
+                if($array[$j]<$min){
+
+                    $min = $array[$j];
+                    $min_key = $j;
+
+                }
+
+            }
+
+            $tamp = $array[$i];
+            $array[$i] = $min;
+            $array[$min_key] = $tamp;
+
+        }
+
+        print_r($array);die;
+
+        die;
 
         return $this->render('test');
 

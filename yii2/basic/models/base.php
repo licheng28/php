@@ -148,7 +148,7 @@ class base extends Model
 
         $price = $price_purchase = $difference = 0;
 
-        if($data->item_id_c5){
+        if($data->item_id_c5&&Yii::$app->user->id){
 
             $url_purchase_item = 'https://www.c5game.com/api/purchase/item';
 
@@ -194,7 +194,7 @@ class base extends Model
 
         $name = $data->name;
 
-        $url = 'https://www.c5game.com/dota.html?k='.$name;
+        $url = 'https://www.c5game.com/dota.html?locale=zh&k='.$name;
 
         $url = str_replace(' ', '%20', $url);
 
