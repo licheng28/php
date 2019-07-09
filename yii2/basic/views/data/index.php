@@ -21,16 +21,17 @@ use yii\widgets\LinkPager;
         <button type="submit" class="btn btn-primary" style="float: left;margin-left: 10px;">submit</button>
         <span style="margin-left: 20px;">
             <input type="checkbox" name="bundle" <?php echo $bundle?'checked':''?>>只显示捆绑包
+            <input type="checkbox" name="immortal" <?php echo $immortal?'checked':''?>>只显示不朽
         </span>
     </form>
-<!--    <a class="btn btn-success updateData" href="index.php?r=data/bundle&type=--><?php //echo \app\models\PriceDifference::TYPE_BUNDLE?><!--" style="margin-left: 470px;margin-top: -32px;">捆绑包</a>-->
+    <a class="btn btn-success updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_BUNDLE?>" style="margin-left: 400px;margin-top: -32px;">捆绑包</a>
 <!--    <a class="btn btn-default updateData" href="index.php?r=data/bundle&type=--><?php //echo \app\models\PriceDifference::TYPE_UNIQUE?><!--" style="margin-top: -32px;">标准</a>-->
 <!--    <a class="btn btn-danger updateData" href="index.php?r=data/bundle&type=--><?php //echo \app\models\PriceDifference::TYPE_GENUINE?><!--" style="margin-top: -32px;">纯正</a>-->
+    <a class="btn btn-warning updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_IMMORTAL?>" style="margin-top: -32px;">不朽</a>
 </div>
 <body class="content-container">
 
     <div class="site-index"  style="margin-top:20px;">
-
         <table class="table">
             <tr class="accordion">
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['name']?></td>

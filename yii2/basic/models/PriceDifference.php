@@ -32,6 +32,7 @@ class PriceDifference extends \yii\db\ActiveRecord
     const TYPE_UNIQUE = 2;
     const TYPE_GENUINE = 3;
     const TYPE_DEFAULT = 0;
+    const TYPE_IMMORTAL = 4;
 
     public static function tableName()
     {
@@ -45,6 +46,7 @@ class PriceDifference extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'update_time', 'creat_time'], 'required'],
+            [['name'], 'trim'],
             [['item_id_igxe', 'price_igxe', 'item_id_c5', 'price_c5', 'price_buff', 'update_time', 'creat_time', 'difference', 'is_sell', 'c5_id', 'type','purchase_c5'], 'integer'],
             [['name', 'img'], 'string', 'max' => 255],
         ];

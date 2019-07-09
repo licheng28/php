@@ -162,17 +162,11 @@ class base extends Model
 
             $content = json_decode($html);
 
-            if(!$content){
-
-                return false;
-
-            }
-
             $price = $data->price_c5;
 
             $price_purchase = 0;
 
-            if($content->{'status'} == 200){
+            if($content&&$content->{'status'} == 200){
 
                 $price = $content->{'body'}->{'item'}->{'sell_min_price'};
 
@@ -466,7 +460,7 @@ class base extends Model
 
                  foreach($res->{'show_data'} as $e){
 
-                     if($e->{'name'} == $data->name){
+                     if($e->{'market_name'} == $data->name){
 
                          return 1;
 
@@ -733,22 +727,33 @@ class base extends Model
     {
         $m_type = PriceDifference::TYPE_DEFAULT;
 
-        if($type==PriceDifference::TYPE_BUNDLE){
+        switch($type){
 
-            $url = 'https://www.igxe.cn/dota2/570?tags_type_name=%E6%8D%86%E7%BB%91%E5%8C%85&tags_type_id=1027&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1556266391326';
-            $m_type = PriceDifference::TYPE_BUNDLE;
+            case PriceDifference::TYPE_BUNDLE:
 
-        }elseif($type == PriceDifference::TYPE_UNIQUE){
+                $url = 'https://www.igxe.cn/dota2/570?tags_type_name=%E6%8D%86%E7%BB%91%E5%8C%85&tags_type_id=1027&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1556266391326';
+                $m_type = PriceDifference::TYPE_BUNDLE;
+                break;
 
-            $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=2500&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
+            case PriceDifference::TYPE_UNIQUE:
 
-        }elseif($type == PriceDifference::TYPE_GENUINE){
+                $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=2500&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
+                break;
 
-            $url = "https://www.igxe.cn/dota2/570?quality_name=%E7%BA%AF%E6%AD%A3&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=450&rarity_id=0&exterior_id=0&quality_id=1023&capsule_id=0&_t=1557129070760";
+            case PriceDifference::TYPE_GENUINE:
 
-        }else{
+                $url = "https://www.igxe.cn/dota2/570?quality_name=%E7%BA%AF%E6%AD%A3&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=450&rarity_id=0&exterior_id=0&quality_id=1023&capsule_id=0&_t=1557129070760";
+                break;
 
-            return false;
+            case PriceDifference::TYPE_IMMORTAL:
+
+                $url = 'https://www.igxe.cn/dota2/570?rarity_name=%E4%B8%8D%E6%9C%BD&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&price_to=200&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=750&rarity_id=1034&exterior_id=0&quality_id=0&capsule_id=0&_t=1562336439593';
+                $m_type = PriceDifference::TYPE_IMMORTAL;
+                break;
+
+            default:
+
+                return false;
 
         }
 
@@ -785,6 +790,8 @@ class base extends Model
 
                 if($result){
 
+                    $is_sell = $this->isSell($result);
+
                     $result->name = $name;
                     $result->item_id_igxe = $item_id;
                     $result->price_igxe = $price;
@@ -794,6 +801,7 @@ class base extends Model
                     $result->type = $m_type;
                     $difference = $result->price_c5?$price-$result->price_c5:-$price;
                     $result->difference = $difference;
+                    $result->is_sell = $is_sell;
 
                     if(!$result->save()){
 
@@ -838,25 +846,37 @@ class base extends Model
 
             $m_type = PriceDifference::TYPE_DEFAULT;
 
-            if($type == PriceDifference::TYPE_BUNDLE){
+            switch ($type){
 
-                $url = 'https://www.c5game.com/dota.html?type=bundle&sort=price.desc';
-                $maxpage = 37;
-                $m_type = PriceDifference::TYPE_BUNDLE;
+                case PriceDifference::TYPE_BUNDLE:
 
-            }elseif($type == PriceDifference::TYPE_UNIQUE){
+                    $url = 'https://www.c5game.com/dota.html?type=bundle&sort=price.desc';
+                    $maxpage = 40;
+                    $m_type = PriceDifference::TYPE_BUNDLE;
+                    break;
 
-                $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique';
-                $maxpage = 101;
+                case PriceDifference::TYPE_UNIQUE:
 
-            }elseif($type == PriceDifference::TYPE_GENUINE){
+                    $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique';
+                    $maxpage = 101;
+                    break;
 
-                $url = "https://www.c5game.com/dota.html?quality=genuine&sort=price.desc";
-                $maxpage = 27;
+                case PriceDifference::TYPE_GENUINE:
 
-            }else{
+                    $url = "https://www.c5game.com/dota.html?quality=genuine&sort=price.desc";
+                    $maxpage = 30;
+                    break;
 
-                return false;
+                case PriceDifference::TYPE_IMMORTAL:
+
+                    $url = 'https://www.c5game.com/dota.html?min=&max=200&k=&rarity=immortal&quality=&hero=&tag=&sort=price.desc';
+                    $maxpage = 30;
+                    $m_type = PriceDifference::TYPE_IMMORTAL;
+                    break;
+
+                default:
+
+                    return false;
             }
 
             $page = 1;
