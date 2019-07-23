@@ -212,6 +212,7 @@ class DataController extends Controller
 
     public function actionUpdateAll()
     {
+        set_time_limit(0);
         $idstr = Yii::$app->request->post('idstr');
         $base = new base();
 

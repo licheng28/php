@@ -390,17 +390,19 @@ class base extends Model
 
             $pay_url = "https://www.c5game.com/api/order/payment.json";
 
-            $is_self_sell = $item_info->is_self_sell;
+//            $is_self_sell = $item_info->is_self_sell;
+//
+//            if($is_self_sell){
+//
+//                $method = 3;
+//
+//            }else{
+//
+//                $method = 1;
+//
+//            }
 
-            if($is_self_sell){
-
-                $method = 3;
-
-            }else{
-
-                $method = 1;
-
-            }
+            $method = 4;
 
             $redis = Yii::$app->redis;
 
