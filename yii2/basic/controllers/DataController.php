@@ -302,37 +302,78 @@ class DataController extends Controller
     public function actionTest()
     {
 
-        $array=array(5,4,8,6,12,7,2,33);
+        $base = new base();
 
-        $count = count($array);
+        $sell_url = 'https://www.c5game.com/user/sell/index.html';
 
-        for($i=0;$i<$count-1;$i++){
+        $html = $base->curl($sell_url);
 
-            $min = $array[$i];
-            $min_key = $i;
+        $dom = new simple_html_dom();
 
-            for($j=$i+1;$j<$count;$j++){
+        $dom->load($html);
 
-                if($array[$j]<$min){
+        foreach($dom->find('.keys') as $e){
 
-                    $min = $array[$j];
-                    $min_key = $j;
-
-                }
-
-            }
-
-            $tamp = $array[$i];
-            $array[$i] = $min;
-            $array[$min_key] = $tamp;
+            preg_match_all('/<span>.*?<\/span>/', $e->innertext , $res);
 
         }
 
-        print_r($array);die;
+        $dom->clear();
 
-        die;
+        $str = '?self_sell_type=1&appid=570';
 
-        return $this->render('test');
+        foreach($res[0] as $v){
 
+            $v = $base->getNum($v);
+
+            $str .= '&id[]='.$v;
+
+        }
+
+        $info_url = 'https://www.c5game.com/api/sell/changePriceQuick'.$str;
+
+        $info = $base->curl($info_url);
+
+        $info = json_decode($info);
+
+        foreach($info->{'body'}->{'items'} as $i){
+
+            if($i->money_min_sell*100 == $i->price){
+
+                continue;
+
+            }
+
+            $min = $i->money_min_sell-0.01;
+
+            if(!$min){
+
+                $min = 0.01;
+            }
+
+            $id[] = $i->id;
+
+            $price[] = $min;
+
+        }
+
+        $data = array(
+
+            'verify_code' => '',
+            'price_policy' => 1,
+            'id' => $id,
+            'price' => $price,
+
+        );
+
+        $change_url = 'https://www.c5game.com/api/sell/changePrice.json?appid=';
+
+        $data = http_build_query($data);
+
+        $callback = $base->curl($change_url, $data);
+
+        $callback = json_decode($callback);
+
+        print_r($callback->message);
     }
 }
