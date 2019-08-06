@@ -740,6 +740,7 @@ class base extends Model
             case PriceDifference::TYPE_UNIQUE:
 
                 $url = 'https://www.igxe.cn/dota2/570?quality_name=%E6%A0%87%E5%87%86&is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=2500&rarity_id=0&exterior_id=0&quality_id=954&capsule_id=0&_t=1556600696201';
+                $m_type = PriceDifference::TYPE_UNIQUE;
                 break;
 
             case PriceDifference::TYPE_GENUINE:
@@ -861,6 +862,7 @@ class base extends Model
 
                     $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique';
                     $maxpage = 101;
+                    $m_type = PriceDifference::TYPE_UNIQUE;
                     break;
 
                 case PriceDifference::TYPE_GENUINE:

@@ -74,6 +74,10 @@ class DataController extends Controller
 
            $data->andWhere('type = :type', array(':type' => PriceDifference::TYPE_IMMORTAL));
 
+       }elseif(Yii::$app->request->get('unique')){
+
+           $data->andWhere('type = :type', array(':type' => PriceDifference::TYPE_UNIQUE));
+
        }
 
        $data->orderBy('difference');
@@ -87,6 +91,7 @@ class DataController extends Controller
            'k'=>$k,
            'bundle' => $bundle,
            'immortal' => Yii::$app->request->get('immortal'),
+           'unique' => Yii::$app->request->get('unique'),
 
        ]);
 
