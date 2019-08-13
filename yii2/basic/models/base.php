@@ -853,27 +853,27 @@ class base extends Model
 
                 case PriceDifference::TYPE_BUNDLE:
 
-                    $url = 'https://www.c5game.com/dota.html?type=bundle&sort=price.desc';
+                    $url = 'https://www.c5game.com/dota.html?locale=zh&type=bundle&sort=price.desc';
                     $maxpage = 40;
                     $m_type = PriceDifference::TYPE_BUNDLE;
                     break;
 
                 case PriceDifference::TYPE_UNIQUE:
 
-                    $url = 'https://www.c5game.com/dota.html?sort=price.desc&quality=unique';
+                    $url = 'https://www.c5game.com/dota.html?locale=zh&sort=price.desc&quality=unique';
                     $maxpage = 101;
                     $m_type = PriceDifference::TYPE_UNIQUE;
                     break;
 
                 case PriceDifference::TYPE_GENUINE:
 
-                    $url = "https://www.c5game.com/dota.html?quality=genuine&sort=price.desc";
+                    $url = "https://www.c5game.com/dota.html?locale=zh&quality=genuine&sort=price.desc";
                     $maxpage = 30;
                     break;
 
                 case PriceDifference::TYPE_IMMORTAL:
 
-                    $url = 'https://www.c5game.com/dota.html?min=&max=200&k=&rarity=immortal&quality=&hero=&tag=&sort=price.desc';
+                    $url = 'https://www.c5game.com/dota.html?locale=zh&min=&max=200&k=&rarity=immortal&quality=&hero=&tag=&sort=price.desc';
                     $maxpage = 30;
                     $m_type = PriceDifference::TYPE_IMMORTAL;
                     break;
