@@ -99,7 +99,7 @@ function index(){
 
     }
 
-    $key = 1;
+//    $key = 1;
 
     foreach($purchase as $data){
 
@@ -115,15 +115,15 @@ function index(){
 
         }
 
-        $key++;
-
-        if($key>10){
-
-            sleep(1);
-
-            $key = 1;
-
-        }
+//        $key++;
+//
+//        if($key>10){
+//
+//            sleep(1);
+//
+//            $key = 1;
+//
+//        }
 
     }
 
@@ -164,7 +164,7 @@ function changePurchasePrice($data, $cookie, $pwd){
 
     $item_id = $data['item_id'];
 
-    $file  = 'D:\workspace/log.txt';
+//    $file  = 'D:\workspace/log.txt';
 
     if(!$item_id){
 
@@ -245,7 +245,7 @@ function changePurchasePrice($data, $cookie, $pwd){
 
         if($sell_min_price&&$purchase_max_price){
 
-            if($purchase_max_price/$sell_min_price<0.94||$sell_min_price-$purchase_max_price>=2){
+            if($purchase_max_price/$sell_min_price<0.91||$sell_min_price-$purchase_max_price>=3){
 
                 if($purchase_max_price>100){
 
@@ -266,36 +266,38 @@ function changePurchasePrice($data, $cookie, $pwd){
                     $improve_price = 0.01;
                 }
 
-                if($is_purchase){
-
-                    $url_purchase_submit = 'https://www.c5game.com/api/purchase/submit';
-
-                    $purchase_data = array(
-
-                        'price' => $purchase_max_price+$improve_price,
-                        'num' => 1,
-                        'paypwd' => $pwd,
-                        'delivery' => 'on',
-                        'id' => $item_id,//item_id
-                        'appid' => 570,
-
-                    );
-
-                    curl($url_purchase_submit, $cookie, $purchase_data);
-
-                    $message = $message .'  发布求购成功,物品名称 = '.$name.',花费金额:'.$purchase_data['price'];
-
-                }else{
-
-                    $message = $message.'&nbsp'.$name.'求购价与新求购价价格相差过高';
-
-                }
+                $price = $purchase_max_price+$improve_price;
 
             }else{
 
-                $message = $message.'  求购价太高取消求购，物品名称 = '.$name;
+                $is_purchase = false;
+
+//                $message = $message.'  求购价太高取消求购，物品名称 = '.$name;
 
             }
+
+            if(!$is_purchase){
+
+                $price = $data['price'];
+
+            }
+
+            $url_purchase_submit = 'https://www.c5game.com/api/purchase/submit';
+
+            $purchase_data = array(
+
+                'price' => $price,
+                'num' => 1,
+                'paypwd' => $pwd,
+                'delivery' => 'on',
+                'id' => $item_id,//item_id
+                'appid' => 570,
+
+            );
+
+            curl($url_purchase_submit, $cookie, $purchase_data);
+
+            $message = $message .'  发布求购成功,物品名称 = '.$name.',花费金额:'.$purchase_data['price'];
 
         }else{
 
