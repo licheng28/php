@@ -279,7 +279,7 @@ function changePurchasePrice($data, $cookie, $pwd){
 
             if(!$is_purchase){
 
-                $price = $data['price'];
+                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price;
 
             }
 
