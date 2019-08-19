@@ -382,11 +382,11 @@ class base extends Model
 
             $item_info = $list->{'body'}->{'items'}[0];
 
-//            if($item_info->price>$data->price_c5/100){
-//
-//                return array('status'=> 204, 'msg'=>'价格过高，请刷新');
-//
-//            }
+            if($item_info->price>$data->price_c5/100+0.1){
+
+                return array('status'=> 204, 'msg'=>'价格过高，请刷新');
+
+            }
 
             $pay_url = "https://www.c5game.com/api/order/payment.json";
 

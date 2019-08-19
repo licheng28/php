@@ -246,30 +246,32 @@ function changePurchasePrice($data, $cookie, $pwd){
 
         if($sell_min_price&&$purchase_max_price){
 
-            if($purchase_max_price/$sell_min_price<0.91||$sell_min_price-$purchase_max_price>=3){
+            if($purchase_max_price>100){
 
-                if($purchase_max_price>100){
+                $is_purchase = $purchase_max_price-$data['price']>10?false:true;
 
-                    $is_purchase = $purchase_max_price-$data['price']>10?false:true;
+                $improve_price = 1;
 
-                    $improve_price = 1;
+            }elseif($purchase_max_price>=1&&$purchase_max_price<=100){
 
-                }elseif($purchase_max_price>=1&&$purchase_max_price<=100){
+                $is_purchase = $purchase_max_price-$data['price']>4?false:true;
 
-                    $is_purchase = $purchase_max_price-$data['price']>3?false:true;
+                $improve_price = 0.1;
 
-                    $improve_price = 0.1;
+            }else{
 
-                }else{
+                $is_purchase = $purchase_max_price-$data['price']>0.5?false:true;
 
-                    $is_purchase = $purchase_max_price-$data['price']>0.5?false:true;
+                $improve_price = 0.01;
+            }
 
-                    $improve_price = 0.01;
-                }
+            if($purchase_max_price/$sell_min_price<0.91||$sell_min_price-$purchase_max_price>=2){
 
                 $price = $purchase_max_price+$improve_price;
 
             }else{
+
+                $price = $data['price'];
 
                 $is_purchase = false;
 
@@ -279,7 +281,7 @@ function changePurchasePrice($data, $cookie, $pwd){
 
             if(!$is_purchase){
 
-                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price;
+                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price+$improve_price;
 
             }
 
@@ -358,6 +360,21 @@ function changePurchasePrice($data, $cookie, $pwd){
         }
 
     }else{
+
+        $url_purchase_submit = 'https://www.c5game.com/api/purchase/submit';
+
+        $purchase_data = array(
+
+            'price' => $data['price'],
+            'num' => 1,
+            'paypwd' => $pwd,
+            'delivery' => 'on',
+            'id' => $item_id,//item_id
+            'appid' => 570,
+
+        );
+
+        curl($url_purchase_submit, $cookie, $purchase_data);
 
         $message = $message.'&nbsp没有物品信息';
 
