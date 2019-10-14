@@ -22,6 +22,7 @@ use Yii;
  * @property int $is_sell
  * @property int $c5_id
  * @property int $type
+ * @property int $appid
  */
 class PriceDifference extends \yii\db\ActiveRecord
 {
@@ -33,6 +34,7 @@ class PriceDifference extends \yii\db\ActiveRecord
     const TYPE_GENUINE = 3;
     const TYPE_DEFAULT = 0;
     const TYPE_IMMORTAL = 4;
+    const TYPE_H1Z1 = 5;
 
     public static function tableName()
     {
@@ -47,7 +49,7 @@ class PriceDifference extends \yii\db\ActiveRecord
         return [
             [['name', 'update_time', 'creat_time'], 'required'],
             [['name'], 'trim'],
-            [['item_id_igxe', 'price_igxe', 'item_id_c5', 'price_c5', 'price_buff', 'update_time', 'creat_time', 'difference', 'is_sell', 'c5_id', 'type','purchase_c5'], 'integer'],
+            [['item_id_igxe', 'price_igxe', 'item_id_c5', 'price_c5', 'price_buff', 'update_time', 'creat_time', 'difference', 'is_sell', 'c5_id', 'type','purchase_c5', 'appid'], 'integer'],
             [['name', 'img'], 'string', 'max' => 255],
         ];
     }
@@ -73,7 +75,8 @@ class PriceDifference extends \yii\db\ActiveRecord
             'difference' => '差价',
             'is_sell' => '在售',
             'c5_id' => 'c5item主键id',
-            'type' => '类型'
+            'type' => '类型',
+            'appid' => '游戏'
         ];
     }
 

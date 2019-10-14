@@ -66,17 +66,25 @@ class DataController extends Controller
 
        }
 
-       if($bundle){
+       if(Yii::$app->request->get('H1Z1')){
 
-           $data->andWhere('type = :type', array(':type' => PriceDifference::TYPE_BUNDLE));
+           $data->andWhere('appid = :appid', array(':appid' => 433850));
 
-       }elseif(Yii::$app->request->get('immortal')){
+       }else{
 
-           $data->andWhere('type = :type', array(':type' => PriceDifference::TYPE_IMMORTAL));
+           if($bundle){
 
-       }elseif(Yii::$app->request->get('unique')){
+               $data->andWhere('type = :type', array(':type' => PriceDifference::TYPE_BUNDLE));
 
-           $data->andWhere('type = :type', array(':type' => PriceDifference::TYPE_UNIQUE));
+           }elseif(Yii::$app->request->get('immortal')){
+
+               $data->andWhere('type = :type', array(':type' => PriceDifference::TYPE_IMMORTAL));
+
+           }elseif(Yii::$app->request->get('unique')){
+
+               $data->andWhere('type = :type', array(':type' => PriceDifference::TYPE_UNIQUE));
+
+           }
 
        }
 
@@ -92,6 +100,8 @@ class DataController extends Controller
            'bundle' => $bundle,
            'immortal' => Yii::$app->request->get('immortal'),
            'unique' => Yii::$app->request->get('unique'),
+           'H1Z1' => Yii::$app->request->get('H1Z1'),
+
 
        ]);
 

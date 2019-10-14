@@ -103,7 +103,18 @@ class base extends Model
 
         }
 
-        $url = 'https://www.igxe.cn/dota2/570?keyword='.$data->name;
+        if($data->appid==570){
+
+            $url = 'https://www.igxe.cn/dota2/570?keyword='.$data->name;
+
+            $find = '.dota';
+
+        }else{
+
+            $url = 'https://www.igxe.cn/h1z1/433850?keyword='.$data->name;
+
+            $find = '.csgo';
+        }
 
         $url = str_replace(' ', '%20', $url);
 
@@ -113,7 +124,7 @@ class base extends Model
 
         $dom->load($html);
 
-        foreach($dom->find('.dota') as $e){
+        foreach($dom->find($find) as $e){
 
             $name = $e->children(1)->innertext;
 
@@ -188,7 +199,15 @@ class base extends Model
 
         $name = $data->name;
 
-        $url = 'https://www.c5game.com/dota.html?locale=zh&k='.$name;
+        if($data->appid == 570){
+
+            $url = 'https://www.c5game.com/dota.html?locale=zh&k='.$name;
+
+        }else{
+
+            $url = 'https://www.c5game.com/market.html?locale=zh&appid=433850'.$name;
+
+        }
 
         $url = str_replace(' ', '%20', $url);
 
@@ -301,19 +320,33 @@ class base extends Model
 
     function getNum($element,$punctuation='.'){
 
-        if($punctuation){
-
-            $p = $punctuation;
-
-        }
-
         $element=trim($element);
         if(empty($element)){return '';}
         $result='';
         for($i=0;$i<strlen($element);$i++){
-            if(is_numeric($element[$i]) || $element[$i] == $p){
+            if(is_numeric($element[$i]) || $element[$i] == $punctuation){
                 $result.=$element[$i];
             }
+        }
+
+        return $result;
+
+    }
+
+    function getH1Z1Num($element,$punctuation='.'){
+
+        $choose = false;
+        $element=trim($element);
+        if(empty($element)){return '';}
+        $result='';
+        for($i=0;$i<strlen($element);$i++){
+            if($element[$i] == '-' || $choose == true){
+                if(is_numeric($element[$i]) || $element[$i] == $punctuation){
+                    $result.=$element[$i];
+                }
+                $choose = true;
+            }
+
         }
 
         return $result;
@@ -729,6 +762,8 @@ class base extends Model
     {
         $m_type = PriceDifference::TYPE_DEFAULT;
 
+        $find = '.dota';
+
         switch($type){
 
             case PriceDifference::TYPE_BUNDLE:
@@ -754,6 +789,12 @@ class base extends Model
                 $m_type = PriceDifference::TYPE_IMMORTAL;
                 break;
 
+            case PriceDifference::TYPE_H1Z1:
+
+                $url = 'https://www.igxe.cn/h1z1/433850?is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=300&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1571062704307';
+                $find = '.csgo';
+                break;
+
             default:
 
                 return false;
@@ -766,7 +807,7 @@ class base extends Model
 
         $dom->load($html);
 
-        foreach($dom->find('.dota') as $e){
+        foreach($dom->find($find) as $e){
 
             $href = $e->href;
 
@@ -822,6 +863,12 @@ class base extends Model
                     $model->img = $src;
                     $model->type = $m_type;
 
+                    if($type==PriceDifference::TYPE_H1Z1){
+
+                        $model->appid = 433850;
+
+                    }
+
                     if(!$model->save()){
 
                         throw new Exception('更新错误');
@@ -848,6 +895,8 @@ class base extends Model
         try{
 
             $m_type = PriceDifference::TYPE_DEFAULT;
+
+            $appid = 570;
 
             switch ($type){
 
@@ -878,6 +927,13 @@ class base extends Model
                     $m_type = PriceDifference::TYPE_IMMORTAL;
                     break;
 
+                case PriceDifference::TYPE_H1Z1:
+
+                    $url = 'https://www.c5game.com/market.html?appid=433850&sort=price.desc';
+                    $maxpage = 30;
+                    $appid = 433850;
+                    break;
+
                 default:
 
                     return false;
@@ -897,19 +953,27 @@ class base extends Model
 
                 foreach($dom->find('.selling') as $e){
 
-                    $name_c5 = $e->children(1)->first_child()->first_child()->innertext;
+                    if($appid == 570){
 
-                    $price = $e->children(2)->first_child()->first_child()->innertext;
+                        $name_c5 = $e->children(1)->first_child()->first_child()->innertext;
+                        $price = $e->children(2)->first_child()->first_child()->innertext;
+                        $item_id_c5 = $this->getNum($e->first_child()->href, '*');
+                        $src = $e->first_child()->children(1)->src;
+
+                    }else{
+
+                        $name_c5 = $e->children(2)->first_child()->first_child()->innertext;
+                        $price = $e->children(3)->first_child()->first_child()->innertext;
+                        $item_id_c5 = $this->getH1Z1Num($e->children(1)->href, '*');
+                        $src = $e->children(1)->children(1)->src;
+
+                    }
 
                     $price = $this->getNum($price);
 
                     $price = $price*100;
 
-                    $item_id_c5 = $this->getNum($e->first_child()->href, '*');
-
                     $update_time = time();
-
-                    $src = $e->first_child()->children(1)->src;
 
                     $model = new PriceDifference();
 
@@ -926,7 +990,6 @@ class base extends Model
 //                        $result->creat_time = $update_time;
                         $result->img = $src;
                         $result->type = $m_type;
-
                         $result->save();
                     }else{
 
@@ -937,6 +1000,7 @@ class base extends Model
                         $model->creat_time = $update_time;
                         $model->img = $src;
                         $model->type = $m_type;
+                        $model->appid = $appid;
 
                         $model->save();
                     }
