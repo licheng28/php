@@ -75,33 +75,33 @@ class base extends Model
 
         $price = 0;
 
-        if($data->item_id_igxe){
-
-            $url = 'https://www.igxe.cn/purchase/product_info_'.$data->item_id_igxe.'_2?p_type=1';
-
-            $html = $this->curl($url, array(), 'ig');
-
-            $content = json_decode($html);
-
-            if($content){
-
-                if($content->{'succ'} == true){
-
-                    $price = $content->{'min_price'};
-
-                    $price = round($price, 2);
-
-//                    $difference = $data->price_c5?($price-$data->price_c5/100)*100:-$price*100;
-
-                    PriceDifference::updateAll(array('price_igxe'=>$price*100, 'update_time'=>time(), 'is_sell' => $data->is_sell), array('id' => $data->id));
-
-                    return $price;
-
-                }
-
-            }
-
-        }
+//        if($data->item_id_igxe){
+//
+//            $url = 'https://www.igxe.cn/purchase/product_info_'.$data->item_id_igxe.'_2?p_type=1';
+//
+//            $html = $this->curl($url, array(), 'ig');
+//
+//            $content = json_decode($html);
+//
+//            if($content){
+//
+//                if($content->{'succ'} == true){
+//
+//                    $price = $content->{'min_price'};
+//
+//                    $price = round($price, 2);
+//
+////                    $difference = $data->price_c5?($price-$data->price_c5/100)*100:-$price*100;
+//
+//                    PriceDifference::updateAll(array('price_igxe'=>$price*100, 'update_time'=>time(), 'is_sell' => $data->is_sell), array('id' => $data->id));
+//
+//                    return $price;
+//
+//                }
+//
+//            }
+//
+//        }
 
         if($data->appid==570){
 
@@ -290,6 +290,8 @@ class base extends Model
 
                 $cookie_ig = $redis->get('cookie_ig'.Yii::$app->user->id);
 
+//                $cookie_ig = '_ga=GA1.2.2053708244.1523634691; distribution_channel=1249c251701509571840; _9755xjdesxxd_=32; agree_sell_agreementlic666=true; username=lic666; bad_id572d9ba0-d737-11e8-970c-a553533099d1=045e9372-3e7a-11e9-9a95-e726cc7fecda; __cfduid=d16d91c59d01d8b94b0766311e57a58091555174165; my_game=570; gr_user_id=1b292252-64ca-4e84-93eb-2fca6de228c1; grwng_uid=8ad16b9a-13d3-413d-8319-8c9e5d9b50d5; _gid=GA1.2.93477972.1578495049; accessId=572d9ba0-d737-11e8-970c-a553533099d1; gdxidpyhxdE=4IIcHMzrPXD4%2Fror%5CILp9I6a9c3dbEzCUy5H%5CfDM5JSRXZ%2BU00tOjX1K5UL6sVYDHNTG%2BmfrLsmlfn8V61gLJJVlW41npzkDsafENfhD%2Bsi59PolpnvUuYmr92%2BRVzRqLa8ph2uOEVid%5C7YrlGp8MwGZS%2B3MgZWJRhm90DrzYNrA%2B5as%3A1578651711679; aliyungf_tc=AQAAADt6VwHi1wUAQAdtfYZPzp2iRwt6; myDateMinutes=7; bb158725ea59c655_gr_session_id=9c71b2a9-97f3-4dad-8a0e-93415ebb5f9f; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; _gat=1; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1578582527,1578650810,1578714269,1578762461; bb158725ea59c655_gr_session_id_9c71b2a9-97f3-4dad-8a0e-93415ebb5f9f=true; csrftoken=E7fs0RpcSSdDqAFhP3L26tfkZ6HONxbU; token=f3131f32-849e-4188-8644-03f3c779b6a6; sessionid=zhjc2yxjc5l4g7srvr0b2gtpfndojye6; pageViewNum=33; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1578762469';
+
                 curl_setopt($curl, CURLOPT_COOKIE, $cookie_ig);
 
             }
@@ -299,6 +301,8 @@ class base extends Model
             $redis = Yii::$app->redis;
 
             $cookie_c5 = $redis->get('cookie_c5'.Yii::$app->user->id);
+
+//            $cookie_c5 = 'C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; isNewUser=-1; C5Appid=570; c5user=18758000957; C5Lang=zh; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5SessionID=gpdl7j54659sj7ssa11175nn70; C5Token=5e1a028adb1cf; C5Login=253352; c5IsBindPhone=1; device_id=789cd0d4674ae4a63b2d4a3a3a8ff193; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1578655786,1578668052,1578714308,1578762894; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1578762894';
 
             curl_setopt($curl, CURLOPT_COOKIE, $cookie_c5);
 
@@ -441,6 +445,8 @@ class base extends Model
 
             $pwd = $redis->get('pwd_c5'.$user_id);
 
+//            $pwd = '328928';
+
             $data_array = array(
 
                 'id' => $item_info->id,
@@ -545,6 +551,8 @@ class base extends Model
             $redis = Yii::$app->redis;
 
             $pwd = $redis->get('pwd_c5'.$user_id);
+//
+//            $pwd = '328928';
 
             $purchase_data = array(
 
@@ -791,7 +799,7 @@ class base extends Model
 
             case PriceDifference::TYPE_H1Z1:
 
-                $url = 'https://www.igxe.cn/h1z1/433850?is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=300&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1571062704307';
+                $url = 'https://www.igxe.cn/h1z1/433850?is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&sort=2&ctg_id=0&type_id=0&page_no=1&page_size=500&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1571062704307';
                 $find = '.csgo';
                 break;
 

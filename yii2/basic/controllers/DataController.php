@@ -88,7 +88,15 @@ class DataController extends Controller
 
        }
 
-       $data->orderBy('difference');
+       if(Yii::$app->request->get('sort')){
+
+           $data->orderBy('name');
+
+       }else{
+
+           $data->orderBy('difference');
+
+       }
 
        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '20']);
        $model = $data->offset($pages->offset)->limit($pages->limit)->all();
@@ -101,7 +109,7 @@ class DataController extends Controller
            'immortal' => Yii::$app->request->get('immortal'),
            'unique' => Yii::$app->request->get('unique'),
            'H1Z1' => Yii::$app->request->get('H1Z1'),
-
+           'sort' => Yii::$app->request->get('sort'),
 
        ]);
 

@@ -19,18 +19,20 @@ use yii\widgets\LinkPager;
 <!--        <input type="hidden" name="r" value="data/index">-->
         <input class="form-control" type="text"  name="k" placeholder="差价" value="<?php echo $k?>" style="float: left;width: 250px;">
         <button type="submit" class="btn btn-primary" style="float: left;margin-left: 10px;">submit</button>
-        <span style="margin-left: 20px;">
+        <span style="margin-left: 20px;height: 50px;">
             <input type="checkbox" name="bundle" <?php echo $bundle?'checked':''?>>只显示捆绑包
             <input type="checkbox" name="immortal" <?php echo $immortal?'checked':''?>>只显示不朽
             <input type="checkbox" name="unique" <?php echo $unique?'checked':''?>>只显示标准
-            <input type="checkbox" name="H1Z1" <?php echo $H1Z1?'checked':''?>>只显示H1Z1
+<!--            <input type="checkbox" name="H1Z1" --><?php //echo $H1Z1?'checked':''?><!-->
+<!--            只显示H1Z1-->
+            <input type="checkbox" name="sort" <?php echo $sort?'checked':''?>>按名称排序
         </span>
     </form>
     <a class="btn btn-success updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_BUNDLE?>" style="margin-left: 400px;margin-top: -32px;">捆绑包</a>
-    <a class="btn btn-default updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_UNIQUE?>" style="margin-top: -32px;">标准</a>
+<!--    <a class="btn btn-default updateData" href="index.php?r=data/bundle&type=--><?php //echo \app\models\PriceDifference::TYPE_UNIQUE?><!--" style="margin-top: -32px;">标准</a>-->
     <a class="btn btn-danger updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_GENUINE?>" style="margin-top: -32px;">纯正</a>
     <a class="btn btn-warning updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_IMMORTAL?>" style="margin-top: -32px;">不朽</a>
-    <a class="btn btn-info updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_H1Z1?>" style="margin-top: -32px;">H1Z1</a>
+<!--    <a class="btn btn-info updateData" href="index.php?r=data/bundle&type=--><?php //echo \app\models\PriceDifference::TYPE_H1Z1?><!--" style="margin-top: -32px;">H1Z1</a>-->
 </div>
 <body class="content-container">
 
