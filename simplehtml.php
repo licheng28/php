@@ -11,7 +11,7 @@ index();
 
 function index(){
 
-    $url = 'https://www.c5game.com/user/purchase/index.html';
+    $url = 'https://www.c5game.com/user/purchase/index.html?appid=570';
     $cookie = 'C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; isNewUser=-1; c5user=18758000957; C5Lang=zh; C5Sate=436a1ffd6dd8452775bc8e37303fdd9ce7579d59a%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Appid=570; C5SessionID=7ss37t0m3dnleq0jhncd61fhuo; C5Token=5e27e7916e3bc; C5Login=253352; c5IsBindPhone=1; device_id=25f7e42a9e51540cfaad7af2bc5adc74; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1579530385,1579623801,1579665172,1579673491; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1579675210';
     $pwd = 328928;
 //    $cookie = 'C5Lang=zh; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1556181926; C5NoticeBounces1556170168=close; C5Appid=570; C5SessionID=rcl4ss5tpvq9deieti9cfm80f7; C5Sate=9dac2228e8e1038ef95eb42cb26dd526540df83ba%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cc174f589f60; C5Login=557376709; C5Machines=Wl4MOBJaQ0Fj%2F3qKBDxJGciO%2Bfd%2BvowCOflGnn8qGYs%3D; C5_NPWD=0QRrydA06t9FYzzO7qR%2FNA%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1556182330';
@@ -49,7 +49,7 @@ function index(){
 
     for($page=1;$page<=$page_count;$page++){
 
-        $url = 'https://www.c5game.com/user/purchase/index.html?page='.$page;
+        $url = 'https://www.c5game.com/user/purchase/index.html?appid=570&page='.$page;
 
         $html = curl($url, $cookie);
 
@@ -265,9 +265,17 @@ function changePurchasePrice($data, $cookie, $pwd){
                 $improve_price = 0.01;
             }
 
-            if($purchase_max_price/$sell_min_price<0.91||$sell_min_price-$purchase_max_price>=2){
+            if($purchase_max_price/$sell_min_price<0.88||$sell_min_price-$purchase_max_price>3){
 
-                $price = $purchase_max_price+$improve_price;
+                if($purchase_max_price){
+
+                    $price = $purchase_max_price+$improve_price;
+
+                }else{
+
+                    $price = $data['price']+$improve_price;
+
+                }
 
             }else{
 
@@ -281,7 +289,7 @@ function changePurchasePrice($data, $cookie, $pwd){
 
             if(!$is_purchase){
 
-                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price+$improve_price;
+                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price-$improve_price;
 
             }
 

@@ -48,7 +48,7 @@ function index(){
 
     for($page=1;$page<=$page_count;$page++){
 
-        $url = 'https://www.c5game.com/user/purchase/index.html?page='.$page;
+        $url = 'https://www.c5game.com/user/purchase/index.html?appid=570&page='.$page;
 
         $html = curl($url, $cookie);
 
@@ -264,9 +264,17 @@ function changePurchasePrice($data, $cookie, $pwd){
                 $improve_price = 0.01;
             }
 
-            if($purchase_max_price/$sell_min_price<0.91||$sell_min_price-$purchase_max_price>=2){
+            if($purchase_max_price/$sell_min_price<0.88||$sell_min_price-$purchase_max_price>3){
 
-                $price = $purchase_max_price+$improve_price;
+                if($purchase_max_price){
+
+                    $price = $purchase_max_price+$improve_price;
+
+                }else{
+
+                    $price = $data['price']+$improve_price;
+
+                }
 
             }else{
 
@@ -280,7 +288,7 @@ function changePurchasePrice($data, $cookie, $pwd){
 
             if(!$is_purchase){
 
-                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price+$improve_price;
+                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price-$improve_price;
 
             }
 
