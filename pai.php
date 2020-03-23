@@ -11,10 +11,18 @@ index();
 
 function index(){
 
+    $redis = new Redis();
+
+    $redis->connect('47.97.253.197', '6379');
+
+    $cookie = $redis->get('cookie_c5101');
+
+    $redis->close();
+
     $url = 'https://www.c5game.com/user/purchase/index.html';
 //    $cookie = 'C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; C5Lang=zh; C5Appid=570; C5Notice1558575896=close; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5SessionID=oqmjotlbf6flvv3tgpt9smm1r5; C5Token=5cebe430de6b7; C5Login=253352; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1558891615,1558891662,1558891775,1558963252; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1558974326';
 //    $pwd = 328928;
-    $cookie = 'C5Machines=A02vlx%2Fdie%2BgN4UDKA%2B1IQ%3D%3D; C5Appid=570; showNewUser=1; Hm_lvt_eaa57ca47dacb4ad4f5a257001a3457c=1579051695,1579095839,1579137898,1579150980; C5Lang=zh; device_id=841017196ae321524fe3bf0f9a8c3112; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1579505180,1579511512,1579659667,1579692797; C5_NPWD=jkiOU6IOVoKOouwywrXx1g%3D%3D; C5NewHome=1; C5SessionID=n4gr7s19ibshotdes0cma3dnoa; C5Sate=cd0826f40183529645d52524765b6e5a3c085a2fa%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5e286af0bab4b; C5Login=557376709; c5IsBindPhone=1; c5user=brave_five; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1579707193';
+//    $cookie = 'C5Machines=A02vlx%2Fdie%2BgN4UDKA%2B1IQ%3D%3D; C5Appid=570; showNewUser=1; Hm_lvt_eaa57ca47dacb4ad4f5a257001a3457c=1579051695,1579095839,1579137898,1579150980; C5Lang=zh; device_id=841017196ae321524fe3bf0f9a8c3112; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1579505180,1579511512,1579659667,1579692797; C5_NPWD=jkiOU6IOVoKOouwywrXx1g%3D%3D; C5NewHome=1; C5SessionID=n4gr7s19ibshotdes0cma3dnoa; C5Sate=cd0826f40183529645d52524765b6e5a3c085a2fa%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5e286af0bab4b; C5Login=557376709; c5IsBindPhone=1; c5user=brave_five; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1579707193';
     $pwd = 679578;
 
 
