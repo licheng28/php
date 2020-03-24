@@ -36,11 +36,15 @@ function index(){
     $dom->load($html);  //加载html
     // Find all images
     $page_count = 1;
-    foreach($dom->find('ul li.last a') as $e){
+    foreach($dom->find('ul.pagination li.last a') as $e){
 
         $page_count = $e->href;
 
-        $page_count = getNum($page_count, '*');
+        $num = (explode('=', $page_count));
+
+//        $page_count = getNum($page_count, '*');
+
+        $page_count = $num[2];
 
         break;
 
@@ -242,9 +246,9 @@ function changePurchasePrice($data, $cookie, $pwd){
 
     $content = curl($url_purchase_item, $cookie, $data_item);
 
-    if($content){
+    $content = json_decode($content);
 
-        $content = json_decode($content);
+    if($content&&$content->{'body'}){
 
         $name = $content->{'body'}->{'item'}->{'name'};
 
@@ -253,6 +257,8 @@ function changePurchasePrice($data, $cookie, $pwd){
         $purchase_max_price = $content->{'body'}->{'item'}->{'purchase_max_price'};
 
         if($sell_min_price&&$purchase_max_price){
+
+            $is_purchase = true;
 
             if($purchase_max_price>100){
 
@@ -273,7 +279,7 @@ function changePurchasePrice($data, $cookie, $pwd){
                 $improve_price = 0.01;
             }
 
-            if($purchase_max_price/$sell_min_price<0.88||$sell_min_price-$purchase_max_price>3){
+            if($purchase_max_price/$sell_min_price<0.90||$sell_min_price-$purchase_max_price>=5){
 
                 if($purchase_max_price){
 
@@ -287,18 +293,21 @@ function changePurchasePrice($data, $cookie, $pwd){
 
             }else{
 
-                $price = $data['price'];
+//                $price = $data['price'];
+                if($is_purchase){
 
-                $is_purchase = false;
+                    $price = ceil($sell_min_price*0.9*10)/10;
 
+                }
 //                $message = $message.'  求购价太高取消求购，物品名称 = '.$name;
 
             }
 
             if(!$is_purchase){
 
-                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price-$improve_price;
+//                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price-$improve_price;
 
+                $price = $data['price']+1;
             }
 
             $url_purchase_submit = 'https://www.c5game.com/api/purchase/submit';

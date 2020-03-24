@@ -19,7 +19,7 @@ function index(){
 
     $redis->close();
 
-    $url = 'https://www.c5game.com/user/purchase/index.html';
+    $url = 'https://www.c5game.com/user/purchase/index.html?appid=570';
 //    $cookie = 'C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; C5Lang=zh; C5Appid=570; C5Notice1558575896=close; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5SessionID=oqmjotlbf6flvv3tgpt9smm1r5; C5Token=5cebe430de6b7; C5Login=253352; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1558891615,1558891662,1558891775,1558963252; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1558974326';
 //    $pwd = 328928;
 //    $cookie = 'C5Machines=A02vlx%2Fdie%2BgN4UDKA%2B1IQ%3D%3D; C5Appid=570; showNewUser=1; Hm_lvt_eaa57ca47dacb4ad4f5a257001a3457c=1579051695,1579095839,1579137898,1579150980; C5Lang=zh; device_id=841017196ae321524fe3bf0f9a8c3112; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1579505180,1579511512,1579659667,1579692797; C5_NPWD=jkiOU6IOVoKOouwywrXx1g%3D%3D; C5NewHome=1; C5SessionID=n4gr7s19ibshotdes0cma3dnoa; C5Sate=cd0826f40183529645d52524765b6e5a3c085a2fa%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5e286af0bab4b; C5Login=557376709; c5IsBindPhone=1; c5user=brave_five; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1579707193';
@@ -35,13 +35,15 @@ function index(){
     $dom->load($html);  //加载html
     // Find all images
     $page_count = 1;
-    foreach($dom->find('ul li.last a') as $e){
+    foreach($dom->find('ul.pagination li.last a') as $e){
 
         $page_count = $e->href;
 
-        $page_count = getNum($page_count, '*');
+        $num = (explode('=', $page_count));
 
-        break;
+//        $page_count = getNum($page_count, '*');
+
+        $page_count = $num[2];
 
     }
     $purchase = array();
@@ -241,9 +243,9 @@ function changePurchasePrice($data, $cookie, $pwd){
 
     $content = curl($url_purchase_item, $cookie, $data_item);
 
-    if($content){
+    $content = json_decode($content);
 
-        $content = json_decode($content);
+    if($content&&$content->{'body'}){
 
         $name = $content->{'body'}->{'item'}->{'name'};
 
@@ -252,6 +254,8 @@ function changePurchasePrice($data, $cookie, $pwd){
         $purchase_max_price = $content->{'body'}->{'item'}->{'purchase_max_price'};
 
         if($sell_min_price&&$purchase_max_price){
+
+            $is_purchase = true;
 
             if($purchase_max_price>100){
 
@@ -272,7 +276,7 @@ function changePurchasePrice($data, $cookie, $pwd){
                 $improve_price = 0.01;
             }
 
-            if($purchase_max_price/$sell_min_price<0.88||$sell_min_price-$purchase_max_price>3){
+            if($purchase_max_price/$sell_min_price<0.90||$sell_min_price-$purchase_max_price>=5){
 
                 if($purchase_max_price){
 
@@ -286,9 +290,13 @@ function changePurchasePrice($data, $cookie, $pwd){
 
             }else{
 
-                $price = $data['price'];
+//                $price = $data['price'];
 
-                $is_purchase = false;
+                if($is_purchase){
+
+                    $price = ceil($sell_min_price*0.9*10)/10;
+
+                }
 
 //                $message = $message.'  求购价太高取消求购，物品名称 = '.$name;
 
@@ -296,7 +304,9 @@ function changePurchasePrice($data, $cookie, $pwd){
 
             if(!$is_purchase){
 
-                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price-$improve_price;
+//                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price-$improve_price;
+
+                $price = $data['price']+1;
 
             }
 
