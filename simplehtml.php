@@ -19,7 +19,7 @@ function index(){
 
     $redis->close();
 
-    $url = 'https://www.c5game.com/user/purchase/index.html?appid=570';
+    $url = 'https://www.c5game.com/user/purchase/index.html';
 
     $pwd = 328928;
 //    $cookie = 'C5Lang=zh; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1556181926; C5NoticeBounces1556170168=close; C5Appid=570; C5SessionID=rcl4ss5tpvq9deieti9cfm80f7; C5Sate=9dac2228e8e1038ef95eb42cb26dd526540df83ba%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cc174f589f60; C5Login=557376709; C5Machines=Wl4MOBJaQ0Fj%2F3qKBDxJGciO%2Bfd%2BvowCOflGnn8qGYs%3D; C5_NPWD=0QRrydA06t9FYzzO7qR%2FNA%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1556182330';
@@ -40,15 +40,15 @@ function index(){
 
         $page_count = $e->href;
 
-        $num = (explode('=', $page_count));
+//        $num = (explode('=', $page_count));
+//        $page_count = $num[2];
 
-//        $page_count = getNum($page_count, '*');
-
-        $page_count = $num[2];
+        $page_count = getNum($page_count, '*');
 
         break;
 
     }
+
     $purchase = array();
     $j = 0;
     $i = 1;
@@ -61,7 +61,7 @@ function index(){
 
     for($page=1;$page<=$page_count;$page++){
 
-        $url = 'https://www.c5game.com/user/purchase/index.html?appid=570&page='.$page;
+        $url = 'https://www.c5game.com/user/purchase/index.html?page='.$page;
 
         $html = curl($url, $cookie);
 
@@ -279,7 +279,19 @@ function changePurchasePrice($data, $cookie, $pwd){
                 $improve_price = 0.01;
             }
 
-            if($purchase_max_price/$sell_min_price<0.90||$sell_min_price-$purchase_max_price>=5){
+            $appid = $content->{'body'}->{'item'}->{'appid'};
+
+            $n = 0.9;
+            $j = 5;
+
+            if($appid == 433850){
+
+                $n = 0.70;
+                $j = 12;
+
+            }
+
+            if($purchase_max_price/$sell_min_price<$n||$sell_min_price-$purchase_max_price>=$j){
 
                 if($purchase_max_price){
 
@@ -296,7 +308,7 @@ function changePurchasePrice($data, $cookie, $pwd){
 //                $price = $data['price'];
                 if($is_purchase){
 
-                    $price = ceil($sell_min_price*0.9*10)/10;
+                    $price = ceil($sell_min_price*$n*10)/10;
 
                 }
 //                $message = $message.'  求购价太高取消求购，物品名称 = '.$name;
