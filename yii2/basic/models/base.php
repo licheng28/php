@@ -10,6 +10,7 @@ namespace app\models;
 use Yii;
 use yii\base\Exception;
 use yii\base\Model;
+use yii\debug\models\search\User;
 use yii\web\simple_html_dom;
 
 
@@ -24,6 +25,7 @@ class base extends Model
 //    var $pwd = '679578';
     const C5 = 'c5';
     const IG = 'ig';
+    const BUFF = 'buff';
 
     public function updateInfo($id){
 
@@ -67,6 +69,7 @@ class base extends Model
             'difference' => (int)$difference,
             'sell' => $sell_msg,
             'price_p' => $price_arr['price_p'],
+            'sell_time' => $price_arr['sell_time'],
         );
 
     }
@@ -74,6 +77,8 @@ class base extends Model
     public function updateIgPrice($data){
 
         $price = 0;
+
+        $item_id = $data->item_id_igxe;
 
 //        if($data->item_id_igxe){
 //
@@ -143,11 +148,12 @@ class base extends Model
 
 //                $difference = $data->price_c5?($price-$data->price_c5/100)*100:-$price*100;
 
-                PriceDifference::updateAll(array('price_igxe'=>$price*100, 'update_time'=>time(), 'is_sell' => $data->is_sell, 'item_id_igxe' => $item_id), array('id' => $data->id));
 
             }
 
         }
+
+        PriceDifference::updateAll(array('price_igxe'=>$price*100, 'update_time'=>time(), 'is_sell' => $data->is_sell, 'item_id_igxe' => $item_id), array('id' => $data->id));
 
         $dom->clear();
 
@@ -158,6 +164,14 @@ class base extends Model
     public function updateC5Price($data){
 
         $price = $price_purchase = $difference = 0;
+
+        $sell_time = $data->sell_time;
+
+        if($data->appid == 433850){
+
+            $sell_time = $this->sellTime($data->item_id_c5);
+
+        }
 
         if($data->item_id_c5&&Yii::$app->user->id){
 
@@ -187,9 +201,9 @@ class base extends Model
 
 //            PriceDifference::model()->updateByPk($data->id,array('price_c5'=>$price*100, 'difference'=>$difference, 'update_time'=>time()));
 
-                PriceDifference::updateAll(array('price_c5'=>$price*100, 'difference'=>$difference, 'purchase_c5' => $price_purchase*100, 'update_time'=>time()), array('id' => $data->id));
+                PriceDifference::updateAll(array('sell_time' => $sell_time, 'price_c5'=>$price*100, 'difference'=>$difference, 'purchase_c5' => $price_purchase*100, 'update_time'=>time()), array('id' => $data->id));
 
-                return array('price' => $price, 'price_p' => $price_purchase);
+                return array('price' => $price, 'price_p' => $price_purchase, 'sell_time' => $sell_time);
 
             }
 
@@ -263,14 +277,36 @@ class base extends Model
 
         }
 
-        PriceDifference::updateAll(array('purchase_c5'=>$price_purchase,'price_c5'=>$price, 'difference'=>$difference, 'update_time'=>time(), 'item_id_c5' => $item_id_c5), array('id' => $data->id));
+        PriceDifference::updateAll(array('sell_time' => $sell_time, 'purchase_c5'=>$price_purchase,'price_c5'=>$price, 'difference'=>$difference, 'update_time'=>time(), 'item_id_c5' => $item_id_c5), array('id' => $data->id));
 
         $price = $price/100;
         $price_purchase = $price_purchase/100;
 
         $dom->clear();
 
-        return array('price' => $price, 'price_p' => $price_purchase);
+        return array('price' => $price, 'price_p' => $price_purchase, 'sell_time' => $sell_time);
+
+    }
+
+    public function sellTime($id)
+    {
+
+        $url = "https://www.c5game.com/dota/history/".$id.".html";
+
+        $html = $this->curl($url);
+        $dom = new simple_html_dom();
+        $dom->load($html);
+
+        $sell_time = 0;
+
+        foreach($dom->find('tr.ft-inter') as $e){
+
+            $sell_time = $e->last_child()->innertext;
+
+        }
+
+        return $sell_time;
+
 
     }
 
@@ -282,31 +318,17 @@ class base extends Model
         curl_setopt($curl,CURLOPT_SSL_VERIFYHOST,0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
 //    curl_setopt($curl,CURLOPT_HEADER,1);
-        if($type == 'ig'){
 
-            if($use_cookie){
+        $user_id = Yii::$app->user->id;
 
-                $redis = Yii::$app->redis;
+        $info = UserConfig::find()->where('user_id = :user_id and web = :web', array(':user_id' => $user_id, ':web' => $type))->one();
 
-                $cookie_ig = $redis->get('cookie_ig'.Yii::$app->user->id);
+        if($info)
+        {
+            $cookie = $info->cookie;
+        }else{return false;}
+        curl_setopt($curl, CURLOPT_COOKIE, $cookie);
 
-//                $cookie_ig = '_ga=GA1.2.2053708244.1523634691; distribution_channel=1249c251701509571840; _9755xjdesxxd_=32; agree_sell_agreementlic666=true; username=lic666; bad_id572d9ba0-d737-11e8-970c-a553533099d1=045e9372-3e7a-11e9-9a95-e726cc7fecda; __cfduid=d16d91c59d01d8b94b0766311e57a58091555174165; my_game=570; gr_user_id=1b292252-64ca-4e84-93eb-2fca6de228c1; grwng_uid=8ad16b9a-13d3-413d-8319-8c9e5d9b50d5; _gid=GA1.2.93477972.1578495049; accessId=572d9ba0-d737-11e8-970c-a553533099d1; gdxidpyhxdE=4IIcHMzrPXD4%2Fror%5CILp9I6a9c3dbEzCUy5H%5CfDM5JSRXZ%2BU00tOjX1K5UL6sVYDHNTG%2BmfrLsmlfn8V61gLJJVlW41npzkDsafENfhD%2Bsi59PolpnvUuYmr92%2BRVzRqLa8ph2uOEVid%5C7YrlGp8MwGZS%2B3MgZWJRhm90DrzYNrA%2B5as%3A1578651711679; aliyungf_tc=AQAAADt6VwHi1wUAQAdtfYZPzp2iRwt6; myDateMinutes=7; bb158725ea59c655_gr_session_id=9c71b2a9-97f3-4dad-8a0e-93415ebb5f9f; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; _gat=1; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1578582527,1578650810,1578714269,1578762461; bb158725ea59c655_gr_session_id_9c71b2a9-97f3-4dad-8a0e-93415ebb5f9f=true; csrftoken=E7fs0RpcSSdDqAFhP3L26tfkZ6HONxbU; token=f3131f32-849e-4188-8644-03f3c779b6a6; sessionid=zhjc2yxjc5l4g7srvr0b2gtpfndojye6; pageViewNum=33; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1578762469';
-
-                curl_setopt($curl, CURLOPT_COOKIE, $cookie_ig);
-
-            }
-
-        }else{
-
-            $redis = Yii::$app->redis;
-
-            $cookie_c5 = $redis->get('cookie_c5'.Yii::$app->user->id);
-
-//            $cookie_c5 = 'C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; isNewUser=-1; C5Appid=570; c5user=18758000957; C5Lang=zh; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5SessionID=gpdl7j54659sj7ssa11175nn70; C5Token=5e1a028adb1cf; C5Login=253352; c5IsBindPhone=1; device_id=789cd0d4674ae4a63b2d4a3a3a8ff193; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1578655786,1578668052,1578714308,1578762894; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1578762894';
-
-            curl_setopt($curl, CURLOPT_COOKIE, $cookie_c5);
-
-        }
         if($data){
 
             curl_setopt($curl,CURLOPT_POSTFIELDS,$data);
@@ -441,9 +463,15 @@ class base extends Model
 
             $method = 4;
 
-            $redis = Yii::$app->redis;
+            $info = UserConfig::find()->where('user_id = :user_id and web = :web', array(':user_id' => $user_id, ':web' => 'c5'))->one();
 
-            $pwd = $redis->get('pwd_c5'.$user_id);
+            if(!$info){
+
+                return array('status' => 204, 'msg' => '密码错误！');
+
+            }
+
+            $pwd = $info->pwd;
 
 //            $pwd = '328928';
 
@@ -482,6 +510,86 @@ class base extends Model
             return array('status' => 202, 'msg' => $list->{'message'});
 
         }
+
+    }
+
+    public function confirmPrice($item_id_c5)
+    {
+
+        $user_id = Yii::$app->user->id;
+
+        if(!$user_id){
+
+            return array('status' => 206, 'msg' => '未登录');
+
+        }
+
+        $data = PriceDifference::find()->where('item_id_c5 = '.$item_id_c5)->one();
+
+        if(!$data->c5_id){
+
+            $c5_id = 0;
+
+            $url = "https://www.c5game.com/dota/".$data->item_id_c5."-S.html";
+
+            $html = $this->curl($url);
+
+            $dom = new simple_html_dom();
+
+            $dom->load($html);
+
+            foreach($dom->find('.sale-item-table') as $e){
+
+                $a = $e->outertext;
+
+                preg_match_all('/(data-url)=("[^"]*")/i', $a, $matches);
+
+                $item_url = $matches[2][0];
+
+                $num = $this->getNum($item_url, '=');
+
+                $arr = explode('=',$num);
+
+                $c5_id = $arr[1];
+
+            }
+
+            $row = PriceDifference::updateAll(array('c5_id'=>$c5_id), array('id' => $data->id));
+
+            if(!$row){
+
+                return array('status'=> 205, 'msg'=>'更新c5id失败');
+
+            }
+
+        }else{
+
+            $c5_id = $data->c5_id;
+
+        }
+
+        $sell_url = "https://www.c5game.com/api/product/sale.json?id=".$c5_id."&quick=&gem_id=0&page=1&flag=&delivery=&sort=&b1=&style=";
+
+        $list = $this->curl($sell_url);
+
+        $list = json_decode($list);
+
+        if($list->{'status'} == 200){
+
+            $item_info = $list->{'body'}->{'items'}[1];
+
+            $price = $item_info->price*100;
+
+            return $price;
+
+        }else{
+
+            return array('status' => 202, 'msg' => $list->{'message'});
+
+        }
+
+
+
 
     }
 
@@ -548,9 +656,15 @@ class base extends Model
 
             $url_purchase_submit = 'https://www.c5game.com/api/purchase/submit';
 
-            $redis = Yii::$app->redis;
+            $info = UserConfig::find()->where('user_id = :user_id and web = :web', array(':user_id' => $user_id, ':web' => 'c5'))->one();
 
-            $pwd = $redis->get('pwd_c5'.$user_id);
+            if(!$info){
+
+                return array('status' => 204, 'msg' => '密码错误！');
+
+            }
+
+            $pwd = $info->pwd;
 //
 //            $pwd = '328928';
 
@@ -1023,6 +1137,83 @@ class base extends Model
             echo $e->getMessage();
 
         }
+    }
+
+    public function updateBundleBuff()
+    {
+
+        set_time_limit(0);
+        $maxpage = 53;
+
+        $page = 1;
+
+        while($page<$maxpage){
+
+            $url = 'https://buff.163.com/api/market/goods?game=dota2&type=bundle&sort_by=price.desc&page_num='.$page;
+
+            $html = $this->curl($url,array(),'buff');
+
+            $html = json_decode($html);
+
+            $data = $html->{'data'}->{'items'};
+
+            foreach($data as $v){
+
+                $item_id = $v->{'id'};
+                $name = $v->{'name'};
+                $price = $v->{'sell_min_price'};
+
+                try{
+
+                    $model = new PriceDifference();
+
+                    $result = $model->find()->where('name=:name', array(':name'=>$name))->one();
+
+                    if($result){
+
+                        $result->name = $name;
+                        $result->item_id_buff = $item_id;
+                        $result->price_buff = $price*100;
+                        $result->update_time = time();
+//                    $result->creat_time = time();
+//                    $result->type = $m_type;
+                        if(!$result->save()){
+
+                            throw new Exception($name.'更新错误1');
+
+                        }
+
+                    }else{
+
+                        $model->name = $name;
+                        $model->item_id_buff = $item_id;
+                        $model->price_buff = $price*100;
+                        $model->update_time = time();
+                        $model->creat_time = time();
+                        $model->img = $v->{'goods_info'}->{'icon_url'};
+                        $model->type = PriceDifference::TYPE_BUNDLE;
+
+                        if(!$model->save()){
+
+                            throw new Exception($name.'更新错误2');
+
+                        }
+
+                    }
+
+                }catch (\Exception $e){
+
+                    echo $e->getMessage();
+
+                }
+
+
+            }
+
+            $page++;
+
+        }
+
     }
 
 }

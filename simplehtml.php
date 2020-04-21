@@ -11,13 +11,21 @@ index();
 
 function index(){
 
-    $redis = new Redis();
+//    $redis = new Redis();
+//
+//    $redis->connect('47.97.253.197', '6379');
+//
+//    $cookie = $redis->get('cookie_c5100');
+//
+//    $redis->close();
 
-    $redis->connect('47.97.253.197', '6379');
+    $pdo = new PDO("mysql:host=47.97.253.197;dbname=lic",'root','root');
 
-    $cookie = $redis->get('cookie_c5100');
+    $query = 'select * from user_config where user_id = 100 and web = "c5"';
 
-    $redis->close();
+    $cookieinfo = $pdo->query($query)->fetch();
+
+    $cookie = $cookieinfo['cookie'];
 
     $url = 'https://www.c5game.com/user/purchase/index.html';
 

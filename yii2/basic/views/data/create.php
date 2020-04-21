@@ -19,6 +19,7 @@ $this->title = 'create';
             <select class="form-control" name="name">
                 <option selected>ig</option>
                 <option>c5</option>
+                <option>buff</option>
             </select>
 <!--            <input type="text" name="name" value="ig" class="form-control" >-->
         </div>
@@ -28,7 +29,7 @@ $this->title = 'create';
         </div>
         <div class="form-group">
             <label class="control-label">密码</label>
-            <input type="text" name="pwd" class="form-control" >
+            <input type="text" name="pwd" class="form-control" value="1" >
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success" style="margin-top: 20px;">提交</button>

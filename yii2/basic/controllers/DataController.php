@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\base;
 use app\models\PriceDifference;
 use app\models\Replenish;
+use app\models\UserConfig;
 use Codeception\Module\Redis;
 use Yii;
 use yii\filters\AccessControl;
@@ -114,8 +115,6 @@ class DataController extends Controller
        ]);
 
    }
-
-
 
     public function actionUpdate()
     {
@@ -284,27 +283,34 @@ class DataController extends Controller
 
                 if($user_id){
 
-                    $redis = Yii::$app->redis;
+                    $pwd = Yii::$app->request->get('pwd');
 
-                    if($name == base::IG){
+                    $data = UserConfig::find()->where('user_id =:user_id and web =:web', array(':user_id' => $user_id, ':web' => $name))->one();
 
-                        $key = 'cookie_ig'.$user_id;
-                        $redis->set($key, $cookie);
-                        $redis->expire($key, 84600*2);
+                    if($data){
 
-                    }elseif($name == base::C5){
+                        $data->cookie = $cookie;
+                        $data->pwd = $pwd;
 
-                        $pwd = Yii::$app->request->get('pwd');
+                        $data->save();
 
-                        $key = 'cookie_c5'.$user_id;
-                        $redis->set($key, $cookie);
-                        $redis->expire($key, 84600*60);
 
-                        $key_pwd = 'pwd_c5'.$user_id;
-                        $redis->set($key_pwd, $pwd);
-                        $redis->expire($key_pwd, 84600*60);
+                    }else{
+
+                        $user_config = new UserConfig();
+
+                        $user_config->user_id = $user_id;
+                        $user_config->cookie = $cookie;
+                        $user_config->web = $name;
+                        $user_config->pwd = $pwd;
+
+                        $user_config->save();
 
                     }
+
+//                        $key = 'cookie_ig'.$user_id;
+//                        $redis->set($key, $cookie);
+//                        $redis->expire($key, 84600*30);
 
                 }
 
@@ -322,12 +328,12 @@ class DataController extends Controller
 
     }
 
-    public function actionTest()
+    public function actionChangePrice()
     {
 
         $base = new base();
 
-        $sell_url = 'https://www.c5game.com/user/sell/index.html';
+        $sell_url = 'https://www.c5game.com/user/sell/index.html?appid=433850';
 
         $html = $base->curl($sell_url);
 
@@ -343,7 +349,7 @@ class DataController extends Controller
 
         $dom->clear();
 
-        $str = '?self_sell_type=1&appid=570';
+        $str = '?self_sell_type=1&appid=433850';
 
         foreach($res[0] as $v){
 
@@ -361,11 +367,25 @@ class DataController extends Controller
 
         foreach($info->{'body'}->{'items'} as $i){
 
-            if($i->money_min_sell*100 == $i->price){
+            if(ceil($i->money_min_sell*100) == $i->price){
+
+                $base = new base();
+
+                $price_t = $base->confirmPrice($i->item_id);
+
+                if($price_t != $i->price){
+
+                    $id[] = $i->id;
+
+                    $price[] = ($price_t-1)/100;
+
+                }
 
                 continue;
 
             }
+
+            $id[] = $i->id;
 
             $min = $i->money_min_sell-0.01;
 
@@ -373,8 +393,6 @@ class DataController extends Controller
 
                 $min = 0.01;
             }
-
-            $id[] = $i->id;
 
             $price[] = $min;
 
@@ -398,5 +416,61 @@ class DataController extends Controller
         $callback = json_decode($callback);
 
         print_r($callback->message);
+    }
+
+
+    public function actionAutosp()
+    {
+
+        $k = Yii::$app->request->get('k');
+
+        $sql = "SELECT * FROM `price_difference` WHERE appid = 433850 and price_c5-purchase_c5>400 and price_c5<15000  ORDER BY (price_c5-purchase_c5)";
+
+        $res = Yii::$app->db->createCommand($sql);
+
+        $data = $res->queryAll();
+
+//        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '20']);
+//        $model = $data->offset($pages->offset)->limit($pages->limit)->all();
+
+        return $this->render('autosp',[
+
+            'model' => $data,
+            'k' => $k,
+//            'pages' => $pages,
+
+        ]);
+    }
+
+    public function actionUpdateh1z1()
+    {
+        set_time_limit(0);
+//        $data = PriceDifference::find('id')->where('appid = :appid', array(':appid' => 433850))->all();
+
+        $sql = "SELECT * FROM `price_difference` WHERE appid = 433850 and price_c5-purchase_c5>400 and price_c5<15000  ORDER BY (price_c5-purchase_c5)";
+
+        $res = Yii::$app->db->createCommand($sql);
+
+        $data = $res->queryAll();
+
+        $base = new base();
+
+        foreach($data as $e){
+
+            $base->updateInfo($e['id']);
+
+        }
+
+        echo json_encode(array('status' => 200));
+
+    }
+
+    public function actionTest()
+    {
+
+        $base = new base();
+
+        $base->updateBundleBuff();
+
     }
 }

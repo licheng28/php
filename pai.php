@@ -11,13 +11,13 @@ index();
 
 function index(){
 
-    $redis = new Redis();
+    $pdo = new PDO("mysql:host=47.97.253.197;dbname=lic",'root','root');
 
-    $redis->connect('47.97.253.197', '6379');
+    $query = 'select * from user_config where user_id = 101 and web = "c5"';
 
-    $cookie = $redis->get('cookie_c5101');
+    $cookieinfo = $pdo->query($query)->fetch();
 
-    $redis->close();
+    $cookie = $cookieinfo['cookie'];
 
     $url = 'https://www.c5game.com/user/purchase/index.html?appid=570';
 //    $cookie = 'C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; C5Lang=zh; C5Appid=570; C5Notice1558575896=close; C5Sate=29899df08071363644fe55e1e682693ad0d980eca%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5SessionID=oqmjotlbf6flvv3tgpt9smm1r5; C5Token=5cebe430de6b7; C5Login=253352; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1558891615,1558891662,1558891775,1558963252; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1558974326';
