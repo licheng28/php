@@ -5,52 +5,44 @@
  * Date: 2017/9/5 0005
  * Time: 11:38
  */
-$s = array(
-  0=>1,
-    1=>2,
-    2=>3
-);
-$a = implode('-',$s);
-$b = explode('.',$a);
-$c = 'skjdhfasdfkl';
-trim($c);
-$checkmail="/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/";
-$d = "/^[\w\.]+@[\w]+(\.[a-zA-Z]+){1,3}$/";
-$f = "/^1[87][\d]{8}$/";
-//echo preg_match($f,"1875800095",$match);
-//$file = fopen('yii2.txt', 'r');
-//
-//$size = filesize('yii2.txt');
-//
-//$content = fread($file,$size);
-//
-//fclose($file);
-//
-//echo file_get_contents('yii2.txt');
+$arr = array(1,3,7,9,12,14,22,33,65,98,465);
+function check($arr,$res)
+{
 
-$dir = opendir('D:\workspace\php');
+    $count = count($arr);
 
-while(($name=readdir($dir))!==false){
+    $min = 0;
+    $max = $count-1;
 
-    if($name!='.'&&$name!='..'){
+    while($min<=$max){
 
-        echo $name.'</br>';
+        $mid = floor(($min+$max)/2);
 
-        if(filetype($name)=='dir'){
+        if($arr[$mid] == $res){
 
-            $dir_c = opendir($name);
+            return $mid+1;
 
-            while(($name_c=readdir($dir_c))!==false){
+        }
 
-                echo $name_c.'*<br>';
+        if($arr[$mid]<$res){
 
-            }
+            $min = $mid+1;
+
+        }else{
+
+            $max = $mid-1;
 
         }
 
     }
 
+    return 'not found';
+
 }
+
+print_r(check($arr, 23));
+
+
 
 
 
