@@ -86,6 +86,11 @@ use yii\widgets\LinkPager;
                 <td class="table-danger <?php echo $data->itemInfo['id'].'_purchase'?>"><?php echo $data->itemInfo['purchase_c5']/100?></td>
                 <td class="table-danger <?php echo $data->itemInfo['id'].'_difference'?>"><?php echo $data->itemInfo['difference']/100?></td>
                 <td class="table-danger <?php echo $data->itemInfo['id'].'_sell'?>"><?php echo \app\models\PriceDifference::getSellMsg($data->itemInfo['is_sell'])?></td>
+                <td class="table-danger ">
+                    <a target='_blank' class="url_change"  href="https://buff.163.com/market/goods?goods_id=<?php echo $data->itemInfo['item_id_buff']?>">
+                        <span class="<?php echo $data->itemInfo['id'].'_buff'?>"><?php echo $data->itemInfo['price_buff']/100?></span>
+                    </a>
+                </td>
                 <td class="table-danger"><?php echo date('Y-m-d H:i:s', $data->sold_time)?></td>
                 <td>
                     <!--                        --><?php
@@ -201,6 +206,8 @@ Modal::end();
                     $("."+data.id+"_difference").html(data.difference/100);
                     $("."+data.id+"_sell").html(data.sell);
                     $("."+data.id+"_purchase").html(data.price_p);
+                    $("."+data.id+"_buff").html(data.price_buff);
+                    $('.url_change').attr('href', 'https://buff.163.com/market/goods?goods_id='+data.item_id_buff);
 
                 }
 

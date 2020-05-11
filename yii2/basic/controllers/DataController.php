@@ -87,6 +87,8 @@ class DataController extends Controller
 
            }
 
+           $data->andWhere('appid = :appid', array(':appid' => 570));
+
        }
 
        if(Yii::$app->request->get('sort')){

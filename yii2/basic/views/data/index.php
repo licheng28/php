@@ -29,9 +29,10 @@ use yii\widgets\LinkPager;
         </span>
     </form>
     <a class="btn btn-success updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_BUNDLE?>" style="margin-left: 400px;margin-top: -32px;">捆绑包</a>
-<!--    <a class="btn btn-default updateData" href="index.php?r=data/bundle&type=--><?php //echo \app\models\PriceDifference::TYPE_UNIQUE?><!--" style="margin-top: -32px;">标准</a>-->
+    <a class="btn btn-default updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_UNIQUE?>" style="margin-top: -32px;">标准</a>
     <a class="btn btn-danger updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_GENUINE?>" style="margin-top: -32px;">纯正</a>
     <a class="btn btn-warning updateData" href="index.php?r=data/bundle&type=<?php echo \app\models\PriceDifference::TYPE_IMMORTAL?>" style="margin-top: -32px;">不朽</a>
+<!--    <a class="btn btn-primary updateData" href="" style="margin-top: -32px;">UPDATEALL</a>-->
 <!--    <a class="btn btn-info updateData" href="index.php?r=data/bundle&type=--><?php //echo \app\models\PriceDifference::TYPE_H1Z1?><!--" style="margin-top: -32px;">H1Z1</a>-->
 </div>
 <body class="content-container">
@@ -46,6 +47,7 @@ use yii\widgets\LinkPager;
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['difference']?></td>
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['is_sell']?></td>
                 <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['purchase_c5']?></td>
+                <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_buff']?></td>
                 <td class="table-danger">操作</td>
             </tr>
 
@@ -71,6 +73,7 @@ use yii\widgets\LinkPager;
                     <td class="table-danger <?php echo $data->id.'_difference'?>"><?php echo $data->difference/100?></td>
                     <td class="table-danger <?php echo $data->id.'_sell'?>"><?php echo \app\models\PriceDifference::getSellMsg($data->is_sell)?></td>
                     <td class="table-danger <?php echo $data->id.'_purchase'?>"><?php echo $data->purchase_c5/100?></td>
+                    <td class="table-danger "><a target='_blank' class="url_change"  href="https://buff.163.com/market/goods?goods_id=<?php echo $data->item_id_buff?>"><span class="<?php echo $data->id.'_buff'?>"><?php echo $data->price_buff/100?></span></a></td>
                     <td>
 <!--                        --><?php
 //                            echo ButtonGroup::widget([
@@ -148,6 +151,8 @@ use yii\widgets\LinkPager;
                     $("."+data.id+"_difference").html(data.difference/100);
                     $("."+data.id+"_sell").html(data.sell);
                     $("."+data.id+"_purchase").html(data.price_p);
+                    $("."+data.id+"_buff").html(data.price_buff);
+                    $('.url_change').attr('href', 'https://buff.163.com/market/goods?goods_id='+data.item_id_buff);
 
                 }
 

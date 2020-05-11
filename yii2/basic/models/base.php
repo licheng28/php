@@ -48,6 +48,8 @@ class base extends Model
 
             $price_arr = $this->updateC5Price($data);
 
+            $buff_arr = $this->updateBuffPrice($data);
+
             $trans->commit();
 
         }catch(Exception $e){
@@ -70,7 +72,79 @@ class base extends Model
             'sell' => $sell_msg,
             'price_p' => $price_arr['price_p'],
             'sell_time' => $price_arr['sell_time'],
+            'price_buff' => $buff_arr['price'],
+            'item_id_buff' => $buff_arr['item_id'],
         );
+
+    }
+
+    public function updateBuffPrice($data)
+    {
+
+        $name = $data->name;
+
+        $url = "https://buff.163.com/api/market/goods?game=dota2&page_num=1&search=".$name;
+
+        $url = str_replace(' ', '%20', $url);
+
+        $info = $this->curl($url,array(),'buff');
+
+        $info = json_decode($info);
+
+        $price = '-';
+
+        $item_id = 0;
+
+        if($info){
+
+            if($info->{'code'} == 'OK'){
+
+                foreach($info->{'data'}->{'items'} as $v){
+
+                    if($v->{'name'} == $name ){
+
+                        $price = $v->{'sell_min_price'};
+
+                        $item_id = $v->{'id'};
+
+                        $model = new PriceDifference();
+
+                        $result = $model->find()->where('name=:name', array(':name'=>$name))->one();
+
+                        if($result){
+
+                            $result->name = $name;
+                            $result->item_id_buff = $item_id;
+                            $result->price_buff = ceil($price*100);
+                            $result->update_time = time();
+
+                            $result->save();
+
+                        }else{
+
+                            $model->name = $name;
+                            $model->item_id_buff = $item_id;
+                            $model->price_buff = $price*100;
+                            $model->update_time = time();
+                            $model->creat_time = time();
+                            $model->img = $v->{'goods_info'}->{'icon_url'};
+                            $model->type = PriceDifference::TYPE_BUNDLE;
+
+                            $model->save();
+
+                        }
+
+                        break;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return array('price' => $price, 'item_id' => $item_id);
 
     }
 
@@ -131,7 +205,7 @@ class base extends Model
 
         foreach($dom->find($find) as $e){
 
-            $name = $e->children(1)->innertext;
+            $name = $e->children(3)->innertext;
 
             if($name == $data->name){
 
@@ -141,8 +215,8 @@ class base extends Model
 
                 $item_id = $href_array[3];
 
-                $price1 = $e->children(2)->first_child()->children(1)->innertext;
-                $price2 = $e->children(2)->first_child()->children(2)->innertext;
+                $price1 = $e->children(4)->first_child()->children(1)->innertext;
+                $price2 = $e->children(4)->first_child()->children(2)->innertext;
 
                 $price = $price1.$price2;
 
@@ -937,12 +1011,12 @@ class base extends Model
 
             $item_id = $href_array[3];
 
-            $src = $e->first_child()->first_child()->src;
+            $src = $e->children(1)->first_child()->src;
 
-            $name = $e->children(1)->innertext;
+            $name = $e->children(3)->innertext;
 
-            $price1 = $e->children(2)->first_child()->children(1)->innertext;
-            $price2 = $e->children(2)->first_child()->children(2)->innertext;
+            $price1 = $e->children(4)->first_child()->children(1)->innertext;
+            $price2 = $e->children(4)->first_child()->children(2)->innertext;
 
             $price = $price1.$price2;
 
@@ -1128,6 +1202,8 @@ class base extends Model
                     }
 
                 }
+
+                $dom->clear();
 
                 $page++;
             }

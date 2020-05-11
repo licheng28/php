@@ -1,34 +1,19 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/4/21 0021
- * Time: 15:43
+ * User: licheng
+ * Date: 2020/3/16
+ * Time: 14:27
  */
+
 date_default_timezone_set("Asia/Shanghai");
 set_time_limit(0);
 index();
 
 function index(){
 
-//    $redis = new Redis();
-//
-//    $redis->connect('47.97.253.197', '6379');
-//
-//    $cookie = $redis->get('cookie_c5100');
-//
-//    $redis->close();
-
-    $pdo = new PDO("mysql:host=127.0.0.1;dbname=lic",'root','root');
-
-    $query = 'select * from user_config where user_id = 100 and web = "c5"';
-
-    $cookieinfo = $pdo->query($query)->fetch();
-
-    $cookie = $cookieinfo['cookie'];
-
-    $url = 'https://www.c5game.com/user/purchase/index.html';
-
+    $url = 'https://www.c5game.com/user/purchase/index.html?appid=730';
+    $cookie = 'C5Machines=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; isNewUser=-1; c5user=18758000957; C5Appid=570; C5Lang=zh; device_id=cd2accb82d0e8d27fae0f16cb1fadaef; C5SessionID=4o1q5dlv5s5vbpd5b6k1vs2cfg; C5Sate=436a1ffd6dd8452775bc8e37303fdd9ce7579d59a%3A4%3A%7Bi%3A0%3Bs%3A6%3A%22253352%22%3Bi%3A1%3Bs%3A11%3A%2218758000957%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5e6f0fcc6e5bd; C5Login=253352; c5IsBindPhone=1; C5_NPWD=fbmKgZj2PmMmtu%2BOOyePtg%3D%3D; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1584337747,1584337776,1584338417,1584338434; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1584339710';
     $pwd = 328928;
 //    $cookie = 'C5Lang=zh; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1556181926; C5NoticeBounces1556170168=close; C5Appid=570; C5SessionID=rcl4ss5tpvq9deieti9cfm80f7; C5Sate=9dac2228e8e1038ef95eb42cb26dd526540df83ba%3A4%3A%7Bi%3A0%3Bs%3A9%3A%22557376709%22%3Bi%3A1%3Bs%3A10%3A%22brave_five%22%3Bi%3A2%3Bi%3A259200%3Bi%3A3%3Ba%3A0%3A%7B%7D%7D; C5Token=5cc174f589f60; C5Login=557376709; C5Machines=Wl4MOBJaQ0Fj%2F3qKBDxJGciO%2Bfd%2BvowCOflGnn8qGYs%3D; C5_NPWD=0QRrydA06t9FYzzO7qR%2FNA%3D%3D; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1556182330';
 //    $pwd = 679578;
@@ -44,19 +29,15 @@ require_once  'D:/workspace/php/simple_html_dom.php';
     $dom->load($html);  //加载html
     // Find all images
     $page_count = 1;
-    foreach($dom->find('ul.pagination li.last a') as $e){
+    foreach($dom->find('ul li.last a') as $e){
 
         $page_count = $e->href;
-
-//        $num = (explode('=', $page_count));
-//        $page_count = $num[2];
 
         $page_count = getNum($page_count, '*');
 
         break;
 
     }
-
     $purchase = array();
     $j = 0;
     $i = 1;
@@ -69,7 +50,7 @@ require_once  'D:/workspace/php/simple_html_dom.php';
 
     for($page=1;$page<=$page_count;$page++){
 
-        $url = 'https://www.c5game.com/user/purchase/index.html?page='.$page;
+        $url = 'https://www.c5game.com/user/purchase/index.html?appid=730&page='.$page;
 
         $html = curl($url, $cookie);
 
@@ -222,7 +203,7 @@ function changePurchasePrice($data, $cookie, $pwd){
 
 //取消求购
 
-      $message = '';
+    $message = '';
 
     $url_cancel = 'https://www.c5game.com/api/purchase/cancel';
 
@@ -254,9 +235,9 @@ function changePurchasePrice($data, $cookie, $pwd){
 
     $content = curl($url_purchase_item, $cookie, $data_item);
 
-    $content = json_decode($content);
+    if($content){
 
-    if($content&&$content->{'body'}){
+        $content = json_decode($content);
 
         $name = $content->{'body'}->{'item'}->{'name'};
 
@@ -265,8 +246,6 @@ function changePurchasePrice($data, $cookie, $pwd){
         $purchase_max_price = $content->{'body'}->{'item'}->{'purchase_max_price'};
 
         if($sell_min_price&&$purchase_max_price){
-
-            $is_purchase = true;
 
             if($purchase_max_price>100){
 
@@ -287,19 +266,7 @@ function changePurchasePrice($data, $cookie, $pwd){
                 $improve_price = 0.01;
             }
 
-            $appid = $content->{'body'}->{'item'}->{'appid'};
-
-            $n = 0.9;
-            $j = 5;
-
-            if($appid == 433850){
-
-                $n = 0.70;
-                $j = 12;
-
-            }
-
-            if($purchase_max_price/$sell_min_price<$n||$sell_min_price-$purchase_max_price>=$j){
+            if($purchase_max_price/$sell_min_price<0.8||$sell_min_price-$purchase_max_price>=6){
 
                 if($purchase_max_price){
 
@@ -313,21 +280,18 @@ function changePurchasePrice($data, $cookie, $pwd){
 
             }else{
 
-//                $price = $data['price'];
-                if($is_purchase){
+                $price = $data['price'];
 
-                    $price = ceil($sell_min_price*$n*10)/10;
+                $is_purchase = false;
 
-                }
 //                $message = $message.'  求购价太高取消求购，物品名称 = '.$name;
 
             }
 
             if(!$is_purchase){
 
-//                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price-$improve_price;
+                $price = $data['price']<$purchase_max_price?$data['price']:$purchase_max_price-$improve_price;
 
-                $price = $data['price']+1;
             }
 
             $url_purchase_submit = 'https://www.c5game.com/api/purchase/submit';
@@ -339,7 +303,7 @@ function changePurchasePrice($data, $cookie, $pwd){
                 'paypwd' => $pwd,
                 'delivery' => 'on',
                 'id' => $item_id,//item_id
-                'appid' => 570,
+                'appid' => 730,
 
             );
 
@@ -381,7 +345,7 @@ function changePurchasePrice($data, $cookie, $pwd){
                         'paypwd' => $pwd,
                         'delivery' => 'on',
                         'id' => $item_id,//item_id
-                        'appid' => 570,
+                        'appid' => 730,
 
                     );
 
@@ -415,7 +379,7 @@ function changePurchasePrice($data, $cookie, $pwd){
             'paypwd' => $pwd,
             'delivery' => 'on',
             'id' => $item_id,//item_id
-            'appid' => 570,
+            'appid' => 730,
 
         );
 
