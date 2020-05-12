@@ -10,7 +10,7 @@ namespace app\models;
 use Yii;
 use yii\base\Exception;
 use yii\base\Model;
-use yii\debug\models\search\User;
+//use yii\debug\models\search\User;
 use yii\web\simple_html_dom;
 
 
@@ -399,6 +399,7 @@ class base extends Model
 
         if($info)
         {
+//            $cookie = "distribution_channel=681a3905060164114876; agree_sell_agreementlic666=true; __cfduid=df3f0b4c819c6784bd1b0389d2d79ab7b1563095090; bad_id572d9ba0-d737-11e8-970c-a553533099d1=e95fabd1-3e39-11e9-a785-a5e06bca4f16; my_game=570; grwng_uid=810d00fa-59a1-4e73-87ff-938d292e6467; aliyungf_tc=AQAAAIS/mwM0/Q4Aj5e1PGZFrrsAUwXm; href=https%3A%2F%2Fwww.igxe.cn%2Flogin%2F%3Fnext%3D%2Fsold%2F570; gdxidpyhxdE=pT%2FIRQPiNGMvR77US1yzQ%2B5%2F0r5PeX%2BAIkMn96NpIEJ28Yp9jjkkAteGY9mZO6h6KzbqYB8d0ez43mq6cTKllLL0pKUgN9DtufomVWc1xUnIBHInV%2Bywuth25BcY6NkMhtkOzJLYrpI4okuUobvOlvglus5WfrqmUXt4uiyv3MXY2v7e%3A1589181668459; _9755xjdesxxd_=32; token=35f967be-1cbd-4610-a7ca-5df73f04e5d1; myDateMinutes=27; _gat=1; qimo_seosource_572d9ba0-d737-11e8-970c-a553533099d1=%E7%AB%99%E5%86%85; qimo_seokeywords_572d9ba0-d737-11e8-970c-a553533099d1=; accessId=572d9ba0-d737-11e8-970c-a553533099d1; pageViewNum=40; csrftoken=6NlyDIQ62KlZxvZCIDF8xV8hQEbygVr7; sessionid=mvleuaw54hzkchzi4a39a8aaksego1lg; _ga=GA1.2.2062975550.1499832672; _gid=GA1.2.800288797.1589084226; gr_user_id=5ffa0a3e-0170-4f90-9a8d-1356ea8c2672; bb158725ea59c655_gr_session_id_8e1cf368-736b-47ab-8c28-762f7b0085be=true; bb158725ea59c655_gr_session_id=8e1cf368-736b-47ab-8c28-762f7b0085be; Hm_lvt_fe0238ac0617c14d9763a2776288b64b=1589087758,1589089407,1589089983,1589173547; Hm_lpvt_fe0238ac0617c14d9763a2776288b64b=1589182104";
             $cookie = $info->cookie;
         }else{return false;}
         curl_setopt($curl, CURLOPT_COOKIE, $cookie);
@@ -1285,6 +1286,67 @@ class base extends Model
 
 
             }
+
+            $page++;
+
+        }
+
+    }
+
+    public function updateCsgoC5(){
+
+        $page = 1;
+        while($page<101){
+
+            $url = 'https://www.c5game.com/csgo/default/result.html?max=50&sort=price.desc&locale=zh&page='.$page;
+
+            $html = $this->curl($url);
+
+            $dom = new simple_html_dom();
+
+            $dom->load($html);
+
+            foreach($dom->find('.selling') as $e){
+
+                $name_c5 = $e->children(1)->first_child()->first_child()->innertext;
+                $price = $e->children(2)->first_child()->first_child()->innertext;
+                $item_id_c5 = $this->getNum($e->first_child()->href, '*');
+                $src = $e->first_child()->children(1)->src;
+                $appearance = $e->first_child()->children(2)->innertext;
+
+                $price = $this->getNum($price);
+                $price = $price*100;
+
+                $update_time = time();
+
+                $model = new Csgo();
+
+                $result = $model->find()->where('name=:name', array(':name' => $name_c5))->one();
+
+                if($result){
+
+                    $result->price_c5 = $price;
+                    $result->update_time = $update_time;
+                    $result->save();
+
+                }else{
+
+                    $model->name = $name_c5;
+                    $model->price_c5 = $price;
+                    $model->img = $src;
+                    $model->item_id_c5 = $item_id_c5;
+                    $model->appearance = $appearance;
+                    $model->update_time = $update_time;
+                    $model->create_time = $update_time;
+                    $model->save();
+
+                }
+
+                die;
+
+            }
+
+            $dom->clear();
 
             $page++;
 

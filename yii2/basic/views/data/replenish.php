@@ -62,6 +62,7 @@ use yii\widgets\LinkPager;
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['purchase_c5']?></td>
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['difference']?></td>
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['is_sell']?></td>
+            <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_buff']?></td>
             <td class="table-danger"><?php echo \app\models\Replenish::attributeLabels()['sold_time']?></td>
             <td class="table-danger">操作</td>
         </tr>

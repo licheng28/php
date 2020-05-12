@@ -475,4 +475,13 @@ class DataController extends Controller
         $base->updateBundleBuff();
 
     }
+
+    public function actionUpdatecsgo()
+    {
+
+        $base = new base();
+
+        $base->updateCsgoC5();
+
+    }
 }
