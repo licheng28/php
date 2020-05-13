@@ -1342,13 +1342,13 @@ class base extends Model
 
                 }
 
-                die;
-
             }
 
             $dom->clear();
 
             $page++;
+
+            die;
 
         }
 

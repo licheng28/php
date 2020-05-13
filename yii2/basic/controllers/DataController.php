@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\base;
+use app\models\Csgo;
 use app\models\PriceDifference;
 use app\models\Replenish;
 use app\models\UserConfig;
@@ -473,6 +474,24 @@ class DataController extends Controller
         $base = new base();
 
         $base->updateBundleBuff();
+
+    }
+
+    public function actionCsgo()
+    {
+
+        $data = Csgo::find();
+
+        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '8']);
+        $model = $data->offset($pages->offset)->limit($pages->limit)->all();
+
+
+        return $this->render('csgo', array(
+
+            'model' => $model,
+            'pages' => $pages,
+
+        ));
 
     }
 

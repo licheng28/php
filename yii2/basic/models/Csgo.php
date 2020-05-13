@@ -13,8 +13,8 @@ use Yii;
  * @property int $category
  * @property string $appearance
  * @property string $type
- * @property int $price_ig
- * @property int $item_id_ig
+ * @property int $price_igxe
+ * @property int $item_id_igxe
  * @property int $price_c5
  * @property int $item_id_c5
  * @property int $purchase_c5
@@ -43,7 +43,7 @@ class Csgo extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'img', 'appearance', 'create_time', 'update_time'], 'required'],
-            [['category', 'price_ig', 'item_id_ig', 'price_c5', 'item_id_c5', 'purchase_c5', 'c5_id', 'price_buff', 'item_id_buff', 'is_sell', 'create_time', 'update_time', 'sign'], 'integer'],
+            [['category', 'price_igxe', 'item_id_igxe', 'price_c5', 'item_id_c5', 'purchase_c5', 'c5_id', 'price_buff', 'item_id_buff', 'is_sell', 'create_time', 'update_time', 'sign'], 'integer'],
             [['name', 'img', 'appearance', 'type'], 'string', 'max' => 255],
         ];
     }
@@ -60,8 +60,8 @@ class Csgo extends \yii\db\ActiveRecord
             'category' => 'Category',
             'appearance' => 'Appearance',
             'type' => 'Type',
-            'price_ig' => 'Price Ig',
-            'item_id_ig' => 'Item Id Ig',
+            'price_igxe' => 'Price Ig',
+            'item_id_igxe' => 'Item Id Ig',
             'price_c5' => 'Price C5',
             'item_id_c5' => 'Item Id C5',
             'purchase_c5' => 'Purchase C5',
@@ -73,5 +73,26 @@ class Csgo extends \yii\db\ActiveRecord
             'update_time' => 'Update Time',
             'sign' => 'Sign',
         ];
+    }
+
+    public function getSellMsg($k)
+    {
+
+        if($k === null){
+
+            return '-';
+
+        }
+
+        $arr = [
+
+            0 => '否',
+            1 => '是',
+            2 => '-',
+
+        ];
+
+        return $arr[$k];
+
     }
 }
