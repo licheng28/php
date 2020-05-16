@@ -1298,7 +1298,7 @@ class base extends Model
         $page = 1;
         while($page<101){
 
-            $url = 'https://www.c5game.com/csgo/default/result.html?max=50&sort=price.desc&locale=zh&page='.$page;
+            $url = 'https://www.c5game.com/csgo/default/result.html?max=4&sort=price.desc&locale=zh&page='.$page;
 
             $html = $this->curl($url);
 
@@ -1348,9 +1348,301 @@ class base extends Model
 
             $page++;
 
-            die;
+        }
+
+    }
+
+    public function updateCsgoIg()
+    {
+
+        $page = 1;
+
+        while($page<11){
+
+            $url = 'https://www.igxe.cn/csgo/730?is_buying=0&is_stattrak%5B%5D=0&is_stattrak%5B%5D=0&price_to=50&sort=2&ctg_id=0&type_id=0&page_no='.$page.'&page_size=1000&rarity_id=0&exterior_id=0&quality_id=0&capsule_id=0&_t=1589606365007';
+
+            $html = $this->curl($url);
+
+            $dom = new simple_html_dom();
+
+            $dom->load($html);
+
+            foreach($dom->find('.csgo') as $e){
+
+                $href = $e->href;
+
+                $href_array = explode('/', $href);
+
+                $item_id = $href_array[3];
+
+                $src = $e->children(1)->first_child()->src;
+
+                $name = $e->children(3)->innertext;
+
+                $price1 = $e->children(4)->first_child()->children(1)->innertext;
+                $price2 = $e->children(4)->first_child()->children(2)->innertext;
+
+                $price = $price1.$price2;
+
+                $price = $price*100;
+
+                $appearance = $e->first_child()->innertext;
+
+                try{
+
+                    $model = new csgo();
+
+                    $result = $model->find()->where('name=:name', array(':name'=>$name))->one();
+
+                    if($result){
+
+//                        $result->name = $name;
+                        $result->item_id_igxe = $item_id;
+                        $result->price_igxe = $price;
+                        $result->update_time = time();
+//                    $result->creat_time = time();
+//                        $result->img = $src;
+
+                        if(!$result->save()){
+
+                            throw new Exception('更新错误');
+
+                        }
+
+                    }else{
+
+                        $model->name = $name;
+                        $model->item_id_igxe = $item_id;
+                        $model->price_igxe = $price;
+                        $model->update_time = time();
+                        $model->create_time = time();
+                        $model->img = $src;
+                        $model->appearance = $appearance;
+
+                        if(!$model->save()){
+
+                            throw new Exception('更新错误');
+
+                        }
+
+                    }
+
+                }catch (\Exception $e){
+
+                    echo $e->getMessage();
+
+                }
+
+            }
+
+            $page++;
+
+            $dom->clear();
 
         }
+
+    }
+
+    public function updateCsgoPrice($id)
+    {
+
+        $data = Csgo::findOne($id);
+
+        $trans = Yii::$app->db->beginTransaction();
+
+        try{
+
+            $price_arr = $this->updateCsgoInfo($data);
+
+            $trans->commit();
+
+        }catch(Exception $e){
+
+            $trans->rollBack();
+
+            return array('status' => 204, 'msg' => 'err');
+
+        }
+
+        return array(
+            'c5' => $price_arr['price'],
+            'ig' => $price_ig,
+            'id' => $data->id,
+            'price_p' => $price_arr['price_p'],
+            'sell_time' => $price_arr['sell_time'],
+            'price_buff' => $buff_arr['price'],
+            'item_id_buff' => $buff_arr['item_id'],
+        );
+
+    }
+
+    public function updateCsgoInfo($data)
+    {
+
+        $price = 0;
+        $item_id_igxe = 0;
+        $url = 'https://www.igxe.cn/csgo/730?keyword='.$data->name;
+        $find = '.csgo';
+        $url = str_replace(' ', '%20', $url);
+        $html = $this->curl($url,array(),'ig', false);
+        $dom = new simple_html_dom();
+        $dom->load($html);
+        foreach($dom->find($find) as $e){
+
+            $name = $e->children(3)->innertext;
+
+            if($name == $data->name){
+
+                $href = $e->href;
+
+                $href_array = explode('/', $href);
+
+                $item_id_igxe = $href_array[3];
+
+                $price1 = $e->children(4)->first_child()->children(1)->innertext;
+                $price2 = $e->children(4)->first_child()->children(2)->innertext;
+
+                $price = $price1.$price2;
+
+            }
+
+        }
+
+        $updatearrig = array(
+
+            'price_igxe' => $price,
+            'item_id_igxe' => $item_id_igxe,
+
+        );
+
+        $dom->clear();
+
+        //c5价格
+
+        $price_c5 = $price_purchase = $difference = 0;
+
+//        if($data->item_id_c5&&Yii::$app->user->id){
+//
+//            $item_id_c5 = $data->item_id_c5;
+//
+//            $url_purchase_item = 'https://www.c5game.com/api/purchase/item?id='.$item_id_c5;
+//
+//            print_r($url_purchase_item);die;
+//
+//            $html = $this->curl($url_purchase_item);
+//
+//            $content = json_decode($html);
+//
+//            $price_c5 = $data->price_c5;
+//
+//            $price_purchase = 0;
+//
+//            if($content&&$content->{'status'} == 200){
+//
+//                $price_c5 = $content->{'body'}->{'item'}->{'sell_min_price'};
+//
+//                $price_purchase = $content->{'body'}->{'item'}->{'purchase_max_price'};
+//
+//            }
+//
+//        }else{
+
+            $item_id_c5 = 0;
+            $name = $data->name;
+            $url = 'https://www.c5game.com/csgo/default/result.html?locale=zh&k='.$name;
+            $url = str_replace(' ', '%20', $url);
+            $html = $this->curl($url);
+            $dom = new simple_html_dom();
+            $dom->load($html);
+            foreach($dom->find('.selling') as $e){
+
+                $name_c5 = $e->children(1)->first_child()->first_child()->innertext;
+
+                if($name==$name_c5){
+
+                    $item_id_c5 = $this->getNum($e->first_child()->href, '*');
+                    $price_c5 = $e->children(2)->first_child()->first_child()->innertext;
+                    $price_c5 = $this->getNum($price_c5);
+
+                    break;
+
+                }
+
+            }
+
+
+
+            foreach($dom->find('.purchaseing') as $e){
+
+                $name_c5 = $e->children(1)->first_child()->first_child()->innertext;
+
+                if($name==$name_c5){
+
+                    $price_purchase = $e->children(2)->first_child()->first_child()->innertext;
+
+                    $price_purchase = $this->getNum($price_purchase);
+
+                }
+
+            }
+
+            $dom->clear();
+//        }
+
+        $updatearrc5 = array(
+
+            'price_c5' => $price_c5,
+            'price_purchase' => $price_purchase,
+            'item_id_c5' => $item_id_c5,
+
+        );
+
+        //buff价格
+
+        $name = $data->name;
+        $url = "https://buff.163.com/api/market/goods?game=csgo&page_num=1&search=".$name;
+        $url = str_replace(' ', '%20', $url);
+        $info = $this->curl($url,array(),'buff');
+        $info = json_decode($info);
+        $price_buff = '-';
+        $item_id_buff = 0;
+
+        print_r($info);die;
+        if($info){
+
+            if($info->{'code'} == 'OK'){
+
+                foreach($info->{'data'}->{'items'} as $v){
+
+                    if($v->{'name'} == $name ){
+
+                        $price_buff = $v->{'sell_min_price'};
+
+                        $item_id_buff = $v->{'id'};
+
+                        break;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        $updatearrbuff = array(
+
+            'price_buff' => $price_buff,
+            'item_id_buff' => $item_id_buff,
+
+        );
+
+        $updatearr = array_merge($updatearrig, $updatearrc5, $updatearrbuff);
+
+        print_r($updatearr);die;
+
+        Csgo::updateAll(array('price_igxe'=>$updatearr['price_igxe']*100, 'update_time'=>time(), 'item_id_igxe' => $updatearr['item_id_igxe'], 'price_c5'=>$updatearr['price_c5'], 'price_purchase'=>$updatearr['price_purchase']), array('id' => $data->id));
+
 
     }
 

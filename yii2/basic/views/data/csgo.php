@@ -16,8 +16,8 @@ use yii\widgets\LinkPager;
 <div class="site-index">
 
     <form id="formdata" action="" method="get" style="width: auto;">
-        <!--        <input type="hidden" name="r" value="data/index">-->
-        <input class="form-control" type="text"  name="k" placeholder="差价" value="" style="float: left;width: 250px;">
+                <input type="hidden" name="r" value="data/csgo">
+        <input class="form-control" type="text"  name="k" placeholder="差价" value="<?php echo $k;?>" style="float: left;width: 250px;">
         <button type="submit" class="btn btn-primary" style="float: left;margin-left: 10px;">submit</button>
         <span style="margin-left: 20px;height: 50px;">
         </span>
@@ -32,7 +32,7 @@ use yii\widgets\LinkPager;
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['img']?></td>
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_igxe']?></td>
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_c5']?></td>
-<!--            <td class="table-danger">--><?php //echo \app\models\PriceDifference::attributeLabels()['difference']?><!--</td>-->
+            <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['difference']?></td>
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['is_sell']?></td>
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['purchase_c5']?></td>
             <td class="table-danger"><?php echo \app\models\PriceDifference::attributeLabels()['price_buff']?></td>
@@ -54,7 +54,7 @@ use yii\widgets\LinkPager;
                 </td>
                 <td class="table-danger <?php echo $data->id.'_ig'?>"><?php echo $data->price_igxe/100?></td>
                 <td class="table-danger <?php echo $data->id.'_c5'?>"><?php echo $data->price_c5/100?></td>
-<!--                <td class="table-danger --><?php //echo $data->id.'_difference'?><!--">--><?php //echo $data->difference/100?><!--</td>-->
+                <td class="table-danger <?php echo $data->id.'_difference'?>"><?php echo $data->price_c5/100-$data->price_igxe/100?></td>
                 <td class="table-danger <?php echo $data->id.'_sell'?>"><?php echo \app\models\Csgo::getSellMsg($data->is_sell)?></td>
                 <td class="table-danger <?php echo $data->id.'_purchase'?>"><?php echo $data->purchase_c5/100?></td>
                 <td class="table-danger "><a target='_blank' class="url_change"  href="https://buff.163.com/market/goods?goods_id=<?php echo $data->item_id_buff?>"><span class="<?php echo $data->id.'_buff'?>"><?php echo $data->price_buff/100?></span></a></td>
@@ -68,9 +68,9 @@ use yii\widgets\LinkPager;
                     //                            ]
                     //                        ]);
                     //                        ?>
-                    <button class="btn update" id="<?php echo $data->id?>" data-url="index.php?r=data/update">update</button>
-                    <button class="btn btn-info buy" data-id="<?php echo $data->id?>" data-url="index.php?r=data/buy">buy</button>
-                    <button class="btn btn-warning purchase" data-id="<?php echo $data->id?>" data-url="index.php?r=data/purchase">purchase</button>
+                    <button class="btn update" id="<?php echo $data->id?>" data-url="index.php?r=data/updatecsgoprice">update</button>
+<!--                    <button class="btn btn-info buy" data-id="--><?php //echo $data->id?><!--" data-url="index.php?r=data/buy">buy</button>-->
+<!--                    <button class="btn btn-warning purchase" data-id="--><?php //echo $data->id?><!--" data-url="index.php?r=data/purchase">purchase</button>-->
                 </td>
             </tr>
         <?php }?>

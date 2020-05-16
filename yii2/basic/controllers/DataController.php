@@ -480,9 +480,23 @@ class DataController extends Controller
     public function actionCsgo()
     {
 
-        $data = Csgo::find();
+        $k = Yii::$app->request->get('k');
 
-        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '8']);
+        if($k){
+
+            $k = trim($k);
+
+            $data = Csgo::find()->where(['like', 'name', $k]);
+
+        }else{
+
+            $data = Csgo::find();
+
+        }
+
+        $data->orderBy('(price_c5-price_igxe)');
+
+        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '20']);
         $model = $data->offset($pages->offset)->limit($pages->limit)->all();
 
 
@@ -490,6 +504,7 @@ class DataController extends Controller
 
             'model' => $model,
             'pages' => $pages,
+            'k' => $k,
 
         ));
 
@@ -497,10 +512,25 @@ class DataController extends Controller
 
     public function actionUpdatecsgo()
     {
+        set_time_limit(0);
 
         $base = new base();
 
         $base->updateCsgoC5();
+
+//        $base->updateCsgoIg();
+
+    }
+
+    public function actionUpdatecsgoprice()
+    {
+
+        $id = Yii::$app->request->post('id');
+        $base = new base();
+
+        $data = $base->updateCsgoPrice($id);
+
+        echo json_encode($data);
 
     }
 }
